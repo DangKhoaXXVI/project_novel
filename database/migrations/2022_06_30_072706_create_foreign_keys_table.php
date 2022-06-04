@@ -13,8 +13,10 @@ class CreateForeignKeysTable extends Migration
      */
     public function up()
     {
-        Schema::table('novels', function (Blueprint $table) {
+        Schema::table('categories_of_novel', function (Blueprint $table) {
             $table->foreign('Category_id')->references('id')->on('categories');
+            $table->foreign('Novel_id')->references('id')->on('novels');
+               
         });
 
         Schema::table('topics', function (Blueprint $table) {
