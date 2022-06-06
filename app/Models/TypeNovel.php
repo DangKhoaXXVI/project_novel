@@ -14,4 +14,8 @@ class TypeNovel extends Model
     ];
     protected $primaryKey = 'id';
     protected $table = 'type';
+
+    public function novel(){
+        return $this->hasMany('App\Models\Novel');
+    }
 }

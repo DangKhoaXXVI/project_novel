@@ -4,7 +4,7 @@
 @include('layouts.nav')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">Danh sách các loại truyện</div>
 

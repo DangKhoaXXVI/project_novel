@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TypeNovelController;
 use App\Http\Controllers\NovelController;
+use App\Http\Controllers\ChapterController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +30,6 @@ Route::resource('/typenovel', TypeNovelController::class);
 
 Route::resource('/novel', NovelController::class);
 
+Route::resource('/chapter', ChapterController::class);
 
 

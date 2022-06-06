@@ -28,15 +28,15 @@
                         @method('PUT')
                         @csrf
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Tên loại truyện</label>
+                            <label >Tên loại truyện</label>
                             <input type="text" value="{{$type->typename}}" class="form-control" onkeyup="ChangeToSlug();" name="typename" id="slug" placeholder="Tên loại truyện...">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Slug loại truyện</label>
+                            <label >Slug loại truyện</label>
                             <input type="text" class="form-control" value="{{$type->slug_typename}}" name="slug_typename" id="convert_slug" placeholder="Slug loại truyện...">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Trạng thái</label>
+                            <label >Trạng thái</label>
                                 <select name="status" class="custom-select">
                                     @if($type->status==0)
                                         <option selected value="0">Kích hoạt</option>
@@ -48,7 +48,7 @@
                                 </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                        <button name="update_typenovel" type="submit" class="btn btn-primary">Cập nhật</button>
                     </form>
                     
                 </div>
