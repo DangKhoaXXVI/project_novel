@@ -40,7 +40,7 @@ class ChapterController extends Controller
     {
         $data = $request->validate(
             [
-                'novel_id' => 'required',
+                //'novel_id' => 'required',
                 'title' => 'required|max:255',
                 'slug_chapter' => 'required|max:255',
                 'content' =>  'required',

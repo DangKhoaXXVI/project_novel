@@ -28,7 +28,7 @@
                         @method('PUT')
                         @csrf
                         <div class="form-group">
-                            <label >Thuộc truyện</label>
+                            <label style="font-weight: 700">Thuộc truyện</label>
                                 <select name="novel_id" class="custom-select">
                                     @foreach($listnovel as $key => $novel)
                                     <option {{ $chapter->novel_id == $novel->id ? 'selected' : '' }} value={{$novel->id}}>{{$novel->novelname}}</option>
@@ -36,19 +36,19 @@
                                 </select>
                         </div>
                         <div class="form-group">
-                            <label >Tên chương</label>
+                            <label style="font-weight: 700">Tên chương</label>
                             <input type="text" class="form-control" value="{{$chapter->title}}" onkeyup="ChangeToSlug();" name="title" id="slug" placeholder="Tên chương truyện...">
                         </div>
                         <div class="form-group">
-                            <label >Slug chương</label>
+                            <label style="font-weight: 700">Slug chương</label>
                             <input type="text" class="form-control" value="{{$chapter->slug_chapter}}" name="slug_chapter" id="convert_slug"  placeholder="Slug chương truyện...">
                         </div>
                         <div class="form-group">
-                            <label>Nội dung</label>
-                            <textarea class="form-control" name="content" rows="10" style="resize: none">{{$chapter->content}}</textarea>
+                            <label style="font-weight: 700">Nội dung</label>
+                            <textarea class="form-control" id="chapter_content" name="content" rows="10" style="resize: none">{{$chapter->content}}</textarea>
                         </div>
                         <div class="form-group">
-                            <label >Trạng thái</label>
+                            <label style="font-weight: 700">Trạng thái</label>
                                 <select name="status" class="custom-select">
                                     @if($chapter->status==0)
                                         <option selected value="0">Kích hoạt</option>

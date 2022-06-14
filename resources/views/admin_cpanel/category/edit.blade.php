@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Chỉnh sửa loại truyện</div>
+                <div class="card-header">Chỉnh sửa thể loại</div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -24,21 +24,21 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{route('typenovel.update', [$type->id])}}">
+                    <form method="POST" action="{{route('category.update', [$category->id])}}">
                         @method('PUT')
                         @csrf
                         <div class="form-group">
-                            <label style="font-weight: 700">Tên loại truyện</label>
-                            <input type="text" value="{{$type->typename}}" class="form-control" onkeyup="ChangeToSlug();" name="typename" id="slug" placeholder="Tên loại truyện...">
+                            <label style="font-weight: 700">Tên thể loại</label>
+                            <input type="text" value="{{$category->categoryname}}" class="form-control" onkeyup="ChangeToSlug();" name="categoryname" id="slug" placeholder="Tên thể loại...">
                         </div>
                         <div class="form-group">
-                            <label style="font-weight: 700">Slug loại truyện</label>
-                            <input type="text" class="form-control" value="{{$type->slug_typename}}" name="slug_typename" id="convert_slug" placeholder="Slug loại truyện...">
+                            <label style="font-weight: 700">Slug thể loại</label>
+                            <input type="text" class="form-control" value="{{$category->slug_category}}" name="slug_category" id="convert_slug" placeholder="Slug thể loại...">
                         </div>
                         <div class="form-group">
                             <label style="font-weight: 700">Trạng thái</label>
                                 <select name="status" class="custom-select">
-                                    @if($type->status==0)
+                                    @if($category->status==0)
                                         <option selected value="0">Kích hoạt</option>
                                         <option value="1">Không kích hoạt</option>
                                     @else
@@ -48,7 +48,7 @@
                                 </select>
                         </div>
 
-                        <button name="update_typenovel" type="submit" class="btn btn-primary">Cập nhật</button>
+                        <button name="update_category" type="submit" class="btn btn-primary">Cập nhật</button>
                     </form>
                     
                 </div>

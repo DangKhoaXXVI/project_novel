@@ -27,15 +27,15 @@
                     <form method="POST" action="{{route('typenovel.store')}}">
                         @csrf
                         <div class="form-group">
-                            <label >Tên loại truyện</label>
+                            <label style="font-weight: 700">Tên loại truyện</label>
                             <input type="text" class="form-control" value="{{old('typename')}}" onkeyup="ChangeToSlug();" name="typename" id="slug" placeholder="Tên loại truyện...">
                         </div>
                         <div class="form-group">
-                            <label >Slug loại truyện</label>
+                            <label style="font-weight: 700">Slug loại truyện</label>
                             <input type="text" class="form-control" value="{{old('slug_typename')}}" name="slug_typename" id="convert_slug"  placeholder="Slug loại truyện...">
                         </div>
                         <div class="form-group">
-                            <label >Trạng thái</label>
+                            <label style="font-weight: 700">Trạng thái</label>
                                 <select name="status" class="custom-select">
                                     <option value="0">Kích hoạt</option>
                                     <option value="1">Không kích hoạt</option>

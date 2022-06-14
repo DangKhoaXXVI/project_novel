@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TypeNovel;
 use App\Models\Novel;
+use App\Models\Category;
+use App\Models\InCategory;
 
 class NovelController extends Controller
 {
@@ -15,7 +17,7 @@ class NovelController extends Controller
      */
     public function index()
     {
-        $listnovel = Novel::with('typenovel')->orderBy('id', 'DESC')->get();
+        $listnovel = Novel::with('typenovel', 'belongstomanycategory')->orderBy('id', 'DESC')->get();
         return view('admin_cpanel.novel.index')->with(compact('listnovel'));
     }
 
@@ -26,8 +28,9 @@ class NovelController extends Controller
      */
     public function create()
     {
+        $category = Category::orderBy('id', 'DESC')->get();
         $type = TypeNovel::orderBy('id', 'DESC')->get();
-        return view('admin_cpanel.novel.create')->with(compact('type'));
+        return view('admin_cpanel.novel.create')->with(compact('type', 'category'));
     }
 
     /**
@@ -45,6 +48,7 @@ class NovelController extends Controller
                 'author' => 'required|max:255',
                 'summary' =>  'required',
                 'type' => 'required',
+                'category' => 'required',
                 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100, min_height=100, max_width=3000, max_height=3000',
                 'status' => 'required',
             ],
@@ -66,9 +70,13 @@ class NovelController extends Controller
         $novel->type_id = $data['type'];
         $novel->status = $data['status'];
 
+        foreach($data['category'] as $key => $categories) {
+            $novel->category_id = $categories[0];
+        }
+
         // add a new image into folder
         $get_image = $request->image;
-        $path = 'public/uploads/novel';
+        $path = 'uploads/novel/';
         $get_name_image = $get_image->getClientOriginalName();
         $name_image = current(explode('.',$get_name_image));
         $new_image = $name_image.'-'.rand(0,99).'.'.$get_image->getClientOriginalExtension();
@@ -76,6 +84,9 @@ class NovelController extends Controller
         $novel->image = $new_image;
 
         $novel->save();
+
+        $novel->belongstomanycategory()->attach($data['category']);
+
         return redirect()->back()->with('status', 'Thêm truyện thành công!');
     }
 
@@ -99,8 +110,13 @@ class NovelController extends Controller
     public function edit($id)
     {
         $novel = Novel::find($id);
+
+        $incategory = $novel->belongstomanycategory;
+
         $type = TypeNovel::orderBy('id', 'DESC')->get();
-        return view('admin_cpanel.novel.edit')->with(compact('novel', 'type'));
+        $category = Category::orderBy('id', 'DESC')->get();
+
+        return view('admin_cpanel.novel.edit')->with(compact('novel', 'type', 'category', 'incategory'));
     }
 
     /**
@@ -119,6 +135,7 @@ class NovelController extends Controller
                 'author' => 'required|max:255',
                 'summary' =>  'required',
                 'type' => 'required',
+                'category' => 'required',
                 'status' => 'required',
             ],
             [
@@ -136,14 +153,19 @@ class NovelController extends Controller
         $novel->type_id = $data['type'];
         $novel->status = $data['status'];
 
+        foreach($data['category'] as $key => $categories) {
+            $novel->category_id = $categories[0];
+        }
+        $novel->belongstomanycategory()->sync($data['category']);
+
         // add a new image into folder
         $get_image = $request->image;
         if($get_image) {
-            $path = 'public/uploads/novel'.$novel->image;
+            $path = 'uploads/novel/'.$novel->image;
             if(file_exists($path)) {
                 unlink($path);
             }
-            $path = 'public/uploads/novel';
+            $path = 'uploads/novel/';
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.',$get_name_image));
             $new_image = $name_image.'-'.rand(0,99).'.'.$get_image->getClientOriginalExtension();
@@ -164,7 +186,7 @@ class NovelController extends Controller
     public function destroy($id)
     {
         $novel = Novel::find($id);
-        $path = 'public/uploads/novel'.$novel->image;
+        $path = 'uploads/novel/'.$novel->image;
         if(file_exists($path)) {
             unlink($path);
         }

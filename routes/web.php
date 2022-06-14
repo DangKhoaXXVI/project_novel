@@ -5,6 +5,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TypeNovelController;
 use App\Http\Controllers\NovelController;
 use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -18,18 +21,39 @@ use App\Http\Controllers\ChapterController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+
+
+Route::get('/log-out', [UserController::class, 'logOut'])->name('log-out');
+Route::post('/log-in', [UserController::class, 'logIn'])->name('loginnn');
+Route::get('/log-in', [UserController::class, 'viewLogin'])->name('log-in');
+
+Route::get('/', [IndexController::class, 'home'])->name('home');
+
+Route::get('/category/{slug}', [IndexController::class, 'category']);
+
+Route::get('/novel/{slug}', [IndexController::class, 'novel']);
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::resource('/typenovel', TypeNovelController::class);
+Route::middleware('auth')->group(function () {
+    //
+});
 
-Route::resource('/novel', NovelController::class);
+Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
 
-Route::resource('/chapter', ChapterController::class);
+    Route::get('/home', [HomeController::class, 'index'])->name('homeAdmin');
+    
+    Route::resource('/typenovel', TypeNovelController::class);
+
+    Route::resource('/novel', NovelController::class);
+
+    Route::resource('/chapter', ChapterController::class);
+
+    Route::resource('/category', CategoryController::class);
+
+});
 
 

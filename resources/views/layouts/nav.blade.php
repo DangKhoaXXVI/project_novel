@@ -5,7 +5,7 @@
                 <li class="nav-item active">
                 <a class="nav-link" href="{{route('home')}}">Admin<span class="sr-only">(current)</span></a>
                     </li>
-                        <li class="nav-item dropdown">
+                        <!-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="{{route('typenovel.index')}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Loại truyện
                             </a>
@@ -23,8 +23,12 @@
                                 <a class="dropdown-item" href="#">Thêm tiểu thuyết</a>
                                 <a class="dropdown-item" href="#    ">Danh sách tiểu thuyết</a>
                             </div>
-                        </li>
+                        </li> -->
+                        <a class="nav-link" href="{{route('novel.index')}}">Truyện</span></a>
+                        <a class="nav-link" href="{{route('typenovel.index')}}">Loại truyện</span></a>
+                        <a class="nav-link" href="{{route('category.index')}}">Thể loại</span></a>
                         <a class="nav-link" href="{{route('chapter.index')}}">Chương</span></a>
+                        
                                 <!-- <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ 'Quản lý loại truyện' }}

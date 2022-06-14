@@ -18,7 +18,7 @@
                     <div class="container">
                         <a href="{{route('novel.create')}}" class="btn btn-success">+ Thêm</a>
                     </div>
-                    <table class="table">
+                    <table class="table table-striped table-responsive">
                         <thead class="thead-dark">
                             <tr>
                             <th scope="col">STT</th>
@@ -26,6 +26,7 @@
                             <th scope="col">Tên truyện</th>
                             <!-- <th scope="col">Slug truyện</th> -->
                             <th scope="col">Tác giả</th>
+                            <th scope="col">Thể loại</th>
                             <th scope="col">Loại truyện</th>
                             <th scope="col">Trạng thái</th>
                             <th scope="col">Chức năng</th>
@@ -35,10 +36,15 @@
                             @foreach($listnovel as $key => $novel)
                             <tr>
                                 <th scope="row">{{$key}}</th>
-                                <td><img src="{{asset('public/uploads/novel/'.$novel->image)}}" height="250" width="180"></td>
+                                <td><img src="{{asset('uploads/novel/'.$novel->image)}}" height="250" width="180"></td>
                                 <td>{{$novel->novelname}}</td>
                                 <!-- <td>{{$novel->slug_novelname}}</td> -->
                                 <td>{{$novel->author}}</td>
+                                <td>
+                                    @foreach($novel->belongstomanycategory as $incategories)
+                                        <span class="badge badge-dark">{{$incategories->categoryname}}</span>
+                                    @endforeach
+                                </td>
                                 <td>{{$novel->typenovel->typename}}</td>
                                 <td>
                                     @if($novel->status==0)

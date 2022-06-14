@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Thêm chương truyện</div>
+                <div class="card-header">Thêm thể loại</div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -24,27 +24,15 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{route('chapter.store')}}">
+                    <form method="POST" action="{{route('category.store')}}">
                         @csrf
                         <div class="form-group">
-                            <label style="font-weight: 700">Thuộc truyện</label>
-                                <select name="novel_id" class="custom-select">
-                                    @foreach($listnovel as $key => $novel)
-                                    <option value={{$novel->id}}>{{$novel->novelname}}</option>
-                                    @endforeach
-                                </select>
+                            <label style="font-weight: 700">Tên thể loại</label>
+                            <input type="text" class="form-control" value="{{old('categoryname')}}" onkeyup="ChangeToSlug();" name="categoryname" id="slug" placeholder="Tên thể loại...">
                         </div>
                         <div class="form-group">
-                            <label style="font-weight: 700">Tên chương</label>
-                            <input type="text" class="form-control" value="{{old('title')}}" onkeyup="ChangeToSlug();" name="title" id="slug" placeholder="Tên chương truyện...">
-                        </div>
-                        <div class="form-group">
-                            <label style="font-weight: 700">Slug chương</label>
-                            <input type="text" class="form-control" value="{{old('slug_chapter')}}" name="slug_chapter" id="convert_slug"  placeholder="Slug chương truyện...">
-                        </div>
-                        <div class="form-group">
-                            <label style="font-weight: 700">Nội dung</label>
-                            <textarea class="form-control" id="chapter_content" name="content" rows="10" style="resize: none"></textarea>
+                            <label style="font-weight: 700">Slug thể loại</label>
+                            <input type="text" class="form-control" value="{{old('slug_category')}}" name="slug_category" id="convert_slug"  placeholder="Slug thể loại...">
                         </div>
                         <div class="form-group">
                             <label style="font-weight: 700">Trạng thái</label>
@@ -54,7 +42,7 @@
                                 </select>
                         </div>
 
-                        <button type="submit" name="add_chapter" class="btn btn-primary">Thêm chương truyện</button>
+                        <button type="submit" name="add_category" class="btn btn-primary">Thêm thể loại</button>
                     </form>
                     
                 </div>
