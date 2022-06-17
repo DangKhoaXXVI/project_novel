@@ -16,7 +16,7 @@
                     @endif
 
                     <div class="container">
-                        <a href="{{route('novel.create')}}" class="btn btn-success">+ Thêm</a>
+                        <a href="{{route('novel.create')}}" class="btn btn-success mb-4">+ Thêm</a>
                     </div>
                     <table class="table table-striped table-responsive">
                         <thead class="thead-dark">
@@ -27,8 +27,11 @@
                             <!-- <th scope="col">Slug truyện</th> -->
                             <th scope="col">Tác giả</th>
                             <th scope="col">Thể loại</th>
-                            <th scope="col">Loại truyện</th>
+                            <!-- <th scope="col">Loại truyện</th> -->
+                            <th scope="col">Tình trạng</th>
                             <th scope="col">Trạng thái</th>
+                            <th scope="col">Ngày tạo</th>
+                            <th scope="col">Ngày cập nhật</th>
                             <th scope="col">Chức năng</th>
                             </tr>
                         </thead>
@@ -45,12 +48,31 @@
                                         <span class="badge badge-dark">{{$incategories->categoryname}}</span>
                                     @endforeach
                                 </td>
-                                <td>{{$novel->typenovel->typename}}</td>
+                                <!-- <td>{{$novel->typenovel->typename}}</td> -->
+                                <td>
+                                    @if($novel->state==0)
+                                        <span class="text text-primary">Đang tiến hành</span>
+                                    @elseif($novel->state==1)
+                                        <span class="text text-success">Đã hoàn thành</span>
+                                    @else
+                                        <span class="text text-warning">Tạm ngưng</span>
+                                    @endif
+                                </td>
                                 <td>
                                     @if($novel->status==0)
                                         <span class="text text-success">Kích hoạt</span>
                                     @else
                                         <span class="text text-danger">Không kích hoạt</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($novel->created_at != '')
+                                    {{ $novel->created_at }} 
+                                    @endif
+                                </td>                                
+                                <td>
+                                    @if($novel->updated_at != '')
+                                    {{ $novel->updated_at }}
                                     @endif
                                 </td>
                                 <td>

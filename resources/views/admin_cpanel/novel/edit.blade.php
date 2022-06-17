@@ -67,6 +67,24 @@
                                 @endforeach
                         </div>
                         <div class="form-group">
+                            <label style="font-weight: 700">Tình trạng</label>
+                                <select name="state" class="custom-select">
+                                    @if($novel->state==0)
+                                        <option selected value="0">Đang tiến hành</option>
+                                        <option value="1">Đã hoàn thành</option>
+                                        <option value="2">Tạm ngưng</option>
+                                    @elseif($novel->state==1)
+                                        <option selected value="1">Đã hoàn thành</option>
+                                        <option value="0">Đang tiến hành</option>
+                                        <option value="2">Tạm ngưng</option>
+                                    @else
+                                        <option selected value="2">Tạm ngưng</option>
+                                        <option value="0">Đang tiến hành</option>
+                                        <option value="1">Đã hoàn thành</option>
+                                    @endif
+                                </select>
+                        </div>
+                        <div class="form-group">
                             <label style="font-weight: 700">Ảnh bìa truyện</label>
                             <input type="file" class="form-control-file" name="image">
                             <img src="{{asset('uploads/novel/'.$novel->image)}}" height="250" width="180">

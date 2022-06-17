@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\TypeNovel;
 use App\Models\Novel;
@@ -28,6 +29,8 @@ class NovelController extends Controller
      */
     public function create()
     {
+        // $bruh = Carbon::now('Asia/Ho_Chi_Minh')->diffForHumans();
+        // echo($bruh);
         $category = Category::orderBy('id', 'DESC')->get();
         $type = TypeNovel::orderBy('id', 'DESC')->get();
         return view('admin_cpanel.novel.create')->with(compact('type', 'category'));
@@ -49,6 +52,7 @@ class NovelController extends Controller
                 'summary' =>  'required',
                 'type' => 'required',
                 'category' => 'required',
+                'state' => 'required',
                 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100, min_height=100, max_width=3000, max_height=3000',
                 'status' => 'required',
             ],
@@ -68,7 +72,10 @@ class NovelController extends Controller
         $novel->author = $data['author'];
         $novel->summary = $data['summary'];
         $novel->type_id = $data['type'];
+        $novel->state = $data['state'];
         $novel->status = $data['status'];
+
+        $novel->created_at = Carbon::now('Asia/Ho_Chi_Minh');
 
         foreach($data['category'] as $key => $categories) {
             $novel->category_id = $categories[0];
@@ -136,6 +143,7 @@ class NovelController extends Controller
                 'summary' =>  'required',
                 'type' => 'required',
                 'category' => 'required',
+                'state' => 'required',
                 'status' => 'required',
             ],
             [
@@ -151,7 +159,10 @@ class NovelController extends Controller
         $novel->author = $data['author'];
         $novel->summary = $data['summary'];
         $novel->type_id = $data['type'];
+        $novel->state = $data['state'];
         $novel->status = $data['status'];
+
+        $novel->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
         foreach($data['category'] as $key => $categories) {
             $novel->category_id = $categories[0];

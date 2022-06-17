@@ -25,6 +25,8 @@
                             <th scope="col">Tên chương</th>
                             <th scope="col">Slug chương truyện</th>
                             <th scope="col">Trạng thái</th>
+                            <th scope="col">Ngày tạo</th>
+                            <th scope="col">Ngày cập nhật</th>
                             <th scope="col">Chức năng</th>
                             </tr>
                         </thead>
@@ -40,6 +42,16 @@
                                         <span class="text text-success">Kích hoạt</span>
                                     @else
                                         <span class="text text-danger">Không kích hoạt</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($chapter->created_at != '')
+                                    {{ $chapter->created_at }} 
+                                    @endif
+                                </td>                                
+                                <td>
+                                    @if($chapter->updated_at != '')
+                                    {{ $chapter->updated_at }}
                                     @endif
                                 </td>
                                 <td>

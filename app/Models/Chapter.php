@@ -9,9 +9,13 @@ class Chapter extends Model
 {
     use HasFactory;
 
+    protected $dates = [
+        'created_at', 'updated_at'
+    ];
+
     public $timestamps =  false;
     protected $fillable = [
-        'novel_id', 'title', 'content', 'slug_chapter', 'status'
+        'novel_id', 'title', 'content', 'slug_chapter', 'status', 'created_at', 'updated_at'
     ];
     protected $primaryKey = 'id';
     protected $table = 'chapter';

@@ -27,8 +27,8 @@
                 font-family: 'Nunito', sans-serif;
             }
             .logo {
-                width: 200px;
-                height: 100px;
+                width: 150px;
+                height: 50px;
                 background-image: url(../images/ShinoNovelLogo.png);
                 background-size: cover;
                 background-repeat: no-repeat;
@@ -42,42 +42,54 @@
             a:-webkit-any-link {
                 cursor: pointer;
             }
+
+            li {
+                list-style: none;
+            }
+
+            .mainmenu-area {
+                /* background: none repeat scroll 0 0 #fbfbfb; */
+                font-family: roboto condensed, sans-serif;
+                /* text-transform: uppercase; */
+                width: 100%;
+                font-weight: 600;
+                z-index: 999;
+            }
+
         </style>
     </head>
     <body>
             <div class="container">
                 <!----------------------------------------Menu-------------------------------------------->
-                <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                <nav class="navbar navbar-expand-lg navbar-light mainmenu-area">
                     <a class="navbar-brand" href="{{url('/')}}"><div class="logo"></div></a>
-                    <span>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-                            
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Thể Loại
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    @foreach($category as $key => $categories)
-                                    <a class="dropdown-item" href="{{url('category/'.$categories->slug_category)}}">{{$categories->categoryname}}</a>
-                                    @endforeach
-                                </div>
-                            </li>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a style="font-size: 18px; padding: 15px; color: #799a19; font-weight: 700;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Thể Loại
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach($category as $key => $categories)
+                                <a class="dropdown-item" href="{{url('category/'.$categories->slug_category)}}">{{$categories->categoryname}}</a>
+                                @endforeach
+                            </div>
+                        </li>
                         </ul>
+                        <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm..." aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+                        </form>
+                        <li class="ml-4"><a alt="Nền Tối" id="dark_theme"><i class="far fa-moon"></i></a></li>
+                        <li class="ml-12" style="font-size: 18px; padding: 15px; color: #799a19; font-weight: 700;"><a href="{{ url('log-in') }}">Đăng Nhập</a></li>
                     </div>
-                    </span>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </nav>
+                    </nav>
                 <!----------------------------------------Slide-------------------------------------------->
                 @yield('slide')
                 <!----------------------------------------Truyện Mới Nhất-------------------------------------------->
                 @yield('content')
+                <!----------------------------------------Truyện Đã Hoàn Thành-------------------------------------------->
+                @yield('completed')
             </div>
             <!----------------------------------------Footer-------------------------------------------->
             <footer style="background-color: #333; padding: 30px 10px;">
@@ -106,6 +118,22 @@
                     }
                 }
             })
+        </script>
+        <script type="text/javascript">
+            $('.select-chapter').on('change', function(){
+                var url = $(this).val();
+                if(url) {
+                    window.location = url;
+                }
+                return false;
+            });
+
+            current_chapter();
+            function current_chapter() {
+                var url = window.location.href;
+                $('.select-chapter').find('option[value="' + url + '"]').attr("selected", true);
+            }
+
         </script>
     </body>
 </html>

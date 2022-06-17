@@ -65,6 +65,14 @@
                                 @endforeach
                         </div>
                         <div class="form-group">
+                            <label style="font-weight: 700">Tình trạng</label>
+                                <select name="state" class="custom-select">
+                                    <option value="0">Đang tiến hành</option>
+                                    <option value="1">Đã hoàn thành</option>
+                                    <option value="2">Tạm ngưng</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
                             <label style="font-weight: 700">Ảnh bìa truyện</label>
                             <input type="file" class="form-control-file" name="image">
                         </div>

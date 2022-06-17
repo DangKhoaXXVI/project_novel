@@ -35,6 +35,8 @@ Route::get('/category/{slug}', [IndexController::class, 'category']);
 
 Route::get('/novel/{slug}', [IndexController::class, 'novel']);
 
+Route::get('/chapter/{slug}', [IndexController::class, 'chapter']);
+
 Auth::routes();
 
 

@@ -13,10 +13,8 @@ class UserController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' =>
         $request->password])) {
             if(auth()->user()->role == 1){
-                echo('login with admin');
                 return redirect()->route('homeAdmin');
             }
-            echo('login with user');
             return redirect()->route('home');
 
         } else {

@@ -11,6 +11,7 @@
 .series-name {
     display: block;
     font-weight: 700;
+    font-size: 30px;
 }
 .series-information {
     margin-bottom: 80px;
@@ -48,6 +49,11 @@ a {
     background-color: transparent;
     color: inherit;
     text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #799a19;
 }
 
 a:-webkit-any-link {
@@ -140,7 +146,7 @@ ul.list-chapters li .chapter-time {
                     <div class="top-part" >
                         <div class="row">
                             <div class="left-column col-12 col-md-3">
-                                <img class="card-img-top" src="{{ asset('uploads/novel/'.$novel->image) }}" alt="Card image cap">
+                                <img class="card-img-top" src="{{ asset('uploads/novel/'.$novel->image) }}">
                             </div>
                             <div class="col-12 col-md-9">
                                 <div class="series-name-group" >
@@ -152,7 +158,9 @@ ul.list-chapters li .chapter-time {
                                 </div>
                                 <div class="series-information" >
                                     <div class="series-categories">
-                                        <a class="series-gerne-item"  href="">Comedy</a>
+                                        @foreach($novel->belongstomanycategory as $incategories)
+                                        <a class="series-gerne-item"  href="">{{ $incategories->categoryname }}</a>
+                                        @endforeach
                                     </div>
                                     <div class="info-item" >
                                         <span class="info-name" >Tác giả:</span>
@@ -160,6 +168,42 @@ ul.list-chapters li .chapter-time {
                                             <a href="">
                                             {{ $novel->author }}
                                             </a>
+                                        </span>
+                                    </div>
+                                    <div class="info-item" >
+                                        <span class="info-name" >Lượt xem:</span>
+                                        <span class="info-value ">
+                                            {{ $novel->novel_views }}
+                                        </span>
+                                    </div>
+                                    <div class="info-item" >
+                                        <span class="info-name" >Ngày đăng truyện:</span>
+                                        <span class="info-value ">
+                                            @if($novel->created_at!='')
+                                            {{ $novel->created_at->toDateString() }}
+                                            @endif
+                                        </span>
+                                    </div>
+                                    <div class="info-item" >
+                                        <span class="info-name" >Lần cuối cập nhật:</span>
+                                        <span class="info-value ">
+                                            @if($novel->updated_at!='')
+                                            {{ $novel->updated_at->toDateString()}}
+                                            @else
+                                            {{ $novel->created_at->toDateString() }}
+                                            @endif
+                                        </span>
+                                    </div>
+                                    <div class="info-item" >
+                                        <span class="info-name" >Tình trạng:</span>
+                                        <span class="info-value ">
+                                            @if($novel->state==0)
+                                                Đang tiến hành
+                                            @elseif($novel->state==1)
+                                                Đã hoàn thành
+                                            @else
+                                                Tạm ngưng
+                                            @endif
                                         </span>
                                     </div>
                                 </div>
@@ -210,9 +254,9 @@ ul.list-chapters li .chapter-time {
                                     @foreach($chapter as $key => $chapters)
                                     <li>
                                         <div class="chapter-name">
-                                            <a href="{{url('read-chapter/'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
+                                            <a href="{{url('chapter/'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
                                         </div>
-                                        <div class="chapter-time">21/05/2022</div>
+                                        <div class="chapter-time">{{ $chapters->created_at->toDateString() }}</div>
                                     </li>
                                     @endforeach
                                 @else

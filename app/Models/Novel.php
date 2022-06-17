@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Novel extends Model
 {
     use HasFactory;
+
+    protected $dates = [
+      'created_at', 'updated_at'
+    ];
+
     public $timestamps =  false;
+    
     protected $fillable = [
-        'novelname', 'slog_novelname', 'author', 'summary', 'type_id', 'category_id', 'image', 'status'
+        'novelname', 'slug_novelname', 'author', 'summary', 'novel_views','type_id', 'category_id', 'state', 'image', 'status', 'created_at', 'updated_at'
     ];
     protected $primaryKey = 'id';
     protected $table = 'novel';

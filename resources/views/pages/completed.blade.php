@@ -1,8 +1,3 @@
-@extends('../welcome')
-@section('slide')
-    @include('pages.slide')
-@endsection
-@section('content')
 
 <style type="text/css">
 
@@ -174,77 +169,28 @@ a.series-name:hover {
 
 </style>
 
-
-<!-- Truyện Mới Nhất -->
-    <!-- <div class="container">
-        <div class="row">
-            <div class="col-12 col-lg-9">
-                <section class="index-section thumb-section-flow last-chapter translation three-row">
-                    <header class="section-title">
-                        <span class="sts-bold">Truyện</span>
-                        <span class="sts-empty">mới nhất</span>
-                    </header>
-                </section>
-                <main class="row">
-                    @foreach($novel as $key => $value)
-                    <div class="thumb-item-flow col-4 col-lg-2">
-                        <div class="thumb-wrapper">
-                            <a href="{{url('novel/'.$value->slug_novelname)}}" title="">
-                                <div class="a6-ratio">
-                                    <div class="content img-in-ratio lazyloaded">
-                                        <img style="width: 90px; height: 130;"  src="{{ asset('uploads/novel/'.$value->image) }}" alt="{{$value->novelname}}">
-                                    </div>
-                                </div>
-                            </a>
-                            <div class="thumb-detail">
-                                <div class="thumb_attr chapter-title" title=""><a href="" title=""></a></div>
-                                    <div class="thumb_attr volume-title"></div>
-                            </div>
-                        </div>
-                        <div class="thumb_attr series-title">
-                            <a href="{{url('novel/'.$value->slug_novelname)}}" title="">{{$value->novelname}}</a>
-                        </div>
-                    </div>
-                    @endforeach
-                </main>
-            </div>
-        </div>
-    </div> -->
-
-    <!-- <section class="index-section thumb-section-flow last-chapter translation three-row">
-        <header class="section-title">
-            <span class="sts-bold">Truyện</span>
-            <span class="sts-empty">mới nhất</span>
-        </header>
-    </section> -->
-    <div class="b_title"><strong>Truyện Mới Nhất</strong></div>
+    <div class="b_title"><strong>Truyện Đã Hoàn Thành</strong></div>
     <div class="gridlist">
-        @foreach($novel as $key => $value)
+        @foreach($completed_novel as $key => $completed)
         <div class="glitem">
-            <a href="{{url('novel/'.$value->slug_novelname)}}">
+            <a href="{{url('novel/'.$completed->slug_novelname)}}">
                 <div class="image">
-                    <img class="lazy loaded" src="{{ asset('uploads/novel/'.$value->image) }}" alt="{{$value->novelname}}" width="100%" height="100%" data-was-processed="true">
+                    <img class="lazy loaded" src="{{ asset('uploads/novel/'.$completed->image) }}" alt="{{$completed->novelname}}" width="100%" height="100%" data-was-processed="true">
                 </div>
             </a>
-            <a class="series-name" href="{{url('novel/'.$value->slug_novelname)}}">{{$value->novelname}}</a>
+            <a class="series-name" href="{{url('novel/'.$completed->slug_novelname)}}">{{$completed->novelname}}</a>
         </div>
         @endforeach
         <div class="glitem glitem-see-more">
-            <a title="" href="">
+            <a title="" href="{{ url('admin/home/') }}">
                 <div class="image lazy" style="">
                     <img class="lazy loaded" src="{{ asset('images/readmore.jpg') }}" alt="" width="100%" height="100%" data-was-processed="true">
                 </div>
+                <div class="see-more"><div class="btn-see-more-icon">
+                    <i class="fas fa-angle-double-right"></i>
+                </div>
             </a>
-            <div class="see-more"><div class="btn-see-more-icon">
-                <i class="fas fa-angle-double-right"></i>
-            </div>
         </div>
         <a class="series-name" title="Xem Thêm" href="">Xem Thêm</a>
     </div>
 </div>
-    
-@endsection
-
-@section('completed')
-    @include('pages.completed')
-@endsection
