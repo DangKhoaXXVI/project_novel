@@ -25,7 +25,7 @@ class UserController extends Controller
     public function logOut()
     {
        $user= Auth::logout();
-       return redirect()->route('log-in');
+       return redirect()->route('home');
     }
 
     public function viewLogin() {

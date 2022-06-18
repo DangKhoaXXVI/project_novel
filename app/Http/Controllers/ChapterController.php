@@ -42,13 +42,12 @@ class ChapterController extends Controller
         $data = $request->validate(
             [
                 'novel_id' => 'required',
-                'title' => 'required|unique:chapter|max:255',
+                'title' => 'required|max:255',
                 'slug_chapter' => 'required|max:255',
                 'content' =>  'required',
                 'status' => 'required',
             ],
             [
-                'title.unique' => 'Tên chương này đã có!',
                 'title.required' => 'Phải có tên chương truyện!',
                 'slug_chapter.required' => 'Phải có slug chương truyện!',
                 'content.required' => 'Phải có nội dung chương truyện!',
@@ -62,6 +61,7 @@ class ChapterController extends Controller
         $chapter->status = $data['status'];
 
         $chapter->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $chapter->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
         $chapter->save();
         return redirect()->back()->with('status', 'Thêm chương thành công!'); 
@@ -121,6 +121,7 @@ class ChapterController extends Controller
         $chapter->content = $data['content'];
         $chapter->status = $data['status'];
 
+        $chapter->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $chapter->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
         $chapter->save();

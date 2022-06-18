@@ -8,6 +8,8 @@ use App\Models\TypeNovel;
 use App\Models\Novel;
 use App\Models\Category;
 use App\Models\InCategory;
+use App\Models\Chapter;
+use Illuminate\Support\Facades\Auth;
 
 class NovelController extends Controller
 {
@@ -29,8 +31,6 @@ class NovelController extends Controller
      */
     public function create()
     {
-        // $bruh = Carbon::now('Asia/Ho_Chi_Minh')->diffForHumans();
-        // echo($bruh);
         $category = Category::orderBy('id', 'DESC')->get();
         $type = TypeNovel::orderBy('id', 'DESC')->get();
         return view('admin_cpanel.novel.create')->with(compact('type', 'category'));
@@ -67,6 +67,7 @@ class NovelController extends Controller
             ]
         );
         $novel = new Novel();
+        $novel->user_id = Auth::user()->id;
         $novel->novelname = $data['novelname'];
         $novel->slug_novelname = $data['slug_novelname'];
         $novel->author = $data['author'];
@@ -76,6 +77,7 @@ class NovelController extends Controller
         $novel->status = $data['status'];
 
         $novel->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $novel->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
         foreach($data['category'] as $key => $categories) {
             $novel->category_id = $categories[0];
@@ -198,11 +200,19 @@ class NovelController extends Controller
     {
         $novel = Novel::find($id);
         $path = 'uploads/novel/'.$novel->image;
+        
+        //Xóa ảnh bìa
         if(file_exists($path)) {
             unlink($path);
         }
 
-        Novel::find($id)->delete();
+        //Xóa thể loại
+        InCategory::whereIn('novel_id', [$novel->id])->delete();
+
+        //Xóa Chapter
+        Chapter::whereIn('novel_id', [$novel->id])->delete();
+
+        $novel->delete();
         return redirect()->back()->with('status', 'Xóa truyện thành công!');
     }
 }

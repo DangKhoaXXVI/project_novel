@@ -66,14 +66,10 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($novel->created_at != '')
                                     {{ $novel->created_at }} 
-                                    @endif
                                 </td>                                
                                 <td>
-                                    @if($novel->updated_at != '')
                                     {{ $novel->updated_at }}
-                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{route('novel.edit', [$novel->id])}}" class="btn btn-primary">Chỉnh sửa</a>

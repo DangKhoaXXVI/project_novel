@@ -45,14 +45,10 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($chapter->created_at != '')
                                     {{ $chapter->created_at }} 
-                                    @endif
                                 </td>                                
                                 <td>
-                                    @if($chapter->updated_at != '')
                                     {{ $chapter->updated_at }}
-                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{route('chapter.edit', [$chapter->id])}}" class="btn btn-primary">Chỉnh sửa</a>

@@ -17,6 +17,6 @@ class Category extends Model
     protected $table = 'category';
 
     public function novel() {
-        return $this->hasMany('App\Models\Novel');
+        return $this->belongTo(Novel::class);
     }
 }

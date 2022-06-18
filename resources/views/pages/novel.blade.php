@@ -2,145 +2,15 @@
 @section('content')
 
 <style type="text/css">
-.top-part {
-    padding: 10px;
-}
-.series-name-group {
-    margin-bottom: 10px;
-}
-.series-name {
+
+.collapse.in {
     display: block;
-    font-weight: 700;
-    font-size: 30px;
-}
-.series-information {
-    margin-bottom: 80px;
-}
-.series-gerne-item {
-    background-color: #eee;
-    border-radius: 20px;
-    display: inline-block;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    padding: 0 10px;
-}
-.info-item {
-    margin-bottom: 10px;
-}
-.info-item .info-name {
-    font-weight: 700;
-    margin-right: 6px;
-}
-.summary-wrapper {
-    border-top: 1px solid #d4dae2;
-    margin-top: 10px;
-    padding-top: 10px;
-}
-.series-summary {
-    margin-bottom: 10px;
-}
-h4 {
-    color: #333;
-    font-weight: 700;
-    margin-bottom: 0.2em;
-}
-
-a {
-    background-color: transparent;
-    color: inherit;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: none;
-    color: #799a19;
-}
-
-a:-webkit-any-link {
-    cursor: pointer;
-}
-
-.basic-section {
-    margin-bottom: 20px;
-    background-color: hsla(0,0%,100%,.9);
-    border-color: #e4e5e7 #dadbdd hsla(210,4%,80%,.8);
-    border-radius: 4px;
-    border-style: solid;
-    border-width: 1px;
-    overflow: hidden;
-}
-
-.basic-section .sect-header {
-    font-weight: 700;
-    background-color: #f4f5f6;
-    border-bottom: 1px solid #dadbdd;
-    padding: 10px;
-}
-
-.volume-list.at-series .sect-title {
-    display: block;
-    padding-right: 60px;
-}
-
-.volume-cover {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-ul.list-chapters {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-decoration: none;
-}
-
-ul.list-chapters li {
-    padding: 10px 10px;
-    position: relative;
-}
-
-ul.list-chapters li .chapter-name {
-    padding-right: 86px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-ul.list-chapters li .chapter-time {
-    color: #aaa;
-    font-size: 1rem;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-}
-
-.volume-cover .a6-ratio {
-    margin: auto;
-    max-width: 200px;
-}
-
-.a6-ratio {
-    position: relative;
-}
-
-.a6-ratio>.content {
-    bottom: 0;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-.img-in-ratio {
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
 }
 
 </style>
 
-    <div class="row">
-        <div class="col-12 col-lg-9 float-left">
+    <div class="row mt-4 novelpage">
+        <div class="col-xs-12 col-sm-12 col-md-9 float-left feature-section">
             <section>
                 <main>
                     <div class="top-part" >
@@ -159,7 +29,7 @@ ul.list-chapters li .chapter-time {
                                 <div class="series-information" >
                                     <div class="series-categories">
                                         @foreach($novel->belongstomanycategory as $incategories)
-                                        <a class="series-gerne-item"  href="">{{ $incategories->categoryname }}</a>
+                                        <a class="series-gerne-item"  href="{{url('category/'.$incategories->slug_category)}}">{{ $incategories->categoryname }}</a>
                                         @endforeach
                                     </div>
                                     <div class="info-item" >
@@ -179,19 +49,13 @@ ul.list-chapters li .chapter-time {
                                     <div class="info-item" >
                                         <span class="info-name" >Ngày đăng truyện:</span>
                                         <span class="info-value ">
-                                            @if($novel->created_at!='')
                                             {{ $novel->created_at->toDateString() }}
-                                            @endif
                                         </span>
                                     </div>
                                     <div class="info-item" >
                                         <span class="info-name" >Lần cuối cập nhật:</span>
                                         <span class="info-value ">
-                                            @if($novel->updated_at!='')
                                             {{ $novel->updated_at->toDateString()}}
-                                            @else
-                                            {{ $novel->created_at->toDateString() }}
-                                            @endif
                                         </span>
                                     </div>
                                     <div class="info-item" >
@@ -224,49 +88,85 @@ ul.list-chapters li .chapter-time {
             </section>
         </div>
 
-        <div class="col-12 col-lg-3 float-right">
-            <h3>Chú Thích Thêm</h3>
-        </div>
-        <div class="col-12 col-lg-9 float-left">
-            <section class="volume-list at-series basic-section">
-                <header class="sect-header">
-                    <span class="sect-title"> Mục Lục </span>
-                </header>
-                <main class="d-lg-block">
-                    <div class="row">
-                        <div class="col-12 col-md-2">
-                            <div class="volume-cover">
-                                <a href="">
-                                    <div class="a6-ratio">
-                                        <div class="content img-in-ratio">
-                                            <img style="padding: 10px;" class="card-img-top" src="{{ asset('uploads/novel/'.$novel->image) }}">
-                                        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 float-right">
+            <div class="row top-group">
+                <div class="col-12 no-push push-3-m col-md-6 no-push-l col-lg-12">
+                    <section class="series-users">
+                        <main>
+                            <div class="series-owner group-mem">
+                                <img src="{{ asset('uploads/user/'.$user->avatar) }}" alt="Poster's avatar">
+                                    <div class="series-owner-title">
+                                        <span class="series-owner_name"><a href="">{{ $user->name }}</a></span>
                                     </div>
-                                </a>
+                            </div>
+                            <div class="fantrans-section">
+                                <div class="fantrans-name">Nhóm dịch</div>
+                                    <div class="fantrans-value"><a href="">3ktan</a></div>
+                            </div>
+                        </main>
+                    </section>
+                </div>
+            </div>
+        </div>
+        @php
+            $mucluc = count($chapter);
+        @endphp
+        @if($mucluc>0)
+            <div class="col-12 col-lg-9 float-left" style="padding: 0;">
+                <section class="volume-list at-series basic-section">
+                    <header class="sect-header">
+                        <a style="margin-left: 10px; float: right; font-size: 20px;" class="edit-icon" href=""><i class="fas fa-edit"></i></a>
+                        <span class="sect-title"> Mục Lục </span>
+                    </header>
+                    <main class="d-lg-block">
+                        <div class="row">
+                            <div class="col-xs-4 col-offset-xs-4 col-md-2 col-sm-2 collapse in img-cover-small">
+                                <img style="padding: 10px;" width="150px" src="{{ asset('uploads/novel/'.$novel->image) }}" alt="{{ $novel->novelname }}">
+                            </div>
+                            <div class="col-12 col-md-10">
+                                <ul class="list-chapters at-series">
+                                    @foreach($chapter as $key => $chapters)
+                                        <li>
+                                            <div class="chapter-name">
+                                                <a href="{{url('chapter/'.$chapters->id.'-'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
+                                            </div>
+                                            <div class="chapter-time">{{ $chapters->created_at->toDateString() }}</div>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-12 col-md-10">
-                            <ul class="list-chapters at-series">
-                                @php
-                                    $mucluc = count($chapter);
-                                @endphp
-                                @if($mucluc>0)
+                    </main>
+                </section>
+            </div>
+        @else
+            <div class="col-12 col-lg-9 float-left" style="padding: 0; cursor: not-allowed; opacity: .5; pointer-events: none;">
+                <section class="volume-list at-series basic-section">
+                    <header class="sect-header">
+                        <a style="margin-left: 10px; float: right; font-size: 20px;" class="edit-icon" href=""><i class="fas fa-edit"></i></a>
+                        <span class="sect-title"> Mục Lục </span>
+                    </header>
+                    <main class="d-lg-block">
+                        <div class="row">
+                            <div class="col-xs-4 col-offset-xs-4 col-md-2 col-sm-2 collapse in">
+                                <img style="padding: 10px;" width="150px" src="{{ asset('uploads/novel/'.$novel->image) }}" alt="{{ $novel->novelname }}">
+                            </div>
+                            <div class="col-12 col-md-10">
+                                <ul class="list-chapters at-series">
                                     @foreach($chapter as $key => $chapters)
-                                    <li>
-                                        <div class="chapter-name">
-                                            <a href="{{url('chapter/'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
-                                        </div>
-                                        <div class="chapter-time">{{ $chapters->created_at->toDateString() }}</div>
-                                    </li>
+                                        <li>
+                                            <div class="chapter-name">
+                                                <a href="{{url('chapter/'.$chapters->id.'-'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
+                                            </div>
+                                            <div class="chapter-time">{{ $chapters->created_at->toDateString() }}</div>
+                                        </li>
                                     @endforeach
-                                @else
-                                    <li>Truyện chưa đăng chương nào...</li>
-                                @endif
-                            </ul>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </main>
-            </section>
-        </div>
+                    </main>
+                </section>
+            </div>
+        @endif
     </div>
 @endsection

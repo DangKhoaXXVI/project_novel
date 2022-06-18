@@ -16,10 +16,14 @@ class Novel extends Model
     public $timestamps =  false;
     
     protected $fillable = [
-        'novelname', 'slug_novelname', 'author', 'summary', 'novel_views','type_id', 'category_id', 'state', 'image', 'status', 'created_at', 'updated_at'
+        'user_id', 'novelname', 'slug_novelname', 'author', 'summary', 'novel_views','type_id', 'category_id', 'state', 'image', 'status', 'created_at', 'updated_at'
     ];
     protected $primaryKey = 'id';
     protected $table = 'novel';
+
+    public function user(){
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+    }
 
     public function typenovel(){
         return $this->belongsTo('App\Models\TypeNovel', 'type_id', 'id');
