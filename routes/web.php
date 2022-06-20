@@ -51,7 +51,7 @@ Auth::routes();
 
 
 Route::middleware('auth')->group(function () {
-    //
+    Route::get('/member/{id}', [UserController::class, 'member_wall'])->name('member_wall');
 });
 
 Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {

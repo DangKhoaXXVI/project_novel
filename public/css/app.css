@@ -15,18 +15,10 @@
     --borderbottom: 1px solid #dadbdd;
 }
 
-/* Dark/Light Theme  */
-
+/* Navbar  */
 
 
 /* Welcome Page */
-
-.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-title {
-    font-size: 18px;
-    padding: 15px;
-    color: #799a19;
-    font-weight: 700;
-}
 
 .logo {
     width: 150px;

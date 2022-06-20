@@ -1,5 +1,6 @@
-  
+
                 <nav class="navbar navbar-expand-lg navbar-light mainmenu-area">
+                    <div class="container">
                     <a class="navbar-brand" href="{{url('/')}}"><div class="logo"></div></a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
@@ -38,7 +39,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('homeAdmin') }}">
+                                    <a class="dropdown-item" href="{{ route('member_wall', ['id' => Auth::user()->id ] ) }}">
                                         <i class="fa fa-btn fa-user"></i>
                                         Tài khoản
                                     </a>
@@ -49,5 +50,6 @@
                                 </div>
                             </li>
                         @endif
+                    </div>
                     </div>
                 </nav>
