@@ -1,7 +1,7 @@
 @extends('../welcome')
 @section('content')
 
-    <div class="b_title"><strong>{{ $category_id->categoryname }}</strong></div>
+    <div class="b_title"><strong>Truyện {{ $category_id->categoryname }}</strong></div>
     <div class="gridlist">
         @foreach($novel as $key => $value)
         <div class="glitem">

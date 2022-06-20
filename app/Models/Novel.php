@@ -16,7 +16,7 @@ class Novel extends Model
     public $timestamps =  false;
     
     protected $fillable = [
-        'user_id', 'novelname', 'slug_novelname', 'author', 'summary', 'novel_views','type_id', 'category_id', 'state', 'image', 'status', 'created_at', 'updated_at'
+        'user_id', 'novelname', 'slug_novelname', 'author', 'slug_author', 'summary', 'novel_views','type_id', 'category_id', 'state', 'image', 'status', 'created_at', 'updated_at'
     ];
     protected $primaryKey = 'id';
     protected $table = 'novel';

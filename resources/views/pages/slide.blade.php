@@ -2,7 +2,6 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-9">
-            <!-- <span class="top-tab_title title-active mt-4"><i class="fas fa-trophy"></i> Truyện Nổi bật</span> -->
             <div class="b_title"><strong><i class="fas fa-trophy"></i>    Truyện Nổi Bật</strong></div>
             <div class="owl-carousel owl-theme mt-5">
                 @foreach($top8_novel as $key => $top)

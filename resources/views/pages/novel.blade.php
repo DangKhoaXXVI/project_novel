@@ -33,17 +33,32 @@
                                         @endforeach
                                     </div>
                                     <div class="info-item" >
+                                    <i class="fa fa-user"></i>
                                         <span class="info-name" >Tác giả:</span>
                                         <span class="info-value ">
-                                            <a href="">
+                                            <a href="{{ url('author/'.$novel->slug_author ) }}">
                                             {{ $novel->author }}
                                             </a>
                                         </span>
                                     </div>
                                     <div class="info-item" >
+                                        <i class="fa fa-eye"></i>
                                         <span class="info-name" >Lượt xem:</span>
                                         <span class="info-value ">
                                             {{ $novel->novel_views }}
+                                        </span>
+                                    </div>
+                                    <div class="info-item" >
+                                        <i class="fa fa-rss"></i>
+                                        <span class="info-name" >Tình trạng:</span>
+                                        <span class="info-value ">
+                                            @if($novel->state==0)
+                                                Đang tiến hành
+                                            @elseif($novel->state==1)
+                                                Đã hoàn thành
+                                            @else
+                                                Tạm ngưng
+                                            @endif
                                         </span>
                                     </div>
                                     <div class="info-item" >
@@ -58,18 +73,6 @@
                                             {{ $novel->updated_at->toDateString()}}
                                         </span>
                                     </div>
-                                    <div class="info-item" >
-                                        <span class="info-name" >Tình trạng:</span>
-                                        <span class="info-value ">
-                                            @if($novel->state==0)
-                                                Đang tiến hành
-                                            @elseif($novel->state==1)
-                                                Đã hoàn thành
-                                            @else
-                                                Tạm ngưng
-                                            @endif
-                                        </span>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +83,7 @@
                                 <h4>Tóm tắt</h4>
                             </div>
                             <div class="summary-content">
-                                <p>{{ $novel->summary }}</p>
+                                <p>{!! $novel->summary !!}</p>
                             </div>
                         </div>
                     </div>
@@ -98,10 +101,6 @@
                                     <div class="series-owner-title">
                                         <span class="series-owner_name"><a href="">{{ $user->name }}</a></span>
                                     </div>
-                            </div>
-                            <div class="fantrans-section">
-                                <div class="fantrans-name">Nhóm dịch</div>
-                                    <div class="fantrans-value"><a href="">3ktan</a></div>
                             </div>
                         </main>
                     </section>

@@ -13,7 +13,7 @@
         </div>
         @endforeach
         <div class="glitem glitem-see-more">
-            <a title="" href="{{ url('admin/home/') }}">
+            <a title="" href="{{ url('All-Completed-Novel') }}">
                 <div class="image lazy" style="">
                     <img class="lazy loaded" src="{{ asset('images/readmore.jpg') }}" alt="" width="100%" height="100%" data-was-processed="true">
                 </div>
@@ -22,6 +22,6 @@
                 </div>
             </a>
         </div>
-        <a class="series-name" title="Xem Thêm" href="">Xem Thêm</a>
+        <a class="series-name" title="Xem Thêm" href="{{ url('All-Completed-Novel') }}">Xem Thêm</a>
     </div>
 </div>

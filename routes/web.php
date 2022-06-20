@@ -37,6 +37,16 @@ Route::get('/novel/{slug}', [IndexController::class, 'novel']);
 
 Route::get('/chapter/{id}-{slug}', [IndexController::class, 'chapter'])->name('chapter');
 
+Route::get('/All-New-Novel', [IndexController::class, 'listnewnovel'])->name('AllNewNovel');
+
+Route::get('/All-Completed-Novel', [IndexController::class, 'listcompletednovel'])->name('AllCompleted');
+
+Route::get('/author/{author}', [IndexController::class, 'author'])->name('ListNovelAuthor');
+
+Route::get('/search', [IndexController::class, 'search'])->name('search');
+
+
+
 Auth::routes();
 
 

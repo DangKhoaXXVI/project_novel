@@ -13,15 +13,23 @@
             <div style="text-align: center; margin: 20px auto -20px auto;">
             </div>
             <section class="rd-basic_icon row">
-                <a href="{{ url('chapter/'.$previous_chapter_id.'-'.$previous_chapter) }}" class="col text-center {{ $chapter->id == $min_id->id ? 'isDisable' : '' }}"><i class="fas fa-backward"></i></a>
+                @if($chapter->id == $min_id->id)
+                <a href="" class="col text-center {{ $chapter->id == $min_id->id ? 'isDisable' : '' }}"><i class="fas fa-backward"></i></a>
+                @else
+                <a href="{{ url('chapter/'.$previous_chapter_id.'-'.$previous_chapter_slug->slug_chapter) }}" class="col text-center {{ $chapter->id == $min_id->id ? 'isDisable' : '' }}"><i class="fas fa-backward"></i></a>
+                @endif
                 <span>
                     <select name="select-chapter" class="custom-select select-chapter">
                         @foreach($all_chapter as $key => $chap)
-                        <option value="{{url('chapter/'.$chap->id.'-'.$chap->slug_chapter)}}">{{ $chap->title }}</option>
+                        <option value="{{url('chapter/'.$chap->id.'-'.$chap->slug_chapter) }}">{{ $chap->title }}</option>
                         @endforeach
                     </select>
                 </span>
-                <a href="{{ url('chapter/'.$next_chapter_id.'-'.$next_chapter ) }}" class="col text-center {{ $chapter->id == $max_id->id ? 'isDisable' : '' }}"><i class="fas fa-forward"></i></a>
+                @if($chapter->id == $max_id->id)
+                <a href="" class="col text-center {{ $chapter->id == $max_id->id ? 'isDisable' : '' }}"><i class="fas fa-forward"></i></a>
+                @else
+                <a href="{{ url('chapter/'.$next_chapter_id.'-'.$next_chapter_slug->slug_chapter ) }}" class="col text-center {{ $chapter->id == $max_id->id ? 'isDisable' : '' }}"><i class="fas fa-forward"></i></a>
+                @endif
             </section>
             <div id="chapter-content" class="long-text no-select" style="padding-left: 0px; padding-right: 0px;">
                 {!! $chapter->content !!}
@@ -30,9 +38,17 @@
             <div style="text-align: center; margin: 20px auto 10px auto;">
             </div>
             <section class="rd-basic_icon row">
-                <a href="{{ url('chapter/'.$previous_chapter_id.'-'.$previous_chapter) }}" class="col text-center {{ $chapter->id == $min_id->id ? 'isDisable' : '' }}"><i class="fas fa-backward"></i></a>
+            @if($chapter->id == $min_id->id)
+                <a href="" class="col text-center {{ $chapter->id == $min_id->id ? 'isDisable' : '' }}"><i class="fas fa-backward"></i></a>
+                @else
+                <a href="{{ url('chapter/'.$previous_chapter_id.'-'.$previous_chapter_slug->slug_chapter) }}" class="col text-center {{ $chapter->id == $min_id->id ? 'isDisable' : '' }}"><i class="fas fa-backward"></i></a>
+                @endif
                 <a href="{{ url('novel/'.$chapter->novel->slug_novelname) }}" class="col text-center"><i class="fas fa-home"></i></a>
-                <a href="{{ url('chapter/'.$next_chapter_id.'-'.$next_chapter) }}" class="col text-center {{ $chapter->id == $max_id->id ? 'isDisable' : '' }}"><i class="fas fa-forward"></i></a>
+                @if($chapter->id == $max_id->id)
+                <a href="" class="col text-center {{ $chapter->id == $max_id->id ? 'isDisable' : '' }}"><i class="fas fa-forward"></i></a>
+                @else
+                <a href="{{ url('chapter/'.$next_chapter_id.'-'.$next_chapter_slug->slug_chapter ) }}" class="col text-center {{ $chapter->id == $max_id->id ? 'isDisable' : '' }}"><i class="fas fa-forward"></i></a>
+                @endif
             </section>
         </div>
     </div>

@@ -22,15 +22,39 @@ class IndexController extends Controller
 
     public function home() {
         $category = Category::orderBy('id', 'DESC')->get();
-        $novel = Novel::orderBy('id', 'DESC')->where('status', 0)->take(13)->get();
+        $novel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->take(13)->get();
         $top8_novel = Novel::orderBy('novel_views', 'DESC')->where('status', 0)->take(8)->get();
         $completed_novel = Novel::orderBy('id', 'DESC')->where('status', 0)->where('state', 1)->take(6)->get();
+        // $new_chapter = Chapter::where('created_at', 'DESC')->take(13)->get();
 
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
         }
         return view('pages.home')->with(compact('category', 'novel', 'top8_novel', 'completed_novel'));
     }
+
+    public function listnewnovel() {
+        $category = Category::orderBy('id', 'DESC')->get();
+        $new_novel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->paginate(20);
+        
+        if(Auth::check()) {
+            view()->share('nguoidung', Auth::user());
+        }
+
+        return view('pages.listall.list_all_new_novel')->with(compact('category', 'new_novel'));
+    }
+
+    public function listcompletednovel() {
+        $category = Category::orderBy('id', 'DESC')->get();
+        $list_completed_novel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->where('state', 1)->paginate(20);
+        
+        if(Auth::check()) {
+            view()->share('nguoidung', Auth::user());
+        }
+
+        return view('pages.listall.list_all_completed')->with(compact('category', 'list_completed_novel'));
+    }
+
 
     public function category($slug) {
         $category = Category::orderBy('id', 'DESC')->get();
@@ -49,6 +73,7 @@ class IndexController extends Controller
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
         }
+        
         return view('pages.category')->with(compact('category', 'novel', 'category_id', 'incategories', 'many_categories'));
     }
 
@@ -74,14 +99,45 @@ class IndexController extends Controller
         $all_chapter = Chapter::with('novel')->orderBy('id', 'ASC')->where('novel_id', $novel->novel_id)->get();
         $next_chapter = Chapter::where('novel_id', $novel->novel_id)->where('id', '>', $chapter->id)->min('slug_chapter');
         $next_chapter_id = Chapter::where('novel_id', $novel->novel_id)->where('id', '>', $chapter->id)->min('id');
+
+        
+
         $previous_chapter = Chapter::where('novel_id', $novel->novel_id)->where('id', '<', $chapter->id)->max('slug_chapter');
         $previous_chapter_id = Chapter::where('novel_id', $novel->novel_id)->where('id', '<', $chapter->id)->max('id');
+
+
         $max_id = Chapter::where('novel_id', $novel->novel_id)->orderBy('id', 'DESC')->first();
         $min_id = Chapter::where('novel_id', $novel->novel_id)->orderBy('id', 'ASC')->first();
+
+        $next_chapter_slug = Chapter::where('novel_id', $novel->novel_id)->where('id', $next_chapter_id)->first();
+        $previous_chapter_slug = Chapter::where('novel_id', $novel->novel_id)->where('id', $previous_chapter_id)->first();
 
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
         }
-        return view('pages.chapter')->with(compact('category','chapter', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'next_chapter_id', 'previous_chapter_id'));
+        return view('pages.chapter')->with(compact('category','chapter', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'next_chapter_id', 'previous_chapter_id', 'next_chapter_slug', 'previous_chapter_slug'));
     }
+
+    public function author($author) {
+        $category = Category::orderBy('id', 'DESC')->get();
+
+        $novel_author = Novel::orderBy('created_at', 'DESC')->where('status', 0)->where('slug_author', $author)->paginate(20);
+        $novel_author_name = Novel::orderBy('created_at', 'DESC')->where('status', 0)->where('slug_author', $author)->first();
+
+        if(Auth::check()) {
+            view()->share('nguoidung', Auth::user());
+        }
+        return view('pages.listall.author')->with(compact('category','novel_author', 'novel_author_name'));
+    }
+
+    public function search() {
+        $category = Category::orderBy('id', 'DESC')->get();
+        $keywords = $_GET['keywords'];
+        $novel = Novel::with('category')->where('novelname', 'LIKE', '%'.$keywords.'%')->orWhere('author', 'LIKE', '%'.$keywords.'%')->get();
+        if(Auth::check()) {
+            view()->share('nguoidung', Auth::user());
+        }
+        return view('pages.search')->with(compact('category','keywords', 'novel'));
+    }
+
 }

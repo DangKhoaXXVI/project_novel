@@ -32,16 +32,18 @@
                             <input type="text" class="form-control" value="{{$novel->novelname}}" onkeyup="ChangeToSlug();" name="novelname" id="slug" placeholder="Tên truyện...">
                         </div>
                         <div class="form-group">
-                            <label style="font-weight: 700">Slug truyện</label>
-                            <input type="text" class="form-control" value="{{$novel->slug_novelname}}" name="slug_novelname" id="convert_slug"  placeholder="Slug truyện...">
+                            <input type="hidden" class="form-control" value="{{$novel->slug_novelname}}" name="slug_novelname" id="convert_slug"  placeholder="Slug truyện...">
                         </div>
                         <div class="form-group">
                             <label style="font-weight: 700">Tác giả</label>
-                            <input type="text" class="form-control" value="{{$novel->author}}" name="author" placeholder="Tên tác giả...">
+                            <input type="text" class="form-control" value="{{$novel->author}}" onkeyup="ChangeToSlugAuthor();" name="author" id="slug_author" placeholder="Tên tác giả...">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" value="{{$novel->slug_author}}" name="slug_author" id="convert_slug_author"  placeholder="Slug author...">
                         </div>
                         <div class="form-group">
                             <label style="font-weight: 700">Tóm tắt</label>
-                            <textarea class="form-control" name="summary" rows="5" style="resize: none">{{$novel->summary}}</textarea>
+                            <textarea class="form-control" id="summary_content" name="summary" rows="5" style="resize: none">{{$novel->summary}}</textarea>
                         </div>
                         <div class="form-group">
                             <label style="font-weight: 700">Loại truyện</label>

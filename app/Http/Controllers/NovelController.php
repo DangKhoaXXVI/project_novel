@@ -49,6 +49,7 @@ class NovelController extends Controller
                 'novelname' => 'required|unique:novel|max:255',
                 'slug_novelname' => 'required|unique:novel|max:255',
                 'author' => 'required|max:255',
+                'slug_author' => 'required|max:255',
                 'summary' =>  'required',
                 'type' => 'required',
                 'category' => 'required',
@@ -62,6 +63,7 @@ class NovelController extends Controller
                 'novelname.required' => 'Phải có tên truyện!',
                 'slug_novelname.required' => 'Phải có slug truyện!',
                 'author.required' => 'Phải có tên tác giả truyện!',
+                'slug_author.required' => 'Phải có slug tác giả!',
                 'summary.required' => 'Phải có tóm tắt truyện!',
                 'image.required' => 'Phải có ảnh bìa truyện!',
             ]
@@ -71,6 +73,7 @@ class NovelController extends Controller
         $novel->novelname = $data['novelname'];
         $novel->slug_novelname = $data['slug_novelname'];
         $novel->author = $data['author'];
+        $novel->slug_author = $data['slug_author'];
         $novel->summary = $data['summary'];
         $novel->type_id = $data['type'];
         $novel->state = $data['state'];
@@ -142,6 +145,7 @@ class NovelController extends Controller
                 'novelname' => 'required|max:255',
                 'slug_novelname' => 'required|max:255',
                 'author' => 'required|max:255',
+                'slug_author' => 'required|max:255',
                 'summary' =>  'required',
                 'type' => 'required',
                 'category' => 'required',
@@ -152,6 +156,7 @@ class NovelController extends Controller
                 'novelname.required' => 'Phải có tên truyện!',
                 'slug_novelname.required' => 'Phải có slug truyện!',
                 'author.required' => 'Phải có tên tác giả truyện!',
+                'slug_author.required' => 'Phải có slug tác giả!',
                 'summary.required' => 'Phải có tóm tắt truyện!',
             ]
         );
@@ -159,6 +164,7 @@ class NovelController extends Controller
         $novel->novelname = $data['novelname'];
         $novel->slug_novelname = $data['slug_novelname'];
         $novel->author = $data['author'];
+        $novel->slug_author = $data['slug_author'];
         $novel->summary = $data['summary'];
         $novel->type_id = $data['type'];
         $novel->state = $data['state'];
