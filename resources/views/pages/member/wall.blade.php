@@ -11,14 +11,14 @@
                             <img src="{{ url('/uploads/user/'.$member->cover) }}">
                         </div>
                     </div>
-                        <div id="profile-changer_cover" class="profile-changer none block-m">
+                        <!-- <div id="profile-changer_cover" class="profile-changer none block-m">
                             <div class="cover-change" style="position: initial;">
                                 <input name="cover" type="file">
                                 <i class="fas fa-camera"></i>
                                 <span class="p-c_text">Yêu cầu 1100 x 300 px</span>
                                 <input name="cover" type="file">
                             </div>
-                        </div>
+                        </div> -->
                 </div>
                 <div class="profile-nav">
                     <div class="profile-ava-wrapper">
@@ -62,7 +62,7 @@
                                                                     <div class="cover-change" style="position: initial;">
                                                                         <input name="cover" type="file">
                                                                         <i class="fas fa-camera"></i>
-                                                                        <input name="cover" type="file">
+                                                                        <span class="p-c_text">Yêu cầu 1100 x 300 px</span>
                                                                     </div>
                                                                 </div>
                                                         </div>

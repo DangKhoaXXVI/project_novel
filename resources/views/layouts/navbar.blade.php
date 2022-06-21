@@ -44,7 +44,7 @@
                                     @endphp
                                     @if($role == 1)
                                         <a class="dropdown-item" href="{{ route('homeAdmin') }}">
-                                            <i class="fa fa-btn fa-user"></i>
+                                            <i class="fa-solid fa-house-chimney-user"></i>
                                             Trang quản lý
                                         </a>
                                         <a class="dropdown-item" href="{{ route('member_wall', ['id' => Auth::user()->id ] ) }}">

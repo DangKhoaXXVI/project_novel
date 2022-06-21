@@ -2,6 +2,11 @@
 @section('slide')
     @include('pages.slide')
 @endsection
+
+@section('topic')
+    @include('pages.topic')
+@endsection
+
 @section('content')
 
 <!-- @section('novel_new_chapter')

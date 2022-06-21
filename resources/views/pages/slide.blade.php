@@ -1,6 +1,6 @@
 
-<div class="container">
-    <div class="row">
+<!-- <div class="container">
+    <div class="row"> -->
         <div class="col-xs-12 col-sm-12 col-md-9">
             <div class="b_title"><strong><i class="fas fa-trophy"></i>    Truyện Nổi Bật</strong></div>
             <div class="owl-carousel owl-theme mt-5">
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-3">
+        <!-- <div class="col-xs-12 col-sm-12 col-md-3">
             <div class="tin-tuc">
                 <div class="b_title"><strong><i class="far fa-newspaper"></i> Tin Tức</strong></div>
                 <p><a title="" href="">
@@ -30,8 +30,11 @@
                         <a href="">Xem Thêm &gt;&gt;</a>
                     </div>
             </div>
-        </div>
-    </div>
-</div>
+        </div> -->
+
+
+        
+    <!-- </div>
+</div> -->
 
                 
