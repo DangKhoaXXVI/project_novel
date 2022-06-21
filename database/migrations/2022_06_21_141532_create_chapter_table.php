@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesOfNovelTable extends Migration
+class CreateChapterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateCategoriesOfNovelTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories_of_novel', function (Blueprint $table) {
+        Schema::create('chapter', function (Blueprint $table) {
             $table->id();
-            $table->BigInteger('Novel_id')->unsigned();
-            $table->BigInteger('Category_id')->unsigned();
+            $table->bigInteger('novel_id')->unsigned();
+            $table->text('title')->nullable();
+            $table->string('slug_chapter');
+            $table->longText('content')->nullable();
+            $table->boolean('status');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateCategoriesOfNovelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories_of_novel');
+        Schema::dropIfExists('chapter');
     }
 }
