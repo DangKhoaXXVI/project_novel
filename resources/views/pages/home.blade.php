@@ -4,11 +4,11 @@
 @endsection
 @section('content')
 
-@section('novel_new_chapter')
+<!-- @section('novel_new_chapter')
     @include('pages.novel_new_chapter')
-@endsection
+@endsection -->
 
-    <div class="b_title"><strong>Truyện Mới Nhất</strong></div>
+<div class="b_title"><strong>Truyện Mới Nhất</strong></div>
     <div class="gridlist">
         @foreach($novel as $key => $value)
         <div class="glitem">

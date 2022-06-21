@@ -62,12 +62,14 @@
                                         </span>
                                     </div>
                                     <div class="info-item" >
+                                        <i class="fa fa-calendar"></i>
                                         <span class="info-name" >Ngày đăng truyện:</span>
                                         <span class="info-value ">
                                             {{ $novel->created_at->toDateString() }}
                                         </span>
                                     </div>
                                     <div class="info-item" >
+                                        <i class="fa fa-calendar"></i>
                                         <span class="info-name" >Lần cuối cập nhật:</span>
                                         <span class="info-value ">
                                             {{ $novel->updated_at->toDateString()}}

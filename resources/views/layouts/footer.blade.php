@@ -5,6 +5,7 @@
                 </div>
             </footer>
         <!-- Scripts -->
+
         <script type="text/javascript">
             const toggle = document.querySelector('.toggle');
             const main_all = document.querySelector('.main_all');
@@ -72,10 +73,20 @@
         </script>
 
 <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
     <script type="text/javascript">
         CKEDITOR.replace('chapter_content');
         CKEDITOR.replace('summary_content');
     </script>
+
+    <script type="text/javascript">
+        flatpickr("#birthday-pk", {
+            dateFormat: "d-m-Y",
+        });
+    </script>
+
     
     <script type="text/javascript">
         function ChangeToSlug()

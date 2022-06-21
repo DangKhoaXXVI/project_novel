@@ -48,7 +48,7 @@ nav {
 
 
 
-<div class="text-center">
+<div class="text-center center-pagination">
     {{ $list_completed_novel->links() }}
 </div>
 
