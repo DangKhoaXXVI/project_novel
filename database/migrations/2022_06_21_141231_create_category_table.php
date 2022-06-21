@@ -17,7 +17,7 @@ class CreateCategoryTable extends Migration
             $table->id();
             $table->text('categoryname');
             $table->string('slug_category');
-            $table->boolean('status');
+            $table->integer('status');
             $table->timestamps();
         });
     }

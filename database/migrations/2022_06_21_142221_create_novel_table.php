@@ -26,7 +26,7 @@ class CreateNovelTable extends Migration
             $table->bigInteger('category_id')->unsigned();
             $table->integer('state');
             $table->string('image');
-            $table->boolean('status');
+            $table->integer('status');
             $table->timestamps();
         });
     }
