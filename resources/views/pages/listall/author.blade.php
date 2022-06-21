@@ -48,7 +48,7 @@ nav {
 
 
 
-<div class="text-center">
+<div class="text-center center-pagination">
     {{ $novel_author->links() }}
 </div>
 

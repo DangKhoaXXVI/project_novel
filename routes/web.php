@@ -26,8 +26,13 @@ use App\Http\Controllers\UserController;
 
 
 Route::get('/log-out', [UserController::class, 'logOut'])->name('log-out');
+
+
 Route::post('/log-in', [UserController::class, 'logIn'])->name('loginnn');
 Route::get('/log-in', [UserController::class, 'viewLogin'])->name('log-in');
+
+// Route::post('/sign-up', [UserController::class, 'signUp'])->name('sign-up');
+Route::get('/sign-up', [UserController::class, 'ViewsignUp'])->name('sign-up-view');
 
 Route::get('/', [IndexController::class, 'home'])->name('home');
 
@@ -52,6 +57,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('/member/{id}', [UserController::class, 'member_wall'])->name('member_wall');
+    Route::put('/member/{id}', [UserController::class, 'update'])->name('update_member');
 });
 
 Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
