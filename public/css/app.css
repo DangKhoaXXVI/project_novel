@@ -13,6 +13,9 @@
     --seriesgerne: #eee;
     --bordercolor: #e4e5e7;
     --borderbottom: 1px solid #dadbdd;
+    --border-cover: #e4e5e7 #dadbdd hsla(210,4%,80%,.8);
+    --background-cover: hsla(0,0%,100%,.9);
+    --icon-infor: rgba(0,0,0,.4);
 }
 
 /* Navbar  */

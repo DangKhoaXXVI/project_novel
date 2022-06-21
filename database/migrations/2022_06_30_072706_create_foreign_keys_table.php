@@ -13,33 +13,19 @@ class CreateForeignKeysTable extends Migration
      */
     public function up()
     {
-
-        Schema::table('topics', function (Blueprint $table) {
-            $table->foreign('User_id')->references('id')->on('users');
+        Schema::table('incategory', function (Blueprint $table) {
+            $table->foreign('category_id')->references('id')->on('category');
+            $table->foreign('novel_id')->references('id')->on('novel');             
         });
 
-        Schema::table('chapters', function (Blueprint $table) {
-            $table->foreign('Novel_id')->references('id')->on('novels');
+        Schema::table('chapter', function (Blueprint $table) {
+            $table->foreign('novel_id')->references('id')->on('novel');             
         });
 
-        Schema::table('follows', function (Blueprint $table) {
-            $table->foreign('User_id')->references('id')->on('users');
-            $table->foreign('Novel_id')->references('id')->on('novels');
-        });
-
-        Schema::table('topic_comments', function (Blueprint $table) {
-            $table->foreign('User_id')->references('id')->on('users');
-            $table->foreign('Topic_id')->references('id')->on('topics');
-        });
-
-        Schema::table('novel_comments', function (Blueprint $table) {
-            $table->foreign('User_id')->references('id')->on('users');
-            $table->foreign('Novel_id')->references('id')->on('novels');
-        });
-
-        Schema::table('categories_of_novel', function (Blueprint $table) {
-            $table->foreign('Category_id')->references('id')->on('categories');
-            $table->foreign('Novel_id')->references('id')->on('novels');             
+        Schema::table('novel', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');      
+            $table->foreign('type_id')->references('id')->on('type');
+            $table->foreign('category_id')->references('id')->on('category');
         });
     }
 

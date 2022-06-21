@@ -47,13 +47,17 @@
 }
 
 .main_all {
-    background-color: var(--lightest);
+    background-color: var(--lightest)!important;
 }
 
 
 footer {
     background-color: #333; 
     padding: 30px 10px;
+}
+
+.right-footer a:hover {
+    text-decoration: none;
 }
 
 .right-footer {
@@ -69,6 +73,22 @@ footer {
     margin-right: 20px; 
 }
 
+.profile-feature {
+    border-color: var(--border-cover)!important;
+    background-color: var(--background-cover)!important;
+}
+
+.profile-nav {
+    background-color: var(--white)!important;
+}
+
+.profile-intro_name {
+    color: var(--darkest)!important;
+}
+
+.profile-info-item .info-name {
+    color: var(--icon-infor)!important;
+}
 
 .toggle {
     cursor: pointer;
@@ -93,6 +113,10 @@ footer {
 }
 
 .dark {
+    --icon-infor: rgba(255, 255, 255, 0.452);
+    --darkest: #ffffff;
+    --background-cover: rgba(7, 7, 7, 0.9);
+    --border-cover: #202020 #2c2c2c rgba(66, 66, 66, 0.8);
     --white: #333;
     --lightest: #111;
     --lightgreen: #fff;

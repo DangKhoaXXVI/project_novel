@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTopicCommentsTable extends Migration
+class CreateIncategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateTopicCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('topic_comments', function (Blueprint $table) {
+        Schema::create('incategory', function (Blueprint $table) {
             $table->id();
-            $table->BigInteger('Topic_id')->unsigned();
-            $table->BigInteger('User_id')->unsigned();
-            $table->longText('Content')->nullable();
-            $table->boolean('Status')->default(1);
+            $table->bigInteger('novel_id')->unsigned();
+            $table->bigInteger('category_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateTopicCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topic_comment');
+        Schema::dropIfExists('incategory');
     }
 }
