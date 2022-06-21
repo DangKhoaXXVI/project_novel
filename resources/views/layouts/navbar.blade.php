@@ -39,14 +39,33 @@
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('member_wall', ['id' => Auth::user()->id ] ) }}">
-                                        <i class="fa fa-btn fa-user"></i>
-                                        Tài khoản
-                                    </a>
-                                    <a class="dropdown-item" href="{{ url('log-out') }}">
-                                        <i class="fa fa-btn fa-sign-out"></i>
-                                        Đăng xuất
-                                    </a>
+                                    @php
+                                        $role = Auth::user()->role
+                                    @endphp
+                                    @if($role == 1)
+                                        <a class="dropdown-item" href="{{ route('homeAdmin') }}">
+                                            <i class="fa fa-btn fa-user"></i>
+                                            Trang quản lý
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('member_wall', ['id' => Auth::user()->id ] ) }}">
+                                            <i class="fa fa-btn fa-user"></i>
+                                            Tài khoản
+                                        </a>
+                                        <a class="dropdown-item" href="{{ url('log-out') }}">
+                                            <i class="fa fa-btn fa-sign-out"></i>
+                                            Đăng xuất
+                                        </a>
+                                    @else
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('member_wall', ['id' => Auth::user()->id ] ) }}">
+                                            <i class="fa fa-btn fa-user"></i>
+                                            Tài khoản
+                                        </a>
+                                        <a class="dropdown-item" href="{{ url('log-out') }}">
+                                            <i class="fa fa-btn fa-sign-out"></i>
+                                            Đăng xuất
+                                        </a>
+                                    @endif
                                 </div>
                             </li>
                         @endif

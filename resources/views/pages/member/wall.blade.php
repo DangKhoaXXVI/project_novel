@@ -1,168 +1,6 @@
 @extends('../welcome')
 @section('member')
 
-<style>
-
-#mainpart {
-    padding-bottom: 30px;
-    padding-top: 0px;
-    width: 100%;
-}
-
-.profile-feature-wrapper {
-    padding-bottom: 20px;
-    padding-top: 66px;
-    position: relative;
-}
-
-.profile-feature {
-    box-shadow: none;
-    background-color: hsla(0,0%,100%,.9);
-    border-color: #e4e5e7 #dadbdd hsla(210,4%,80%,.8);
-    border-radius: 4px;
-    border-style: solid;
-    border-width: 1px;
-    overflow: hidden;
-}
-
-.profile-feature .profile-cover {
-    background-color: #fff;
-    background-size: cover;
-    position: relative;
-    width: 100%;
-}
-
-#profile-changer_cover {
-    top: 0;
-}
-
-.profile-changer {
-    color: #fff;
-    cursor: pointer;
-    left: 0;
-    padding: 10px;
-    position: absolute;
-    text-shadow: 0 0 4px #999;
-    width: 100%;
-    z-index: 9;
-    opacity: 0.6;
-}
-
-.profile-changer:hover {
-    opacity: 1;
-}
-
-#profile-changer_cover .p-c_wrapper {
-    display: inline-block;
-    padding: 4px 10px;
-    background: #333;
-}
-
-.profile-feature .profile-nav {
-    padding: 10px;
-    position: relative;
-}
-
-.profile-nav {
-    background-color: #fff;
-}
-
-.profile-feature .profile-ava-wrapper {
-    bottom: 10px;
-    left: 20px;
-    position: absolute;
-}
-
-.profile-feature .profile-ava {
-    background-color: #fff;
-    border-radius: 100px;
-    box-shadow: 0 0 4px #333;
-    height: 150px;
-    overflow: hidden;
-    position: relative;
-    width: 150px;
-}
-
-.profile-ava {
-    border-color: #666;
-    box-shadow: none;
-}
-
-#profile-changer_ava {
-    bottom: 0;
-    padding: 0;
-    text-align: center;
-    top: 70%;
-    opacity: 0;
-}
-
-#profile-changer_ava:hover {
-    opacity: 1;
-    background: #333;
-}
-
-.profile-changer {
-    color: #fff;
-    cursor: pointer;
-    left: 0;
-    padding: 10px;
-    position: absolute;
-    text-shadow: 0 0 4px #999;
-    width: 100%;
-    z-index: 9;
-}
-
-.profile-feature .profile-cover .img-in-ratio {
-    background-position: inherit;
-    background-size: 100% auto;
-}
-
-.profile-feature .profile-ava img {
-    display: block;
-    width: 100%;
-}
-.profile-feature .profile-ava img, svg {
-    vertical-align: middle;
-}
-.profile-feature .profile-ava img {
-    border-style: none;
-}
-
-.profile-feature .profile-function.at-desktop {
-    float: right;
-    line-height: 60px;
-    padding-left: 20px;
-}
-
-.button-green {
-    background-color: #5cb85c;
-    border-color: #4cae4c;
-    color: #fff;
-}
-
-.profile-feature .profile-intro {
-    color: #fff;
-    padding-left: 180px;
-}
-
-.profile-feature .profile-intro_role {
-    background-color: #36a189;
-    border-radius: 2px;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 2px 20px;
-}
-
-.profile-intro_name {
-    color: #111;
-}
-
-
-
-</style>
-
-
 <main id="mainpart" class="profile-page">
     <div class="profile-feature-wrapper">
         <div class="container">
@@ -170,30 +8,152 @@
                 <div class="profile-cover">
                     <div class="fourone-ratio">
                         <div class="content img-in-ratio">
-                            <img src="{{ url('/uploads/user/profile-cover.jpg') }}">
+                            <img src="{{ url('/uploads/user/'.$member->cover) }}">
                         </div>
                     </div>
-                    <div id="profile-changer_cover" class="profile-changer none block-m">
-                        <div class="p-c_wrapper">
-                            <i class="fas fa-camera"></i>
-                            <span class="p-c_text">Yêu cầu 1100 x 300 px</span>
+                        <div id="profile-changer_cover" class="profile-changer none block-m">
+                            <div class="cover-change" style="position: initial;">
+                                <input name="cover" type="file">
+                                <i class="fas fa-camera"></i>
+                                <span class="p-c_text">Yêu cầu 1100 x 300 px</span>
+                                <input name="cover" type="file">
+                            </div>
                         </div>
-                    </div>
-                    <input type="file" id="user_cover_file" style="display: none">
-                    <input type="file" id="user_avatar_file" style="display: none">
                 </div>
                 <div class="profile-nav">
                     <div class="profile-ava-wrapper">
                         <div class="profile-ava">
-                            <div id="profile-changer_ava" class="profile-changer">
-                                <span class="p-c_text"><i class="fas fa-camera"></i></span>
-                            </div>
+                            <!-- <div id="profile-changer_ava" class="profile-changer">
+                                <span class="p-c_text">
+                                    <div class="round">
+                                        <input name="avatar" type="file">
+                                            <i class="fa fa-camera" style="color: #fff"></i>
+                                    </div>
+                                </span>
+                            </div> -->
                             <img src="{{ url('/uploads/user/'.$member->avatar) }}">
                         </div>
                     </div>
-                    <!-- <div class="profile-function at-desktop none block-m">
-                        <a href="https://ln.hako.vn/tin-nhan/moi?to=Shinokawa" class="button to-contact button-green"><i class="fas fa-paper-plane"></i> Liên hệ</a>
-                    </div> -->
+                    <div class="profile-function at-desktop none block-m">
+                        <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fas fa-edit" style="font-size: 20px;"></i>
+                            Sửa thông tin
+                        </button>
+                        <!------------------------------- Dialog ------------------------------>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="dialog-container">
+                                            <div class="dialog-content">
+                                                <form class="eIoQdo" method="POST" action="{{ route('update_member', ['id' => $member->id]) }}" enctype='multipart/form-data'>
+                                                    @method('PUT')
+                                                    @csrf
+                                                    <div class="Heading___Heading-sc-1wdsv8o-0 cfRHkz modal-header">
+                                                        <!-- <a class="navbar-brand"><div class="logo"></div></a> -->
+                                                        <div class="profile-cover" style="overflow: hidden;">
+                                                            <div class="fourone-ratio">
+                                                                <div class="content img-in-ratio">
+                                                                    <img src="{{ url('/uploads/user/'.$member->cover) }}" style="width: 100%">
+                                                                </div>
+                                                            </div>
+                                                                <div id="profile-changer_cover" class="profile-changer none block-m">
+                                                                    <div class="cover-change" style="position: initial;">
+                                                                        <input name="cover" type="file">
+                                                                        <i class="fas fa-camera"></i>
+                                                                        <input name="cover" type="file">
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-headline">
+                                                        <h2>Thay đổi thông tin <b>tài khoản</b> của bạn</b>.</h2>
+                                                    </div>
+                                                    <div class="modal-fields">
+
+                                                    <div class="avatar-dialog">
+                                                        <div class="profile-ava">
+                                                            <div id="profile-changer_ava" class="profile-changer">
+                                                                <span class="p-c_text">
+                                                                    <div class="round">
+                                                                        <input name="avatar" type="file">
+                                                                        <i class="fa fa-camera" style="color: #fff"></i>
+                                                                    </div>
+                                                                </span>
+                                                            </div>
+                                                            <img src="{{ url('/uploads/user/'.$member->avatar) }}">
+                                                        </div>
+                                                    </div>
+                    
+                                                    
+
+                                                    <div class="field has-icon-left">
+                                                        <label class="label" for="2565c-name">Tên</label>
+                                                        <div class="control">
+                                                            <input name="name" placeholder="Tên" autocomplete="name nickname username" type="text" class="input" value="{{ $member->name }}">
+                                                            <label class="icon icon-left" for="2565c-name">
+                                                                <div class="Basic___TooltipArea-sc-hic7b9-7 jQhXRe">
+                                                                    <i class="fa-solid fa-user"></i>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="field has-icon-left">
+                                                        <label class="label" for="2565c-name">Ngày sinh</label>
+                                                        <div class="control">
+                                                            <input name="birthday" placeholder="Ngày sinh" id="birthday-pk" type="text" class="input" value="{{ $member->birthday }}">
+                                                            <label class="icon icon-left" for="2565c-name">
+                                                                <div class="Basic___TooltipArea-sc-hic7b9-7 jQhXRe">
+                                                                    <i class="fa-solid fa-cake-candles"></i>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="field has-icon-left">
+                                                        <label class="lable" for="2565c-name">Sở thích</label>
+                                                        <div class="control">
+                                                            <input name="favorite" placeholder="Sở thích" autocomplete="name nickname username"  type="text" class="input" value="{{ $member->favorite }}">
+                                                            <label class="icon icon-left" for="2565c-name">
+                                                                <div class="Basic___TooltipArea-sc-hic7b9-7 jQhXRe">
+                                                                    <i class="fa-solid fa-heart"></i>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="field has-icon-left">
+                                                        <label class="label" for="2565c-name">Giới thiệu về bản thân</label>
+                                                        <div class="control">
+                                                            <input name="about" placeholder="Giới thiệu về bản thân" autocomplete="name nickname username" type="text" class="input" value="{{ $member->about }}">
+                                                            <label class="icon icon-left" for="2565c-name">
+                                                                <div class="Basic___TooltipArea-sc-hic7b9-7 jQhXRe">
+                                                                    <i class="fa-solid fa-address-card"></i>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="Modal___ModalFooter-sc-1657dip-5 kGCHZn dialog-footer">
+                                                        <div class="options">
+                                                        <button type="submit" class="button to-contact button-save-dialog" data-toggle="modal">
+                                                            <i class="fas fa-edit" style="font-size: 20px;"></i>
+                                                            Lưu
+                                                        </button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="profile-intro">
                         <h3 class="profile-intro_name">
                             {{ $member->name }}
@@ -205,6 +165,73 @@
                         @endif
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-3">
+                <section class="basic-section clear">
+                    <main class="sect-body">
+                        <div class="p-s_i-bio">
+                            <p>
+                            {{ $member->about }}
+                            </p>
+                        </div>
+                        <div class="profile-info-item">
+                            <span class="info-name">
+                                <i class="fas fa-calendar"></i> Ngày sinh: 
+                            </span>
+                            <span class="info-value">{{ $member->birthday }}</span>
+                        </div>
+                        <div class="profile-info-item">
+                            <span class="info-name">
+                                <i class="fas fa-star"></i> Sở thích: 
+                            </span>
+                            <span class="info-value">{{ $member->favorite }}</span>
+                        </div>
+                        <div class="profile-info-item">
+                            <span class="info-name">
+                                <i class="fas fa-calendar"></i> Tham gia: 
+                            </span>
+                            <span class="info-value">{{ $member->created_at->toDateString() }}</span>
+                        </div>
+                    </main>
+                </section>
+            </div>
+            <div class="col-12 col-md-12 col-lg-9 col-xl-9">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                @php
+                    $count = count($novel_uploaded);
+                @endphp
+                @if($count > 0)
+                <div class="b_title"><strong>Truyện đã đăng</strong></div>
+                <div class="gridlist">
+                    @foreach($novel_uploaded as $key => $value)
+                    <div class="glitem">
+                        <a href="{{url('novel/'.$value->slug_novelname)}}">
+                            <div class="image">
+                                <img class="lazy loaded" src="{{ asset('uploads/novel/'.$value->image) }}" alt="{{$value->novelname}}" width="100%" height="100%" data-was-processed="true">
+                            </div>
+                        </a>
+                        <a class="series-name" href="{{url('novel/'.$value->slug_novelname)}}">{{$value->novelname}}</a>
+                    </div>
+                    @endforeach
+                </div>
+                @endif
             </div>
         </div>
     </div>
