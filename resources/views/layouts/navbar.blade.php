@@ -4,16 +4,21 @@
                     <a class="navbar-brand" href="{{url('/')}}"><div class="logo"></div></a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" style="color: var(--lightgreen);" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Thể Loại
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @foreach($category as $key => $categories)
-                                <a class="dropdown-item" href="{{url('category/'.$categories->slug_category)}}">{{$categories->categoryname}}</a>
-                                @endforeach
-                            </div>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: var(--lightgreen);" href="{{ url('All-New-Novel') }}">
+                                Danh Sách Truyện
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" style="color: var(--lightgreen);" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Thể Loại
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @foreach($category as $key => $categories)
+                                    <a class="dropdown-item" href="{{url('category/'.$categories->slug_category)}}">{{$categories->categoryname}}</a>
+                                    @endforeach
+                                </div>
+                            </li>
                         </ul>
                         <form autocomplete="off" method="GET" action="{{ url('search') }}" accept-charset="UTF-8" class="navbar-form navbar-right">
                             @csrf

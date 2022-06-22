@@ -9,7 +9,8 @@
 
 </style>
 
-    <div class="row mt-4 novelpage">
+    <div class="container">
+    <div class="row d-block clearfix mt-4 novelpage">
         <div class="col-xs-12 col-sm-12 col-md-9 float-left feature-section">
             <section>
                 <main>
@@ -92,7 +93,6 @@
                 </main>
             </section>
         </div>
-
         <div class="col-xs-12 col-sm-12 col-md-3 float-right">
             <div class="row top-group">
                 <div class="col-12 no-push push-3-m col-md-6 no-push-l col-lg-12">
@@ -101,14 +101,72 @@
                             <div class="series-owner group-mem">
                                 <img src="{{ asset('uploads/user/'.$user->avatar) }}" alt="Poster's avatar">
                                     <div class="series-owner-title">
-                                        <span class="series-owner_name"><a href="">{{ $user->name }}</a></span>
+                                        <span class="series-owner_name"><a href="{{ url('member/'.$user->id) }}">{{ $user->name }}</a></span>
                                     </div>
                             </div>
                         </main>
                     </section>
                 </div>
             </div>
+            @php
+                $count_novel_uploaded = count($novel_uploaded);
+            @endphp
+            @if($count_novel_uploaded>0)
+                <section class="basic-section">
+                    <header class="sect-header">
+                        <span class="sect-title">Truyện cùng người đăng</span>
+                    </header>
+                    <main class="d-lg-block">
+                        <ul class="others-list">
+                            @foreach($novel_uploaded as $novel_up)
+                                <li>
+                                    <div class="others-img no-padding">
+                                        <div class="a6-ratio">
+                                            <div class="content img-in-ratio"> 
+                                                <img  src="{{ asset('uploads/novel/'.$novel_up->image) }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="others-info">
+                                        <h5 class="others-name"><a href="{{url('novel/'.$novel_up->slug_novelname)}}">{{ $novel_up->novelname }}</a></h5>
+                                        <small class="series-summary-2">{!! $novel_up->summary !!}</small>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </main>
+                </section>
+            @endif
+            <section class="basic-section">
+                <header class="sect-header">
+                    <span class="sect-title">Truyện nổi bật</span>
+                </header>
+                <main class="d-lg-block">
+                    <ul class="others-list">
+                        @foreach($top4_novel as $top4)
+                            <li>
+                                <div class="others-img no-padding">
+                                    <div class="a6-ratio">
+                                        <div class="content img-in-ratio"> 
+                                            <img  src="{{ asset('uploads/novel/'.$top4->image) }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="others-info">                                        
+                                    <h5 class="others-name"><a href="{{url('novel/'.$top4->slug_novelname)}}">{{ $top4->novelname }}</a></h5>
+                                    <i class="fa fa-eye"></i>
+                                        <span>Lượt xem:</span>
+                                        <span>
+                                            {{ $top4->novel_views }}
+                                        </span>
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </main>
+            </section>
         </div>
+        
         @php
             $mucluc = count($chapter);
         @endphp
@@ -170,4 +228,6 @@
             </div>
         @endif
     </div>
+    </div>
+
 @endsection

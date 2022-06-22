@@ -16,9 +16,20 @@
     --border-cover: #e4e5e7 #dadbdd hsla(210,4%,80%,.8);
     --background-cover: hsla(0,0%,100%,.9);
     --icon-infor: rgba(0,0,0,.4);
+    --background-maincontent: #7b7b7b12;
+    --chapter-theme: #f6f4ec;
+}
+
+@font-face {
+    font-family: 'ChimBienNang';
+    src: url(fonts/UVNChimBienNang.TTF);
 }
 
 /* Navbar  */
+
+.nav-item a:hover {
+    color:#aaa!important;
+}
 
 
 /* Welcome Page */
@@ -238,7 +249,63 @@ ul.list-chapters li .chapter-time {
     color: #ffffff;
 }
 
+ul.others-list {
+    margin: 0;
+    padding: 0;
+}
 
+ul.others-list li {
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+ul.others-list li .others-img {
+    float: left;
+    margin-right: 10px;
+}
+
+ul.others-list li .others-info {
+    padding-left: 60px;
+}
+
+ul.others-list li .others-name {
+    display: block;
+    font-weight: 700;
+    overflow: hidden;
+    padding-bottom: 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+ul.others-list li small.series-summary-2 {
+    white-space: nowrap ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+ul.others-list li small {
+    display: block;
+}
+
+.img-in-ratio img {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-position: 50%;
+    background-repeat: no-repeat;
+}
+
+.others-img .a6-ratio .img-in-ratio img {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 70px;
+}
 
 /* Category Page */
 
@@ -304,6 +371,44 @@ a.series-name:hover {
 }
 
 /* Chapter Page */
+
+#rd_side_icon {
+    background-color: var(--chapter-theme);
+    color: var(--black);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    bottom: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    opacity: 1;
+    position: fixed;
+    right: 30px;
+    z-index: 9999;
+}
+
+#rd_side_icon a:hover {
+    color: #5cb85c;
+}
+
+
+.rd_sd-button_item {
+    border-bottom: 1px solid #ccc;
+    display: block;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 16px 20px;
+}
+
+#chapter-content p span{
+    font-family: ChimBienNang!important;
+    font-size: 20px;
+}   
+
+.reading-page {
+    background-color: var(--chapter-theme);
+}   
+
+
 
 .reading-content, .reading-content h2, .reading-content h4, .reading-content h5 {
     line-height: 1.5em;
@@ -432,7 +537,22 @@ a.series-name:hover {
 
 /* Home Page */
 
+#main {
+    min-height: calc(100% - 100px);
+}
 
+.container-fluid {
+    padding-right: 0!important;
+    padding-left: 0!important;
+}
+
+.maincontent-area {
+    padding-top: 40px;
+}
+
+.maincontent-area:nth-child(odd) {
+    background: var(--background-maincontent)!important;
+}
 
 .gridlist {
     display: flex;

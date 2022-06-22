@@ -83,12 +83,19 @@ class IndexController extends Controller
         $novel->novel_views = $novel->novel_views + 1;
         $novel->save();
         $chapter = Chapter::with('novel')->orderBy('id', 'ASC')->where('novel_id', $novel->id)->get();
+        
+        // Người đăng - Truyện đã đăng
         $user = User::with('novel')->where('id', $novel->user_id)->first();
+        $novel_uploaded = Novel::where('user_id', $user->id)->whereNotIn('id', [$novel->id])->inRandomOrder()->take(4)->get();
+
+        // Top truyện nổi bật
+        $top4_novel = Novel::orderBy('novel_views', 'DESC')->where('status', 0)->take(4)->get();
+
 
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
         }
-        return view('pages.novel')->with(compact('category', 'novel', 'chapter', 'user'));
+        return view('pages.novel')->with(compact('category', 'novel', 'chapter', 'user', 'novel_uploaded', 'top4_novel'));
     }
 
     public function chapter($id, $slug) {

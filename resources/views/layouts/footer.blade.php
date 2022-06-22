@@ -87,6 +87,13 @@
         });
     </script>
 
+<!-- <script type="text/javascript">
+    $('.role-list-1').on('change', function() {
+        $('.role-list-1').not(this).prop('checked', false);
+    });
+</script> -->
+
+
     
     <script type="text/javascript">
         function ChangeToSlug()

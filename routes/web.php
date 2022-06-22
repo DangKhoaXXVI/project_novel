@@ -50,13 +50,13 @@ Route::get('/author/{author}', [IndexController::class, 'author'])->name('ListNo
 
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 
+Route::get('/member/{id}', [UserController::class, 'member_wall'])->name('member_wall');
 
 
 Auth::routes();
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/member/{id}', [UserController::class, 'member_wall'])->name('member_wall');
     Route::put('/member/{id}', [UserController::class, 'update'])->name('update_member');
 });
 
@@ -71,6 +71,13 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
     Route::resource('/chapter', ChapterController::class);
 
     Route::resource('/category', CategoryController::class);
+
+    Route::get('/member', [UserController::class, 'index']);
+
+    Route::get('/member/edit/{id}', [UserController::class, 'edit']);
+
+    Route::put('/member/edit/{id}', [UserController::class, 'admin_update'])->name('admin_update_member');
+
 
 });
 

@@ -35,13 +35,31 @@
                         </div>
                     </div>
                     <div class="profile-function at-desktop none block-m">
-                        <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fas fa-edit" style="font-size: 20px;"></i>
-                            Sửa thông tin
-                        </button>
+                        @if(isset($nguoidung)) {
+                            @php
+                            $id_user = Auth::user()->id
+                            @endphp
+                            @if($id_user == $member->id)
+                                <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#information_account">
+                                    <i class="fas fa-edit" style="font-size: 20px;"></i>
+                                    Sửa thông tin
+                                </button>
+                            @else
+                                <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#">
+                                    <i class="fas fa-edit" style="font-size: 20px;"></i>
+                                    Liên lạc
+                                </button>
+                            @endif
+                        }
+                        @else
+                                <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#">
+                                    <i class="fas fa-edit" style="font-size: 20px;"></i>
+                                    Liên lạc
+                                </button>
+                        @endif
                         <!------------------------------- Dialog ------------------------------>
 
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="information_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-body">
