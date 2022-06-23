@@ -58,6 +58,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::put('/member/{id}', [UserController::class, 'update'])->name('update_member');
+    Route::post('/rating-novel', [UserController::class, 'rating'])->name('rating-novel');
 });
 
 Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {

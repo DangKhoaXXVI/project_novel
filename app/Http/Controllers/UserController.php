@@ -9,6 +9,7 @@ use App\Models\InCategory;
 use App\Models\Novel;
 use App\Models\Chapter;
 use App\Models\User;
+use App\Models\Rating;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -171,6 +172,19 @@ class UserController extends Controller
     {
         $user = User::find($id)->destroy();
         return redirect()->back()->with('status', 'Xóa thành viên thành công!');
+    }
+
+    public function rating(Request $request)
+    {
+        $model = Rating::where($request->only('novel_id', 'user_id'))->first();
+        if($model) {    
+            Rating::where($request->only('novel_id', 'user_id'))
+            ->update($request->only('rating_star'));
+        } else {
+            Rating::create($request->only('novel_id', 'user_id', 'rating_star'));
+
+        }
+        return redirect()->back();
     }
 
 }

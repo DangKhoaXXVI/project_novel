@@ -35,13 +35,18 @@
         </script>
         
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('rating/starrr.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>        
         <script type="text/javascript">
             $('.owl-carousel').owlCarousel({
-                loop:false,
+                loop:true,
                 margin:10,
                 nav:false,
+                autoplay: true,
+                autoplayHoverPause: true,
+                autoplayTimeout: 3000,
+                smartSpeed: 500,
                 responsive:{
                     0:{
                         items:1
@@ -74,6 +79,8 @@
 
 <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
     <script type="text/javascript">
@@ -86,12 +93,60 @@
             dateFormat: "d-m-Y",
         });
     </script>
+    
+    <script type="text/javascript">
+        $(function () {
+            let $this = $(this);
+            let number = $this.attr('data-value');
+            $('.number-rating').val(number)
+            $('.number-rating').click(function(e)) {
+                alert('asdasdas');
+            }
+        });
+    </script>
 
-<!-- <script type="text/javascript">
-    $('.role-list-1').on('change', function() {
-        $('.role-list-1').not(this).prop('checked', false);
-    });
-</script> -->
+    <script src="../rating/starrr.js"></script>
+
+    <script>
+        $('#star1').starrr({
+        change: function(e, value){
+            if (value) {
+                // $('.your-choice-was').show();
+                // $('.your-novel-is').show();
+                $('.choice').text(value);
+                $('#rating_star').val(value);
+                $('#formRating').submit();
+            } else {
+                $('.your-choice-was').hide();
+            }
+        }
+        });
+
+        $('#star2').starrr({
+        change: function(e, value){
+            if (value) {
+                alert('Phải đăng nhập để đánh giá!');
+            } else {
+                $('.your-choice-was').hide();
+            }
+        }
+        });
+
+        $('#star3') ({
+        change: function(e, value){
+            if (value) {
+                // $('.your-choice-was').show();
+                // $('.your-novel-is').show();
+                $('.choice').text(value);
+                $('#rating_star').val(value);
+                $('#formRating').submit();
+            } else {
+                $('.your-choice-was').hide();
+            }
+        }
+        });
+
+    </script>
 
 
     

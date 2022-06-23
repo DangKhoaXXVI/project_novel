@@ -8,6 +8,7 @@ use App\Models\InCategory;
 use App\Models\Novel;
 use App\Models\Chapter;
 use App\Models\User;
+use App\Models\Rating;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -81,6 +82,13 @@ class IndexController extends Controller
         $category = Category::orderBy('id', 'DESC')->get();
         $novel = Novel::with('typenovel')->where('slug_novelname', $slug)->where('status', 0)->first();
         $novel->novel_views = $novel->novel_views + 1;
+        if(Auth::check()) {
+            $ratingUser = Rating::where('novel_id', $novel->id)->where('user_id', Auth::user()->id)->first();;
+        } else {
+            $ratingUser = 0;
+        }
+        $rating = Rating::where('novel_id', $novel->id)->get();
+        $ratingAvg = Rating::where('novel_id', $novel->id)->avg('rating_star');
         $novel->save();
         $chapter = Chapter::with('novel')->orderBy('id', 'ASC')->where('novel_id', $novel->id)->get();
         
@@ -95,7 +103,7 @@ class IndexController extends Controller
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
         }
-        return view('pages.novel')->with(compact('category', 'novel', 'chapter', 'user', 'novel_uploaded', 'top4_novel'));
+        return view('pages.novel')->with(compact('category', 'novel', 'chapter', 'user', 'novel_uploaded', 'top4_novel', 'ratingUser', 'ratingAvg', 'rating'));
     }
 
     public function chapter($id, $slug) {

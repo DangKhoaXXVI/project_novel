@@ -43,13 +43,6 @@
                                         </span>
                                     </div>
                                     <div class="info-item" >
-                                        <i class="fa fa-eye"></i>
-                                        <span class="info-name" >Lượt xem:</span>
-                                        <span class="info-value ">
-                                            {{ $novel->novel_views }}
-                                        </span>
-                                    </div>
-                                    <div class="info-item" >
                                         <i class="fa fa-rss"></i>
                                         <span class="info-name" >Tình trạng:</span>
                                         <span class="info-value ">
@@ -59,6 +52,35 @@
                                                 Đã hoàn thành
                                             @else
                                                 Tạm ngưng
+                                            @endif
+                                        </span>
+                                    </div>
+                                    @if(isset($nguoidung))
+                                        @if(isset($ratingUser) || $ratingUser>0)
+                                            <div class="info-item" >
+                                                <i class="fa fa-star"></i>
+                                                <span class="info-name" >Đánh giá của bạn:</span>
+                                                <span class="info-value ">
+                                                    <div class='starrr'>
+                                                        @for($i = 1; $i <= $ratingUser->rating_star; $i++)
+                                                            <a class="fa-star fa"></a>      
+                                                        @endfor
+                                                        <!-- @for($j = $ratingUser->rating_star+1; $j <= 5; $j++)
+                                                            <a class="fa-star-o fa"></a>
+                                                        @endfor -->
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        @endif
+                                    @endif
+                                    <div class="info-item" >
+                                        <i class="fa fa-star"></i>
+                                        <span class="info-name" >Tổng đánh giá của truyện:</span>
+                                        <span class="info-value ">
+                                            @if($rating->count() > 0)
+                                                {{ number_format($ratingAvg, 1) }} / 5 ({{ $rating->count() }} lượt đánh giá)
+                                            @else
+                                                Truyện chưa được đánh giá bởi ai cả... 
                                             @endif
                                         </span>
                                     </div>
@@ -77,6 +99,64 @@
                                         </span>
                                     </div>
                                 </div>
+                                <div class="side-features">
+                                    <div class="row">
+                                        <div class="col-4 col-md feature-item width-auto-x1">
+                                            <div class="side-feature-button button-rate wishlist">
+                                                <span class="block feature-value">
+                                                        <i class="fas fa-heart"></i>
+                                                </span>
+                                                <span class="block feature-name">{{ $novel->novel_views }} lượt yêu thích</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-4 col-md feature-item width-auto-x1">
+                                            <div class="series-rating rated">
+                                                <label for="open-rating" class="side-feature-button button-rate">
+                                                    <span class="block feature-value">
+                                                        @if($ratingUser)
+                                                            <i class="fa-solid fa-star"></i>
+                                                        @else
+                                                            <i class="far fa-star"></i>
+                                                        @endif
+                                                    </span>
+                                                    <span class="block feature-name">Đánh giá</span>
+                                                </label>
+                                                <input type="checkbox" id="open-rating">
+                                                    <div class="series-evaluation clear">
+                                                        @if(isset($nguoidung))
+                                                            <div class="rating text-center">
+                                                                <div class='starrr' id='star1'></div>
+                                                            </div>
+                                                            <form action="{{ route('rating-novel') }}" method="POST" class="form-inline" id="formRating">
+                                                                @csrf
+                                                                <div class="form-group">
+                                                                    <input type="hidden" class="form-control" name="rating_star" id="rating_star">
+                                                                    <input type="hidden" class="form-control" name="novel_id" value="{{ $novel->id }}">
+                                                                    <input type="hidden" class="form-control" name="user_id" value="{{ Auth::user()->id }}">
+                                                                </div>
+                                                            </form>
+                                                        @else
+                                                            <div class="rating text-center">
+                                                                <div class='starrr' id='star2'></div>
+                                                            </div>
+                                                        @endif
+                                                    </div>     
+                                            </div>
+                                        </div>
+                                        <div class="col-4 col-md feature-item width-auto-x1">
+                                            <div class="side-feature-button button-rate viewed">
+                                                <span class="block feature-value">
+                                                        <i class="fa fa-eye"></i>
+                                                </span>
+                                                <span class="block feature-name">{{ $novel->novel_views }} lượt xem</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+
+
                             </div>
                         </div>
                     </div>
