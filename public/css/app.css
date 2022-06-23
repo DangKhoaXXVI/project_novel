@@ -75,6 +75,10 @@ li {
     border-color: #ccc;
 }
 
+.searchbutton  .btn-default .fas {
+    font-weight: 900!important;
+}
+
 /* Novel Page */
 
 
@@ -1277,6 +1281,10 @@ h1.with-gradient {
     position: absolute;
     transform: scale(1);
     opacity: 0;
+}
+
+.cover-change .fas {
+    font-weight: 900!important;
 }
 
 input[type=file]::-webkit-file-upload-button {

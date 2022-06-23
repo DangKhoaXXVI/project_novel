@@ -18,12 +18,6 @@
                 @endif
                 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     <form method="POST" action="{{route('category.store')}}">
                         @csrf
                         <div class="form-group">

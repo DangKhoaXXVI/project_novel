@@ -184,7 +184,7 @@ class UserController extends Controller
             Rating::create($request->only('novel_id', 'user_id', 'rating_star'));
 
         }
-        return redirect()->back();
+        return redirect()->back()->with('status', 'Đánh giá truyện thành công!');
     }
 
 }

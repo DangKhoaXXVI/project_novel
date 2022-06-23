@@ -81,7 +81,29 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+@if(session('status'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: "{{ session('status') }}",
+            showConfirmButton: false,
+            timer: 1500
+        })
+    </script>
+@endif       
+        
+<!-- @if ($errors->any())
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi...',
+            text: '',
+            showConfirmButton: false,
+        })
+    </script>
+@endif -->
 
     <script type="text/javascript">
         CKEDITOR.replace('chapter_content');
@@ -125,7 +147,13 @@
         $('#star2').starrr({
         change: function(e, value){
             if (value) {
-                alert('Phải đăng nhập để đánh giá!');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không thể đánh giá...',
+                    text: 'Bạn cần đăng nhập để đánh giá!',
+                    showConfirmButton: false,
+                    footer: '<a href="/log-in">Đăng nhập</a>'
+                })
             } else {
                 $('.your-choice-was').hide();
             }
