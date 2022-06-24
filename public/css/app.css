@@ -88,7 +88,7 @@ li {
 .series-name-group {
     margin-bottom: 10px;
 }
-.series-name {
+.series-name-group .series-name {
     display: block;
     font-weight: 700;
     font-size: 30px;
@@ -497,6 +497,10 @@ a.series-name:hover {
     z-index: 9999;
 }
 
+.rd_sd-button_item .fas {
+    font-weight: 900!important;
+}
+
 #rd_side_icon a:hover {
     color: #5cb85c;
 }
@@ -556,6 +560,10 @@ h2, h3, h4 {
     cursor: pointer;
     font-size: 20px;
     padding: 8px;
+}
+
+.rd-basic_icon .fas {
+    font-weight: 900!important;
 }
 
 .isDisable {
@@ -1296,3 +1304,100 @@ input[type=file]::-webkit-file-upload-button {
 }
 
 
+
+
+/*  Favorite Page   */
+
+
+
+
+table.listext-table {
+    table-layout: fixed;
+}
+
+.table {
+    color: #212529;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+/* table.listext-table tr:nth-child(odd) {
+    background-color: var(--background-maincontent);
+} */
+
+table.listext-table tr th {
+    background-color: var(--seriesgerne);
+    float: none;
+    padding: 4px 10px;
+    color: var(--icon-infor);
+}
+
+
+table.listext-table.has-covers tr td .series-cover {
+    border: 1px solid #e9e9e9;
+    position: absolute;
+    top: 20px;
+}
+
+table.listext-table.has-covers tr td .series-name {
+    padding-left: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--black);
+}
+
+table.listext-table.has-covers tr td .series-name a:hover {
+    text-decoration: none;
+    color: #5cb85c;
+}
+
+table.listext-table.has-covers tr td {
+    height: 100px;
+    position: relative;
+}
+
+table.listext-table tr td {
+    border-bottom: none;
+    float: none;
+    padding: 30px 10px;
+}
+
+table.listext-table .update-status.unread-chapters {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+table.listext-table .update-status {
+    border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.9rem;
+    margin-bottom: 4px;
+    padding: 2px 8px;
+}
+
+.series-cover .img-in-ratio img {
+    width: 44px;
+    height: 60px;
+}
+
+
+table.listext-table tr td small {
+    display: block;
+}
+
+.table-cell-m {
+    color: var(--black);
+}
+
+.table-cell-m a:hover {
+    text-decoration: none;
+    color: #5cb85c;
+}

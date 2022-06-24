@@ -46,6 +46,8 @@ Route::get('/All-New-Novel', [IndexController::class, 'listnewnovel'])->name('Al
 
 Route::get('/All-Completed-Novel', [IndexController::class, 'listcompletednovel'])->name('AllCompleted');
 
+Route::get('/All-New-Chapter', [IndexController::class, 'listnewchapter'])->name('AllNewChapter');
+
 Route::get('/author/{author}', [IndexController::class, 'author'])->name('ListNovelAuthor');
 
 Route::get('/search', [IndexController::class, 'search'])->name('search');
@@ -59,6 +61,8 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::put('/member/{id}', [UserController::class, 'update'])->name('update_member');
     Route::post('/rating-novel', [UserController::class, 'rating'])->name('rating-novel');
+    Route::post('/favorite', [UserController::class, 'favorite'])->name('favorite');
+    Route::get('/favorite', [UserController::class, 'favorite_page'])->name('favorite_page');
 });
 
 Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {

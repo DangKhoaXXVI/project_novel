@@ -160,19 +160,26 @@
         }
         });
 
-        $('#star3') ({
-        change: function(e, value){
-            if (value) {
-                // $('.your-choice-was').show();
-                // $('.your-novel-is').show();
-                $('.choice').text(value);
-                $('#rating_star').val(value);
-                $('#formRating').submit();
-            } else {
-                $('.your-choice-was').hide();
-            }
+    </script>
+        
+    <script>
+        function submitFavorite() {
+            $('#formFavorite').submit();
         }
-        });
+
+        function submitFavoriteFail() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Không thể thêm vào yêu thích...',
+                text: 'Bạn cần đăng nhập để thêm truyện vào danh sách yêu thích!',
+                showConfirmButton: false,
+                footer: '<a href="/log-in">Đăng nhập</a>'
+            })
+        }
+
+        function submitRemoveFavoriteList() {
+            $('#removeFormFavorite').submit();
+        }
 
     </script>
 

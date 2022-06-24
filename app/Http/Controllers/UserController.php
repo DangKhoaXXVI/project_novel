@@ -10,6 +10,7 @@ use App\Models\Novel;
 use App\Models\Chapter;
 use App\Models\User;
 use App\Models\Rating;
+use App\Models\Favorite;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -185,6 +186,27 @@ class UserController extends Controller
 
         }
         return redirect()->back()->with('status', 'Đánh giá truyện thành công!');
+    }
+
+    public function favorite(Request $request)
+    {
+        $model = Favorite::where($request->only('novel_id', 'user_id'))->first();
+        if($model) {    
+            Favorite::where($request->only('novel_id', 'user_id'))->delete();
+            return redirect()->back()->with('status', 'Đã xóa truyện ra khỏi danh sách yêu thích!');
+        } else {
+            Favorite::create($request->only('novel_id', 'user_id'));
+        }
+        return redirect()->back()->with('status', 'Đã thêm vào danh sách yêu thích!');
+    }
+
+    public function favorite_page() {
+        $category = Category::orderBy('id', 'DESC')->get();
+        $listFavorite = Favorite::where('user_id', Auth::user()->id)->paginate(10);
+        if(Auth::check()) {
+            view()->share('nguoidung', Auth::user());
+        }
+        return view('pages.member.favorite')->with(compact('category', 'listFavorite'));
     }
 
 }

@@ -9,9 +9,10 @@
 
 @section('content')
 
-<!-- @section('novel_new_chapter')
+@section('novel_new_chapter')
     @include('pages.novel_new_chapter')
-@endsection -->
+@endsection
+
 <div class="maincontent-area">
     <div class="container">
         <div class="b_title"><strong>Truyện Mới Nhất</strong></div>

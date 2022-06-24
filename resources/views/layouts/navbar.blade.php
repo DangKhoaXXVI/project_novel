@@ -56,6 +56,10 @@
                                             <i class="fa fa-btn fa-user"></i>
                                             Tài khoản
                                         </a>
+                                        <a class="dropdown-item" href="{{ route('favorite_page') }}">
+                                            <i class="fas fa-heart" style="font-weight: 900!important;"></i>
+                                            Yêu thích
+                                        </a>
                                         <a class="dropdown-item" href="{{ url('log-out') }}">
                                             <i class="fa fa-btn fa-sign-out"></i>
                                             Đăng xuất
@@ -65,6 +69,10 @@
                                         <a class="dropdown-item" href="{{ route('member_wall', ['id' => Auth::user()->id ] ) }}">
                                             <i class="fa fa-btn fa-user"></i>
                                             Tài khoản
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('favorite_page') }}">
+                                            <i class="fas fa-heart" style="font-weight: 900!important;"></i>
+                                            Yêu thích
                                         </a>
                                         <a class="dropdown-item" href="{{ url('log-out') }}">
                                             <i class="fa fa-btn fa-sign-out"></i>

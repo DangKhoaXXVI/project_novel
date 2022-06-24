@@ -104,9 +104,25 @@
                                         <div class="col-4 col-md feature-item width-auto-x1">
                                             <div class="side-feature-button button-rate wishlist">
                                                 <span class="block feature-value">
-                                                        <i class="fas fa-heart"></i>
+                                                    @if(isset($nguoidung))
+                                                        @if($favoritedUser)
+                                                            <i class="fas fa-heart" style="font-weight: 900!important;" onclick="submitFavorite()">
+                                                        @else
+                                                            <i class="fas fa-heart" onclick="submitFavorite()">
+                                                        @endif
+                                                            <form action="{{ route('favorite') }}" method="POST" class="form-inline" id="formFavorite">
+                                                                @csrf
+                                                                <div class="form-group">
+                                                                    <input type="hidden" class="form-control" name="novel_id" value="{{ $novel->id }}">
+                                                                    <input type="hidden" class="form-control" name="user_id" value="{{ Auth::user()->id }}">
+                                                                </div>
+                                                            </form>
+                                                        </i>
+                                                    @else
+                                                        <i class="fas fa-heart" onclick="submitFavoriteFail()"></i>
+                                                    @endif
                                                 </span>
-                                                <span class="block feature-name">{{ $novel->novel_views }} lượt yêu thích</span>
+                                                <span class="block feature-name">{{ $favorite->count() }}</span>
                                             </div>
                                         </div>
                                         <div class="col-4 col-md feature-item width-auto-x1">

@@ -1,12 +1,6 @@
 @extends('../welcome')
 @section('content')
 
-<style type="text/css"> 
-
-
-
-</style>
-
 <div class="container-fluid" id="mainpart">
     <div class="container">
         <div class="b_title"><strong>Danh Sách Tất Cả Truyện</strong></div>
