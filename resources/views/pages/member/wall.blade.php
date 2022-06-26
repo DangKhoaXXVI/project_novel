@@ -1,4 +1,9 @@
 @extends('../welcome')
+
+@section('title')
+    {{ "Tường nhà " }}  {{ $member->name }}
+@endsection
+
 @section('member')
 
 <main id="mainpart" class="profile-page">
@@ -11,31 +16,16 @@
                             <img src="{{ url('/uploads/user/'.$member->cover) }}">
                         </div>
                     </div>
-                        <!-- <div id="profile-changer_cover" class="profile-changer none block-m">
-                            <div class="cover-change" style="position: initial;">
-                                <input name="cover" type="file">
-                                <i class="fas fa-camera"></i>
-                                <span class="p-c_text">Yêu cầu 1100 x 300 px</span>
-                                <input name="cover" type="file">
-                            </div>
-                        </div> -->
                 </div>
                 <div class="profile-nav">
                     <div class="profile-ava-wrapper">
                         <div class="profile-ava">
-                            <!-- <div id="profile-changer_ava" class="profile-changer">
-                                <span class="p-c_text">
-                                    <div class="round">
-                                        <input name="avatar" type="file">
-                                            <i class="fa fa-camera" style="color: #fff"></i>
-                                    </div>
-                                </span>
-                            </div> -->
+
                             <img src="{{ url('/uploads/user/'.$member->avatar) }}">
                         </div>
                     </div>
                     <div class="profile-function at-desktop none block-m">
-                        @if(isset($nguoidung)) {
+                        @if(isset($nguoidung)) 
                             @php
                             $id_user = Auth::user()->id
                             @endphp
@@ -50,7 +40,7 @@
                                     Liên lạc
                                 </button>
                             @endif
-                        }
+                        
                         @else
                                 <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#">
                                     <i class="fas fa-edit" style="font-size: 20px;"></i>

@@ -1,4 +1,9 @@
 @extends('../welcome')
+
+@section('title')
+    {{ "Trang Chủ" }}
+@endsection
+
 @section('slide')
     @include('pages.slide')
 @endsection

@@ -10,6 +10,7 @@ use App\Models\Chapter;
 use App\Models\User;
 use App\Models\Rating;
 use App\Models\Favorite;
+use App\Models\Comment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -116,11 +117,14 @@ class IndexController extends Controller
         // Top truyện nổi bật
         $top4_novel = Novel::orderBy('novel_views', 'DESC')->where('status', 0)->take(4)->get();
 
+        //Bình luận
+        $comment = Comment::where(['novel_id' => $novel->id, 'comment_parent_id' => 0, 'status' => 0])->orderBy('created_at', 'DESC')->get();
+
 
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
         }
-        return view('pages.novel')->with(compact('category', 'novel', 'chapter', 'user', 'novel_uploaded', 'top4_novel', 'ratingUser', 'ratingAvg', 'rating', 'favoritedUser', 'favorite'));
+        return view('pages.novel')->with(compact('category', 'novel', 'chapter', 'user', 'novel_uploaded', 'top4_novel', 'ratingUser', 'ratingAvg', 'rating', 'favoritedUser', 'favorite', 'comment'));
     }
 
     public function chapter($id, $slug) {

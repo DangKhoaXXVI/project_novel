@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/rating-novel', [UserController::class, 'rating'])->name('rating-novel');
     Route::post('/favorite', [UserController::class, 'favorite'])->name('favorite');
     Route::get('/favorite', [UserController::class, 'favorite_page'])->name('favorite_page');
+    Route::post('/comment/{novel_id}', [UserController::class, 'comment'])->name('comment');
 });
 
 Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {

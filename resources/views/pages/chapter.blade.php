@@ -1,4 +1,9 @@
 @extends('../welcome')
+
+@section('title')
+    {{ "Đọc truyện " }} {{ $chapter->novel->novelname }} {{ " - " }}  {{ $chapter->title  }}
+@endsection
+
 @section('content')
 
 <main class="reading-page">

@@ -1,4 +1,9 @@
 @extends('../welcome')
+
+@section('title')
+    {{ "Danh sách truyện" }}
+@endsection
+
 @section('content')
 <div class="maincontent-area">
     <div class="container">

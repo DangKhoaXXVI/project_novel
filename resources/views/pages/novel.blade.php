@@ -1,4 +1,10 @@
 @extends('../welcome')
+
+@section('title')
+    {{ $novel->novelname }}
+@endsection
+
+
 @section('content')
 
 <style type="text/css">
@@ -262,68 +268,180 @@
                 </main>
             </section>
         </div>
-        
+        <div class="col-12 col-lg-9 float-left" style="padding: 0;">
         @php
             $mucluc = count($chapter);
         @endphp
         @if($mucluc>0)
-            <div class="col-12 col-lg-9 float-left" style="padding: 0;">
-                <section class="volume-list at-series basic-section">
-                    <header class="sect-header">
-                        <a style="margin-left: 10px; float: right; font-size: 20px;" class="edit-icon" href=""><i class="fas fa-edit"></i></a>
-                        <span class="sect-title"> Mục Lục </span>
-                    </header>
-                    <main class="d-lg-block">
-                        <div class="row">
-                            <div class="col-xs-4 col-offset-xs-4 col-md-2 col-sm-2 collapse in img-cover-small">
-                                <img style="padding: 10px;" width="150px" src="{{ asset('uploads/novel/'.$novel->image) }}" alt="{{ $novel->novelname }}">
-                            </div>
-                            <div class="col-12 col-md-10">
-                                <ul class="list-chapters at-series">
-                                    @foreach($chapter as $key => $chapters)
-                                        <li>
-                                            <div class="chapter-name">
-                                                <a href="{{url('chapter/'.$chapters->id.'-'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
-                                            </div>
-                                            <div class="chapter-time">{{ $chapters->created_at->toDateString() }}</div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+            <section class="volume-list at-series basic-section">
+                <header class="sect-header">
+                    <a style="margin-left: 10px; float: right; font-size: 20px;" class="edit-icon" href=""><i class="fas fa-edit"></i></a>
+                    <span class="sect-title"> Mục Lục </span>
+                </header>
+                <main class="d-lg-block">
+                    <div class="row">
+                        <div class="col-xs-4 col-offset-xs-4 col-md-2 col-sm-2 collapse in img-cover-small">
+                            <img style="padding: 10px;" width="150px" src="{{ asset('uploads/novel/'.$novel->image) }}" alt="{{ $novel->novelname }}">
                         </div>
-                    </main>
-                </section>
-            </div>
+                        <div class="col-12 col-md-10">
+                            <ul class="list-chapters at-series">
+                                @foreach($chapter as $key => $chapters)
+                                    <li>
+                                        <div class="chapter-name">
+                                            <a href="{{url('chapter/'.$chapters->id.'-'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
+                                        </div>
+                                        <div class="chapter-time">{{ $chapters->created_at->toDateString() }}</div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </main>
+            </section>
         @else
-            <div class="col-12 col-lg-9 float-left" style="padding: 0; cursor: not-allowed; opacity: .5; pointer-events: none;">
-                <section class="volume-list at-series basic-section">
-                    <header class="sect-header">
-                        <a style="margin-left: 10px; float: right; font-size: 20px;" class="edit-icon" href=""><i class="fas fa-edit"></i></a>
-                        <span class="sect-title"> Mục Lục </span>
-                    </header>
-                    <main class="d-lg-block">
-                        <div class="row">
-                            <div class="col-xs-4 col-offset-xs-4 col-md-2 col-sm-2 collapse in">
-                                <img style="padding: 10px;" width="150px" src="{{ asset('uploads/novel/'.$novel->image) }}" alt="{{ $novel->novelname }}">
-                            </div>
-                            <div class="col-12 col-md-10">
-                                <ul class="list-chapters at-series">
-                                    @foreach($chapter as $key => $chapters)
-                                        <li>
-                                            <div class="chapter-name">
-                                                <a href="{{url('chapter/'.$chapters->id.'-'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
-                                            </div>
-                                            <div class="chapter-time">{{ $chapters->created_at->toDateString() }}</div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+            <section class="volume-list at-series basic-section">
+                <header class="sect-header">
+                    <a style="margin-left: 10px; float: right; font-size: 20px;" class="edit-icon" href=""><i class="fas fa-edit"></i></a>
+                    <span class="sect-title"> Mục Lục </span>
+                </header>
+                <main class="d-lg-block">
+                    <div class="row">
+                        <div class="col-xs-4 col-offset-xs-4 col-md-2 col-sm-2 collapse in">
+                            <img style="padding: 10px;" width="150px" src="{{ asset('uploads/novel/'.$novel->image) }}" alt="{{ $novel->novelname }}">
                         </div>
-                    </main>
-                </section>
-            </div>
+                        <div class="col-12 col-md-10">
+                            <ul class="list-chapters at-series">
+                                @foreach($chapter as $key => $chapters)
+                                    <li>
+                                        <div class="chapter-name">
+                                            <a href="{{url('chapter/'.$chapters->id.'-'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
+                                        </div>
+                                        <div class="chapter-time">{{ $chapters->created_at->toDateString() }}</div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </main>
+            </section>
         @endif
+
+            <section class="basic-section">
+                <header class="sect-header tab-list">
+                    <span class="sect-title tab-title">Bình luận <span class="comments-count">({{$comment->count()}})</span></span>
+                </header>
+                <main class="comment-wrapper d-lg-block clear">
+                    <div class="tab-content clear">
+                        <section class="ln-comment">
+                            <main class="ln-comment-body">
+                                @if(isset($nguoidung))
+                                <div class="ln-commemt-form">
+                                    <form class="comment_form" action="{{ route('comment', $novel->id) }}" method="POST">
+                                        @csrf
+                                        <textarea class="form-control" id="comment_content" name="content" rows="5" style="resize: none"></textarea>
+                                        <div class="comment_toolkit clear">
+                                            <input id="btn-comment" class="button comment-button" type="submit" value="Đăng bình luận">
+                                        </div>
+                                    </form>
+                                </div>
+                                @else
+                                Bạn cần <a href="{{route('log-in')}}" style="color: #007bff;">đăng nhập</a> để tham gia bình luận.
+                                @endif
+                                     <!-- Bình luận -->
+                                @foreach($comment as $key => $com)
+                                    <div class="ln-comment-group">
+                                        <div class="ln-comment-item">
+                                            <div class="ln-comment-user_ava">
+                                                <img src="{{ asset('uploads/user/'.$com->user->avatar) }}">
+                                            </div>
+                                            <div class="ln-comment-info">
+                                                <div class="ln-comment-wrapper">
+                                                    <div class="ln-comment-user_name">
+                                                        <a href="{{ url('member/'.$com->user->id) }}" class="strong">{{$com->user->name}}</a>
+                                                        @if($com->user->id == $user->id)
+                                                        <div class="ln-comment-user_badge comment-owner">
+                                                            <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="ln-comment-content long-text">
+                                                        <p>{!! $com->content !!}<p>
+                                                        <div class="visible-toolkit">
+                                                        <a class="visible-toolkit-item do-reply" data-id="{{$com->id}}">Trả lời</a>
+                                                        <span class="ln-comment-time" style="float: right;">
+                                                            <a href="#">
+                                                                <time  class="timeago" title="26-04-2022 10:14:53" datetime="">{{ $com->created_at->format('H:i:s - d/m/Y') }}</time>
+                                                            </a>
+                                                        </span>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ln-comment-reply reply-form">
+                                            <div class="ln-comment-form">
+                                                <form class="replyForm reply-form-{{$com->id}}" style="display: none;" action="{{ route('comment', $novel->id) }}" method="POST">
+                                                    @csrf
+                                                    <textarea class="form-control" id="comment_reply_content_{{$com->id}}" name="content" rows="5" style="resize: none"></textarea>
+                                                    <div class="comment_toolkit clear">
+                                                        <input type="hidden" class="form-control" name="comment_parent_id" value="{{ $com->id }}">
+                                                        <input class="button comment-button" type="submit" value="Trả lời bình luận">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <script type="text/javascript">
+                                            CKEDITOR.replace('comment_reply_content_{{$com->id}}');
+                                        </script>
+
+                                        <!-- Trả lời bình luận -->
+                                        @foreach($com->replies as $key => $child)
+                                        <div class="ln-comment-reply">
+                                            <div class="ln-comment-user_ava">
+                                                <img src="{{ asset('uploads/user/'.$child->user->avatar) }}">
+                                            </div>
+                                            <div class="ln-comment-info">
+                                                <div class="ln-comment-wrapper">
+                                                    <div class="ln-comment-user_name">
+                                                        <a href="{{ url('member/'.$com->user->id) }}" class="strong">{{$child->user->name}}</a>
+                                                        @if($child->user->id == $user->id)
+                                                        <div class="ln-comment-user_badge comment-owner">
+                                                            <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
+                                                        </div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="ln-comment-content long-text">
+                                                        <p>{!! $child->content !!}<p>
+                                                        <div class="visible-toolkit">
+                                                            <span class="ln-comment-time" style="float: right;">
+                                                                <a href="#">
+                                                                    <time  class="timeago" title="26-04-2022 10:14:53" datetime="">{{ $child->created_at->format('H:i:s - d/m/Y') }}</time>
+                                                                </a>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                @endforeach
+                            </main>
+                        </section>
+                    </div>
+                </main>
+            </section>
+        </div>
     </div>
-    </div>
+</div>
+
+
+
+@if ($errors->any())
+<script>
+    alert('Nội dung bình luận không được để trống!')
+</script>
+@endif
 
 @endsection

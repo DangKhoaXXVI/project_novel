@@ -1,8 +1,6 @@
 <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Shino Novel Project</title>
-
+        <link rel="shortcut icon" type="image" href="{{ asset('images/ShinoNovelLogo.jpg') }}">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -25,7 +23,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_green.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
-
+        <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
         <style>
             a {
                 background-color: transparent;

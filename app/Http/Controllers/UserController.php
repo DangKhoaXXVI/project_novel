@@ -11,6 +11,7 @@ use App\Models\Chapter;
 use App\Models\User;
 use App\Models\Rating;
 use App\Models\Favorite;
+use App\Models\Comment;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -207,6 +208,30 @@ class UserController extends Controller
             view()->share('nguoidung', Auth::user());
         }
         return view('pages.member.favorite')->with(compact('category', 'listFavorite'));
+    }
+
+
+    public function comment($novel_id, Request $request) {
+
+        $data = $request->validate(
+            [
+                'content' => 'required',
+            ],
+            [
+                'content.required' => 'Nội dung bình luận không được để trống!',
+            ]
+        );
+        $comment = new Comment();
+        $comment->novel_id = $novel_id;
+        $comment->user_id = Auth::user()->id;
+        $comment->content = $request->content;
+        $comment->comment_parent_id = $request->comment_parent_id ? $request->comment_parent_id : 0;
+        
+        $comment->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $comment->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+
+        $comment->save();        
+        return redirect()->back();
     }
 
 }

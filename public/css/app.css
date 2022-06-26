@@ -18,6 +18,7 @@
     --icon-infor: rgba(0,0,0,.4);
     --background-maincontent: #7b7b7b12;
     --chapter-theme: #f6f4ec;
+    --comment-background: #f1f2f4;
 }
 
 @font-face {
@@ -1401,3 +1402,130 @@ table.listext-table tr td small {
     text-decoration: none;
     color: #5cb85c;
 }
+
+
+/*  Comment  */
+
+section#series-comments main.comment-wrapper {
+    padding: 0;
+}
+
+.ln-comment .ln-comment-body {
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.ln-comment-form {
+    margin-bottom: 20px;
+}
+
+.comment_toolkit {
+    background-color: #c4eae269;
+    border: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
+    border-top: 0;
+    padding: 6px;
+    display: flow-root;
+    margin-bottom: 20px;
+}
+
+.comment-button {
+    background-color: #36a189;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    float: right;
+    font-weight: 700;
+}
+
+.ln-comment-group {
+    padding: 10px 0;
+}
+
+.ln-comment-item {
+    position: relative;
+}
+
+.ln-comment-user_ava {
+    border-radius: 30px;
+    float: left;
+    height: 40px;
+    margin-right: 10px;
+    overflow: hidden;
+    width: 40px;
+}
+
+.ln-comment-user_ava img {
+    background-color: #fff;
+    display: block;
+    height: 100%;
+    padding: 0;
+    width: 100%;
+    border-style: none;
+}
+
+.ln-comment-info {
+    background-color: var(--comment-background);
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-left: 50px;
+    padding: 6px 40px 6px 10px;
+}
+
+.ln-comment-wrapper {
+    position: relative;
+}
+
+.ln-comment-user_name {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--black);
+}
+
+.ln-comment-user_badge.comment-owner {
+    background-color: #e21856;
+    color: #fff;
+}
+
+.ln-comment-user_badge {
+    border-radius: 4px;
+    display: inline-block;
+    margin-left: 4px;
+    padding: 0 10px;
+}
+
+.ln-comment-content {
+    word-wrap: break-word;
+    margin-bottom: 10px;
+    max-height: 90px;
+    overflow-y: hidden;
+}
+
+.ln-comment-time {
+    color: var(--black);
+    display: inline-block;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.visible-toolkit .visible-toolkit-item {
+    border-bottom: 0 solid #111;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    line-height: 15px;
+    margin-right: 10px;
+    opacity: 1;
+}
+
+.strong {
+    font-weight: 700;
+}
+
+.ln-comment-reply {
+    margin-left: 50px;
+}
+
+

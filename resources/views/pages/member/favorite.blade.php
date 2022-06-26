@@ -1,4 +1,9 @@
 @extends('../welcome')
+
+@section('title')
+    {{ "Danh sách truyện yêu thích" }}
+@endsection
+
 @section('member')
 
 <main id="mainpart" class="user-page">
