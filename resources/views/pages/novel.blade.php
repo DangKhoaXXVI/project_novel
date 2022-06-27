@@ -399,6 +399,7 @@
                                                     <i class="fas fa-angle-down"></i>
                                                 </div>
                                                 <div class="ln-comment-toolkit" x-show="show" @click.outside="show = false" style="display: none;">            
+                                                @if(isset($nguoidung))    
                                                     @if(Auth::user()->id == $com->user_id)
                                                     <span onclick="formEditComment{{$com->id}}()" class="ln-comment-toolkit-item span-edit"><i class="fas fa-edit"></i> Chỉnh sửa</span>
                                                     <form action="{{route('deletecomment', [$com->id])}}" method="POST">
@@ -420,6 +421,7 @@
                                                         </button>
                                                     </form>
                                                     @endif
+                                                @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -537,6 +539,7 @@
                                                         <i class="fas fa-angle-down"></i>
                                                     </div>
                                                     <div class="ln-comment-toolkit" x-show="show" @click.outside="show = false" style="display: none;">            
+                                                    @if(isset($nguoidung))
                                                         @if(Auth::user()->id == $child->user_id)
                                                         <span onclick="formEditCommentChild{{$child->id}}()" class="ln-comment-toolkit-item span-edit"><i class="fas fa-edit"></i> Chỉnh sửa</span>
                                                         <form action="{{route('deletecomment', [$child->id])}}" method="POST">
@@ -555,6 +558,7 @@
                                                             Xóa
                                                             </button>                                                        </form>
                                                         @endif
+                                                    @endif
                                                     </div>
                                                 </div>
                                             </div>
