@@ -52,7 +52,6 @@ class NovelController extends Controller
                 'slug_author' => 'required|max:255',
                 'summary' =>  'required',
                 'type' => 'required',
-                'category' => 'required',
                 'state' => 'required',
                 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100, min_height=100, max_width=3000, max_height=3000',
                 'status' => 'required',
@@ -82,10 +81,6 @@ class NovelController extends Controller
         $novel->created_at = Carbon::now('Asia/Ho_Chi_Minh');
         $novel->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
-        foreach($data['category'] as $key => $categories) {
-            $novel->category_id = $categories[0];
-        }
-
         // add a new image into folder
         $get_image = $request->image;
         $path = 'uploads/novel/';
@@ -96,8 +91,6 @@ class NovelController extends Controller
         $novel->image = $new_image;
 
         $novel->save();
-
-        $novel->belongstomanycategory()->attach($data['category']);
 
         return redirect()->back()->with('status', 'Thêm truyện thành công!');
     }
@@ -148,7 +141,6 @@ class NovelController extends Controller
                 'slug_author' => 'required|max:255',
                 'summary' =>  'required',
                 'type' => 'required',
-                'category' => 'required',
                 'state' => 'required',
                 'status' => 'required',
             ],
@@ -172,10 +164,6 @@ class NovelController extends Controller
 
         $novel->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
-        foreach($data['category'] as $key => $categories) {
-            $novel->category_id = $categories[0];
-        }
-        $novel->belongstomanycategory()->sync($data['category']);
 
         // add a new image into folder
         $get_image = $request->image;
