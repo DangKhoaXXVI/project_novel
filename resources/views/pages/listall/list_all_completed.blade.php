@@ -1,31 +1,10 @@
 @extends('../welcome')
+
+@section('title')
+    {{ "Danh sách truyện" }}
+@endsection
+
 @section('content')
-
-<style type="text/css"> 
-
-a.page-link{ 
-    transition: .4s; 
-} 
-
-.page-link {
-    color: #333;
-}
-
-a.page-link:hover { 
-    color: white !important; background: #799a19 !important; 
-}  
-
-.pagination>.active>span {
-    background-color: #749a19!important;
-    border-color: #749a19!important;
-    color: #fff!important;
-}
-
-nav {
-    display: inline-block;
-}
-
-</style>
 
 <div class="container-fluid" id="mainpart">
     <div class="container">

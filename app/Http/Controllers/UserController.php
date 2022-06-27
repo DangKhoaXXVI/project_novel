@@ -9,6 +9,9 @@ use App\Models\InCategory;
 use App\Models\Novel;
 use App\Models\Chapter;
 use App\Models\User;
+use App\Models\Rating;
+use App\Models\Favorite;
+use App\Models\Comment;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -83,17 +86,14 @@ class UserController extends Controller
         $data = $request->validate(
             [
                 'name' => 'required|max:255',
-                'birthday' => 'required|max:255',
-                'favorite' => 'required|max:255',
-                'about' => 'required|max:255',
-                'cover' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:width=1110, height=300',
+                'birthday' => 'max:255',
+                'favorite' => 'max:255',
+                'about' => 'max:255',
+                'cover' => 'image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:width=1110, height=300',
             ],
             [
                 'name.required' => 'Phải có tên thành viên truyện!',
-                'birthday.required' => 'Ngày sinh không được bỏ trống!',
-                'favorite.required' => 'Sở thích không được bỏ trống!',
-                'about.required' => 'Phải có thông tin bản thân!',
-                'cover.required' => 'Phải có ảnh bìa!',
+                'cover.image' => 'Phải là file ảnh!',
                 'cover.dimensions' => 'Ảnh bìa phải có kích thước là 1110 x 300!',
             ]
         );
@@ -109,7 +109,9 @@ class UserController extends Controller
         if($get_image) {
             $path = 'uploads/user/'.$member->avatar;
             if(file_exists($path)) {
-                unlink($path);
+                if($path != 'uploads/user/default.png') {
+                    unlink($path);
+                }
             }
             $path = 'uploads/user/';
             $get_name_image = $get_image->getClientOriginalName();
@@ -123,7 +125,9 @@ class UserController extends Controller
         if($get_cover) {
             $path = 'uploads/user/'.$member->cover;
             if(file_exists($path)) {
-                unlink($path);
+                if($path != 'uploads/user/cover-default.jpg') {
+                    unlink($path);
+                }
             }
             $path = 'uploads/user/';
             $get_name_cover = $get_cover->getClientOriginalName();
@@ -139,5 +143,124 @@ class UserController extends Controller
         return redirect()->back()->with('status', 'Cập nhật thông tin thành công!');
     }
 
+
+    public function index()
+    {
+        $user = User::orderBy('id', 'DESC')->get();
+        return view('admin_cpanel.user.index')->with(compact('user'));
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+        return view('admin_cpanel.user.edit')->with(compact('user'));
+    }
+
+    public function admin_update(Request $request, $id) {
+        $data = $request->validate(
+            [
+                'role' => 'required',
+            ],
+        );
+
+        $member = User::find($id);
+        $member->role = $data['role'];
+
+        $member->save();
+        return redirect()->back()->with('status', 'Cập nhật thành viên thành công!');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id)->destroy();
+        return redirect()->back()->with('status', 'Xóa thành viên thành công!');
+    }
+
+    public function rating(Request $request)
+    {
+        $model = Rating::where($request->only('novel_id', 'user_id'))->first();
+        if($model) {    
+            Rating::where($request->only('novel_id', 'user_id'))
+            ->update($request->only('rating_star'));
+        } else {
+            Rating::create($request->only('novel_id', 'user_id', 'rating_star'));
+
+        }
+        return redirect()->back()->with('status', 'Đánh giá truyện thành công!');
+    }
+
+    public function favorite(Request $request)
+    {
+        $model = Favorite::where($request->only('novel_id', 'user_id'))->first();
+        if($model) {    
+            Favorite::where($request->only('novel_id', 'user_id'))->delete();
+            return redirect()->back()->with('status', 'Đã xóa truyện ra khỏi danh sách yêu thích!');
+        } else {
+            Favorite::create($request->only('novel_id', 'user_id'));
+        }
+        return redirect()->back()->with('status', 'Đã thêm vào danh sách yêu thích!');
+    }
+
+    public function favorite_page() {
+        $category = Category::orderBy('id', 'DESC')->get();
+        $listFavorite = Favorite::where('user_id', Auth::user()->id)->paginate(10);
+        if(Auth::check()) {
+            view()->share('nguoidung', Auth::user());
+        }
+        return view('pages.member.favorite')->with(compact('category', 'listFavorite'));
+    }
+
+
+    public function comment($novel_id, Request $request) {
+
+        $data = $request->validate(
+            [
+                'content' => 'required',
+            ],
+            [
+                'content.required' => 'Nội dung bình luận không được để trống!',
+            ]
+        );
+        $comment = new Comment();
+        $comment->novel_id = $novel_id;
+        $comment->user_id = Auth::user()->id;
+        $comment->content = $request->content;
+        $comment->comment_parent_id = $request->comment_parent_id ? $request->comment_parent_id : 0;
+        
+        $comment->created_at = Carbon::now('Asia/Ho_Chi_Minh');
+        $comment->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+
+        $comment->save();        
+        return redirect()->back();
+    }
+
+    public function updatecomment($cmt_id, Request $request) {
+
+        $data = $request->validate(
+            [
+                'content' => 'required',
+            ],
+            [
+                'content.required' => 'Nội dung bình luận không được để trống!',
+            ]
+        );
+        $comment = Comment::find($cmt_id);
+        $comment->content = $request->content;
+        
+        $comment->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+
+        $comment->save();        
+        return redirect()->back();
+    }
+
+    public function deletecomment($cmt_id)
+    {
+        $name = Auth::user()->name;
+        $comment = Comment::find($cmt_id);
+        $comment->content = "Bình luận đã bị xóa bởi $name";
+        $comment->status = 1;
+        $comment->save();
+        return redirect()->back();
+    }
 
 }

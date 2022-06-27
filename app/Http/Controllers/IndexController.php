@@ -8,6 +8,9 @@ use App\Models\InCategory;
 use App\Models\Novel;
 use App\Models\Chapter;
 use App\Models\User;
+use App\Models\Rating;
+use App\Models\Favorite;
+use App\Models\Comment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,14 +26,15 @@ class IndexController extends Controller
     public function home() {
         $category = Category::orderBy('id', 'DESC')->get();
         $novel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->take(13)->get();
+        $allNovel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->get();
         $top8_novel = Novel::orderBy('novel_views', 'DESC')->where('status', 0)->take(8)->get();
         $completed_novel = Novel::orderBy('id', 'DESC')->where('status', 0)->where('state', 1)->take(6)->get();
-        // $new_chapter = Chapter::where('created_at', 'DESC')->take(13)->get();
+        // $new_chapter = Chapter::with('novel')->orderBy('created_at', 'DESC')->where('novel_id', $allNovel->id)->where('status', 0)->take(6)->get();
 
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
         }
-        return view('pages.home')->with(compact('category', 'novel', 'top8_novel', 'completed_novel'));
+        return view('pages.home')->with(compact('category', 'novel', 'top8_novel', 'completed_novel', 'allNovel'));
     }
 
     public function listnewnovel() {
@@ -42,6 +46,18 @@ class IndexController extends Controller
         }
 
         return view('pages.listall.list_all_new_novel')->with(compact('category', 'new_novel'));
+    }
+
+    public function listnewchapter() {
+        $category = Category::orderBy('id', 'DESC')->get();
+        $allNovel = Novel::get();
+        $new_chapter = Chapter::with('novel')->orderBy('created_at', 'DESC')->where('status', 0)->paginate(20);
+        
+        if(Auth::check()) {
+            view()->share('nguoidung', Auth::user());
+        }
+
+        return view('pages.listall.list_all_new_chapter')->with(compact('category', 'new_chapter'));
     }
 
     public function listcompletednovel() {
@@ -81,14 +97,34 @@ class IndexController extends Controller
         $category = Category::orderBy('id', 'DESC')->get();
         $novel = Novel::with('typenovel')->where('slug_novelname', $slug)->where('status', 0)->first();
         $novel->novel_views = $novel->novel_views + 1;
+        if(Auth::check()) {
+            $ratingUser = Rating::where('novel_id', $novel->id)->where('user_id', Auth::user()->id)->first();
+            $favoritedUser = Favorite::where('novel_id', $novel->id)->where('user_id', Auth::user()->id)->first();
+        } else {
+            $ratingUser = 0;
+            $favoritedUser = 0;
+        }
+        $rating = Rating::where('novel_id', $novel->id)->get();
+        $ratingAvg = Rating::where('novel_id', $novel->id)->avg('rating_star');
+        $favorite = Favorite::where('novel_id', $novel->id)->get();
         $novel->save();
         $chapter = Chapter::with('novel')->orderBy('id', 'ASC')->where('novel_id', $novel->id)->get();
+        
+        // Người đăng - Truyện đã đăng
         $user = User::with('novel')->where('id', $novel->user_id)->first();
+        $novel_uploaded = Novel::where('user_id', $user->id)->whereNotIn('id', [$novel->id])->inRandomOrder()->take(4)->get();
+
+        // Top truyện nổi bật
+        $top4_novel = Novel::orderBy('novel_views', 'DESC')->where('status', 0)->take(4)->get();
+
+        //Bình luận
+        $comment = Comment::where(['novel_id' => $novel->id, 'comment_parent_id' => 0])->orderBy('created_at', 'DESC')->get();
+
 
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
         }
-        return view('pages.novel')->with(compact('category', 'novel', 'chapter', 'user'));
+        return view('pages.novel')->with(compact('category', 'novel', 'chapter', 'user', 'novel_uploaded', 'top4_novel', 'ratingUser', 'ratingAvg', 'rating', 'favoritedUser', 'favorite', 'comment'));
     }
 
     public function chapter($id, $slug) {

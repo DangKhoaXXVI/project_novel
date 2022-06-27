@@ -1,4 +1,9 @@
 @extends('../welcome')
+
+@section('title')
+    {{ "Tường nhà " }}  {{ $member->name }}
+@endsection
+
 @section('member')
 
 <main id="mainpart" class="profile-page">
@@ -11,37 +16,40 @@
                             <img src="{{ url('/uploads/user/'.$member->cover) }}">
                         </div>
                     </div>
-                        <!-- <div id="profile-changer_cover" class="profile-changer none block-m">
-                            <div class="cover-change" style="position: initial;">
-                                <input name="cover" type="file">
-                                <i class="fas fa-camera"></i>
-                                <span class="p-c_text">Yêu cầu 1100 x 300 px</span>
-                                <input name="cover" type="file">
-                            </div>
-                        </div> -->
                 </div>
                 <div class="profile-nav">
                     <div class="profile-ava-wrapper">
                         <div class="profile-ava">
-                            <!-- <div id="profile-changer_ava" class="profile-changer">
-                                <span class="p-c_text">
-                                    <div class="round">
-                                        <input name="avatar" type="file">
-                                            <i class="fa fa-camera" style="color: #fff"></i>
-                                    </div>
-                                </span>
-                            </div> -->
+
                             <img src="{{ url('/uploads/user/'.$member->avatar) }}">
                         </div>
                     </div>
                     <div class="profile-function at-desktop none block-m">
-                        <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fas fa-edit" style="font-size: 20px;"></i>
-                            Sửa thông tin
-                        </button>
+                        @if(isset($nguoidung)) 
+                            @php
+                            $id_user = Auth::user()->id
+                            @endphp
+                            @if($id_user == $member->id)
+                                <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#information_account">
+                                    <i class="fas fa-edit" style="font-size: 20px;"></i>
+                                    Sửa thông tin
+                                </button>
+                            @else
+                                <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#">
+                                    <i class="fas fa-edit" style="font-size: 20px;"></i>
+                                    Liên lạc
+                                </button>
+                            @endif
+                        
+                        @else
+                                <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#">
+                                    <i class="fas fa-edit" style="font-size: 20px;"></i>
+                                    Liên lạc
+                                </button>
+                        @endif
                         <!------------------------------- Dialog ------------------------------>
 
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="information_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-body">
@@ -207,11 +215,6 @@
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
-                    </div>
-                @endif
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
                     </div>
                 @endif
                 @php

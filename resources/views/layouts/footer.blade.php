@@ -35,13 +35,18 @@
         </script>
         
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('rating/starrr.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>        
         <script type="text/javascript">
             $('.owl-carousel').owlCarousel({
-                loop:false,
+                loop:true,
                 margin:10,
                 nav:false,
+                autoplay: true,
+                autoplayHoverPause: true,
+                autoplayTimeout: 3000,
+                smartSpeed: 500,
                 responsive:{
                     0:{
                         items:1
@@ -74,17 +79,118 @@
 
 <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+@if(session('status'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: "{{ session('status') }}",
+            showConfirmButton: false,
+            timer: 1500
+        })
+    </script>
+@endif       
+        
+<!-- @if ($errors->any())
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi...',
+            text: '',
+            showConfirmButton: false,
+        })
+    </script>
+@endif -->
 
     <script type="text/javascript">
         CKEDITOR.replace('chapter_content');
         CKEDITOR.replace('summary_content');
+        CKEDITOR.replace('comment_content');
     </script>
+
 
     <script type="text/javascript">
         flatpickr("#birthday-pk", {
             dateFormat: "d-m-Y",
         });
+    </script>
+    
+
+    <script src="../rating/starrr.js"></script>
+
+    <script>
+        $('#star1').starrr({
+        change: function(e, value){
+            if (value) {
+                // $('.your-choice-was').show();
+                // $('.your-novel-is').show();
+                $('.choice').text(value);
+                $('#rating_star').val(value);
+                $('#formRating').submit();
+            } else {
+                $('.your-choice-was').hide();
+            }
+        }
+        });
+
+        $('#star2').starrr({
+        change: function(e, value){
+            if (value) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Không thể đánh giá...',
+                    text: 'Bạn cần đăng nhập để đánh giá!',
+                    showConfirmButton: false,
+                    footer: '<a href="/log-in">Đăng nhập</a>'
+                })
+            } else {
+                $('.your-choice-was').hide();
+            }
+        }
+        });
+
+    </script>
+        
+    <script>
+        function submitFavorite() {
+            $('#formFavorite').submit();
+        }
+
+        function submitFavoriteFail() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Không thể thêm vào yêu thích...',
+                text: 'Bạn cần đăng nhập để thêm truyện vào danh sách yêu thích!',
+                showConfirmButton: false,
+                footer: '<a href="/log-in">Đăng nhập</a>'
+            })
+        }
+
+        function submitRemoveFavoriteList() {
+            $('#removeFormFavorite').submit();
+        }
+
+    </script>
+
+    <script>
+        let isShowCmt = true;
+        $(document).on('click', '.do-reply', function(ev) {
+            ev.preventDefault();
+            var id = $(this).data('id');
+            var reply_form = '.reply-form-' + id;
+            if(isShowCmt) {
+                $('.replyForm').slideUp();
+                $(reply_form).slideDown();
+                isShowCmt = false;
+            }
+            else {
+                $(reply_form).slideUp();
+                isShowCmt = true;
+            }
+        })
     </script>
 
     
@@ -158,8 +264,11 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-
-
- 
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>        
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
