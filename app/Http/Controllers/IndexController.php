@@ -118,7 +118,7 @@ class IndexController extends Controller
         $top4_novel = Novel::orderBy('novel_views', 'DESC')->where('status', 0)->take(4)->get();
 
         //Bình luận
-        $comment = Comment::where(['novel_id' => $novel->id, 'comment_parent_id' => 0, 'status' => 0])->orderBy('created_at', 'DESC')->get();
+        $comment = Comment::where(['novel_id' => $novel->id, 'comment_parent_id' => 0])->orderBy('created_at', 'DESC')->get();
 
 
         if(Auth::check()) {

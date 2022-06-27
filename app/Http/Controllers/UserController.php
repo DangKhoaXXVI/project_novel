@@ -234,4 +234,33 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function updatecomment($cmt_id, Request $request) {
+
+        $data = $request->validate(
+            [
+                'content' => 'required',
+            ],
+            [
+                'content.required' => 'Nội dung bình luận không được để trống!',
+            ]
+        );
+        $comment = Comment::find($cmt_id);
+        $comment->content = $request->content;
+        
+        $comment->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+
+        $comment->save();        
+        return redirect()->back();
+    }
+
+    public function deletecomment($cmt_id)
+    {
+        $name = Auth::user()->name;
+        $comment = Comment::find($cmt_id);
+        $comment->content = "Bình luận đã bị xóa bởi $name";
+        $comment->status = 1;
+        $comment->save();
+        return redirect()->back();
+    }
+
 }

@@ -176,15 +176,22 @@
     </script>
 
     <script>
+        let isShowCmt = true;
         $(document).on('click', '.do-reply', function(ev) {
             ev.preventDefault();
             var id = $(this).data('id');
             var reply_form = '.reply-form-' + id;
-            $('.replyForm').slideUp();
-            $(reply_form).slideDown();
+            if(isShowCmt) {
+                $('.replyForm').slideUp();
+                $(reply_form).slideDown();
+                isShowCmt = false;
+            }
+            else {
+                $(reply_form).slideUp();
+                isShowCmt = true;
+            }
         })
     </script>
-
 
     
     <script type="text/javascript">

@@ -82,6 +82,12 @@ li {
 
 /* Novel Page */
 
+.disabled, [disabled] {
+    cursor: not-allowed;
+    opacity: .5;
+    pointer-events: none;
+}
+
 
 .top-part {
     padding: 10px;
@@ -312,9 +318,11 @@ ul.others-list li small {
 
 
 
-.far, .fas {
+/* .far, .fas {
     font-weight: 400!important;
-}
+} */
+
+
 
 .wishlist .fas {
     color:fuchsia;
@@ -395,16 +403,6 @@ input[type=checkbox], input[type=radio] {
     color:#FFD119!important;
 }
 
-/* .star-evaluate-item {
-    color: #fff;
-    cursor: pointer;
-    float: right;
-    line-height: 30px;
-    line-height: 3rem;
-    text-align: center;
-    width: 20%;
-} */
-
 
 
 .side-features {
@@ -412,10 +410,13 @@ input[type=checkbox], input[type=radio] {
 }
 
 
-/* .fa-star:before {
-    content: "\f005";
-} */
 
+.isDisable {
+    color: currentColor;
+    pointer-events: none;
+    opacity: 0.5;
+    text-decoration: none;
+}
 
 
 
@@ -481,6 +482,8 @@ a.series-name:hover {
     padding: 10px 15px;
     font-weight: 700;
 }
+
+
 
 /* Chapter Page */
 
@@ -567,12 +570,6 @@ h2, h3, h4 {
     font-weight: 900!important;
 }
 
-.isDisable {
-    color: currentColor;
-    pointer-events: none;
-    opacity: 0.5;
-    text-decoration: none;
-}
 
 
 /* Completed Page */
@@ -1503,6 +1500,12 @@ section#series-comments main.comment-wrapper {
     overflow-y: hidden;
 }
 
+.edit-ln-comment-content {
+    word-wrap: break-word;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 .ln-comment-time {
     color: var(--black);
     display: inline-block;
@@ -1528,4 +1531,62 @@ section#series-comments main.comment-wrapper {
     margin-left: 50px;
 }
 
+.ln-comment-menu {
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+}
 
+.ln-comment-toolkit-icon {
+    cursor: pointer;
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 40px;
+}
+
+.ln-comment-toolkit {
+    background-color: var(--white);
+    border-radius: 4px;
+    position: absolute;
+    right: 0;
+    width: 120px;
+    z-index: 9;
+}
+
+.ln-comment-toolkit-item {
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    padding: 2px 10px;
+    width: 100%;
+}
+
+.ln-comment-toolkit-item:hover {
+    background-color: var(--lightgreen);
+    color: var(--white);
+}
+
+.ln-comment-toolkit-item i {
+    text-align: center;
+    width: 20px;
+}
+
+.list-volume-wrapper, .ln-comment-toolkit, .ln-list-option {
+    box-shadow: 0 0 4px #aaa;
+}
+
+.ln-comment-toolkit button {
+    background-color: var(--white);
+    text-align: left;
+}
+
+ .deleted {
+    font-style: italic;
+    cursor: not-allowed;
+    opacity: .5;
+    pointer-events: none;
+}
