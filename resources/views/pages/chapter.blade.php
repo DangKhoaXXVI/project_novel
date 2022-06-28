@@ -1,6 +1,25 @@
 @extends('../welcome')
+
+@section('title')
+    {{ "Đọc truyện " }} {{ $chapter->novel->novelname }} {{ " - " }}  {{ $chapter->title  }}
+@endsection
+
 @section('content')
 
+<main class="reading-page">
+<section id="rd_side_icon">
+    @if($chapter->id == $min_id->id)
+        <a href="" class="rd_sd-button_item col text-center {{ $chapter->id == $min_id->id ? 'isDisable' : '' }}"><i class="fas fa-backward"></i></a>
+    @else
+        <a href="{{ url('chapter/'.$previous_chapter_id.'-'.$previous_chapter_slug->slug_chapter) }}" class="rd_sd-button_item col text-center {{ $chapter->id == $min_id->id ? 'isDisable' : '' }}"><i class="fas fa-backward"></i></a>
+    @endif                
+        <a href="{{ url('novel/'.$chapter->novel->slug_novelname) }}" class="rd_sd-button_item col text-center"><i class="fas fa-home"></i></a>
+    @if($chapter->id == $max_id->id)
+        <a href="" class="rd_sd-button_item col text-center {{ $chapter->id == $max_id->id ? 'isDisable' : '' }}"><i class="fas fa-forward"></i></a>
+    @else             
+        <a href="{{ url('chapter/'.$next_chapter_id.'-'.$next_chapter_slug->slug_chapter ) }}" class="rd_sd-button_item col text-center {{ $chapter->id == $max_id->id ? 'isDisable' : '' }}"><i class="fas fa-forward"></i></a>
+    @endif
+</section>
 
 
 <div class="container">
@@ -53,6 +72,8 @@
         </div>
     </div>
 </div>
+
+</main>
 
 
 @endsection

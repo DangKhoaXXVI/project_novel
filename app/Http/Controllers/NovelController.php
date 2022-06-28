@@ -82,9 +82,9 @@ class NovelController extends Controller
         $novel->created_at = Carbon::now('Asia/Ho_Chi_Minh');
         $novel->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
-        foreach($data['category'] as $key => $categories) {
-            $novel->category_id = $categories[0];
-        }
+        // foreach($data['category'] as $key => $categories) {
+        //     $novel->category_id = $categories[0];
+        // }
 
         // add a new image into folder
         $get_image = $request->image;
@@ -172,9 +172,9 @@ class NovelController extends Controller
 
         $novel->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
-        foreach($data['category'] as $key => $categories) {
-            $novel->category_id = $categories[0];
-        }
+        // foreach($data['category'] as $key => $categories) {
+        //     $novel->category_id = $categories[0];
+        // }
         $novel->belongstomanycategory()->sync($data['category']);
 
         // add a new image into folder

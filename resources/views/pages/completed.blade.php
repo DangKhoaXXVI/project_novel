@@ -1,5 +1,5 @@
-
-
+<div class="maincontent-area">
+    <div class="container">
     <div class="b_title"><strong>Truyện Đã Hoàn Thành</strong></div>
     <div class="gridlist">
         @foreach($completed_novel as $key => $completed)
@@ -25,3 +25,7 @@
         <a class="series-name" title="Xem Thêm" href="{{ url('All-Completed-Novel') }}">Xem Thêm</a>
     </div>
 </div>
+    </div>
+</div>
+
+    

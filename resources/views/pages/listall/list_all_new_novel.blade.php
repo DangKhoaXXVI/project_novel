@@ -1,11 +1,10 @@
 @extends('../welcome')
+
+@section('title')
+    {{ "Danh sách truyện" }}
+@endsection
+
 @section('content')
-
-<style type="text/css"> 
-
-
-
-</style>
 
 <div class="container-fluid" id="mainpart">
     <div class="container">

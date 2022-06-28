@@ -18,12 +18,6 @@
                 @endif
                 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     <form method="POST" action="{{route('novel.store')}}" enctype='multipart/form-data'>
                         @csrf
                         <div class="form-group">
@@ -54,11 +48,6 @@
                         </div>
                         <div class="form-group">
                             <label style="font-weight: 700">Thể loại</label><br>
-                                <!-- <select name="category" class="custom-select">
-                                    
-                                    <option value="$categories->id">$categories->categoryname</option>
-                                    
-                                </select> -->
                                 @foreach($category as $key => $categories)
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" name="category[]" type="checkbox" id="category_{{$categories->id}}" value="{{$categories->id}}">

@@ -16,7 +16,7 @@ class Novel extends Model
     public $timestamps =  false;
     
     protected $fillable = [
-        'user_id', 'novelname', 'slug_novelname', 'author', 'slug_author', 'summary', 'novel_views','type_id', 'category_id', 'state', 'image', 'status', 'created_at', 'updated_at'
+        'user_id', 'novelname', 'slug_novelname', 'author', 'slug_author', 'summary', 'novel_views','type_id', 'state', 'image', 'status', 'created_at', 'updated_at'
     ];
     protected $primaryKey = 'id';
     protected $table = 'novel';
@@ -29,16 +29,20 @@ class Novel extends Model
         return $this->belongsTo('App\Models\TypeNovel', 'type_id', 'id');
     }
 
-    public function category(){
-        return $this->belongsTo('App\Models\Category', 'category_id', 'id');
-    }
-
     public function chapter(){
         return $this->hasMany('App\Models\Chapter', 'novel_id', 'id');
     }
 
     public function belongstomanycategory(){
         return $this->belongsToMany(Category::class, 'incategory','novel_id', 'category_id');
+    }
+
+    public function favorite(){
+        return $this->belongsToMany(Category::class, 'favorite','novel_id', 'user_id');
+    }
+
+    public function comment() {
+        return $this->hasMany(Comment::class, 'novel_id', 'id');
     }
 
 }

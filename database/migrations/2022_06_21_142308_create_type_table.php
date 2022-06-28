@@ -17,7 +17,7 @@ class CreateTypeTable extends Migration
             $table->id();
             $table->string('typename');
             $table->string('slug_typename');
-            $table->boolean('status');
+            $table->integer('status');
             $table->timestamps();
         });
     }

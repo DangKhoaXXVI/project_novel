@@ -9,11 +9,6 @@
                 <div class="card-header">Danh sách các chương truyện</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
                     <div class="container">
                         <a href="{{route('chapter.create')}}" class="btn btn-success">+ Thêm</a>
                     </div>

@@ -4,16 +4,21 @@
                     <a class="navbar-brand" href="{{url('/')}}"><div class="logo"></div></a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" style="color: var(--lightgreen);" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Thể Loại
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                @foreach($category as $key => $categories)
-                                <a class="dropdown-item" href="{{url('category/'.$categories->slug_category)}}">{{$categories->categoryname}}</a>
-                                @endforeach
-                            </div>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: var(--lightgreen);" href="{{ url('All-New-Novel') }}">
+                                Danh Sách Truyện
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" style="color: var(--lightgreen);" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Thể Loại
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @foreach($category as $key => $categories)
+                                    <a class="dropdown-item" href="{{url('category/'.$categories->slug_category)}}">{{$categories->categoryname}}</a>
+                                    @endforeach
+                                </div>
+                            </li>
                         </ul>
                         <form autocomplete="off" method="GET" action="{{ url('search') }}" accept-charset="UTF-8" class="navbar-form navbar-right">
                             @csrf
@@ -51,6 +56,10 @@
                                             <i class="fa fa-btn fa-user"></i>
                                             Tài khoản
                                         </a>
+                                        <a class="dropdown-item" href="{{ route('favorite_page') }}">
+                                            <i class="fas fa-heart" style="font-weight: 900!important;"></i>
+                                            Yêu thích
+                                        </a>
                                         <a class="dropdown-item" href="{{ url('log-out') }}">
                                             <i class="fa fa-btn fa-sign-out"></i>
                                             Đăng xuất
@@ -60,6 +69,10 @@
                                         <a class="dropdown-item" href="{{ route('member_wall', ['id' => Auth::user()->id ] ) }}">
                                             <i class="fa fa-btn fa-user"></i>
                                             Tài khoản
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('favorite_page') }}">
+                                            <i class="fas fa-heart" style="font-weight: 900!important;"></i>
+                                            Yêu thích
                                         </a>
                                         <a class="dropdown-item" href="{{ url('log-out') }}">
                                             <i class="fa fa-btn fa-sign-out"></i>

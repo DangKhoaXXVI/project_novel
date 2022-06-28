@@ -19,7 +19,7 @@ class CreateChapterTable extends Migration
             $table->text('title')->nullable();
             $table->string('slug_chapter');
             $table->longText('content')->nullable();
-            $table->boolean('status');
+            $table->integer('status');
             $table->timestamps();
         });
     }

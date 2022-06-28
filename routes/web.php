@@ -46,18 +46,26 @@ Route::get('/All-New-Novel', [IndexController::class, 'listnewnovel'])->name('Al
 
 Route::get('/All-Completed-Novel', [IndexController::class, 'listcompletednovel'])->name('AllCompleted');
 
+Route::get('/All-New-Chapter', [IndexController::class, 'listnewchapter'])->name('AllNewChapter');
+
 Route::get('/author/{author}', [IndexController::class, 'author'])->name('ListNovelAuthor');
 
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 
+Route::get('/member/{id}', [UserController::class, 'member_wall'])->name('member_wall');
 
 
 Auth::routes();
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/member/{id}', [UserController::class, 'member_wall'])->name('member_wall');
     Route::put('/member/{id}', [UserController::class, 'update'])->name('update_member');
+    Route::post('/rating-novel', [UserController::class, 'rating'])->name('rating-novel');
+    Route::post('/favorite', [UserController::class, 'favorite'])->name('favorite');
+    Route::get('/favorite', [UserController::class, 'favorite_page'])->name('favorite_page');
+    Route::post('/comment/{novel_id}', [UserController::class, 'comment'])->name('comment');
+    Route::put('/comment/update/{cmt_id}', [UserController::class, 'updatecomment'])->name('updatecomment');
+    Route::put('/comment/delete/{cmt_id}', [UserController::class, 'deletecomment'])->name('deletecomment');
 });
 
 Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
@@ -71,6 +79,13 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
     Route::resource('/chapter', ChapterController::class);
 
     Route::resource('/category', CategoryController::class);
+
+    Route::get('/member', [UserController::class, 'index']);
+
+    Route::get('/member/edit/{id}', [UserController::class, 'edit']);
+
+    Route::put('/member/edit/{id}', [UserController::class, 'admin_update'])->name('admin_update_member');
+
 
 });
 

@@ -1,6 +1,11 @@
 @extends('../welcome')
-@section('content')
 
+@section('title')
+    {{ "Tìm kiếm" }}
+@endsection
+
+@section('content')
+    <div class="container">
     <div class="b_title"><strong>Kết quả tìm kiếm: {{ $keywords }}</strong></div>
     <div class="gridlist">
         @php
@@ -22,6 +27,8 @@
             @endforeach
         @endif
     </div>
+    </div>
+    
 
     
 @endsection

@@ -1,6 +1,12 @@
 @extends('../welcome')
-@section('content')
 
+@section('title')
+    {{ "Danh sách truyện" }}
+@endsection
+
+@section('content')
+<div class="maincontent-area">
+    <div class="container">
     <div class="b_title"><strong>Truyện {{ $category_id->categoryname }}</strong></div>
     <div class="gridlist">
         @foreach($novel as $key => $value)
@@ -14,6 +20,7 @@
         </div>
         @endforeach
     </div>
-
+    </div>
+</div>
     
 @endsection
