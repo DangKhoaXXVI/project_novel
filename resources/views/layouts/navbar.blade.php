@@ -10,7 +10,7 @@
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" style="color: var(--lightgreen);" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link" style="color: var(--lightgreen);" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Thể Loại
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -39,7 +39,7 @@
                             <li class="ml-12" style="font-size: 18px; padding: 15px; color: #799a19; font-weight: 700;"><a href="{{ url('log-in') }}">Đăng Nhập</a></li>
                         @else
                             <li class="nav-item dropdown ml-12">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle usernamelogin" style="color: var(--lightgreen);" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link usernamelogin" style="color: var(--lightgreen);" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <img src="/uploads/user/{{ Auth::user()->avatar }}" style="width: 32px; height: 32px; position: absolute; bottom: 5px; left: -20px; border-radius: 50%;">
                                     {{ Auth::user()->name }}
                                 </a>

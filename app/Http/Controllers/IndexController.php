@@ -25,16 +25,18 @@ class IndexController extends Controller
 
     public function home() {
         $category = Category::orderBy('id', 'DESC')->get();
-        $novel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->take(13)->get();
+        $novel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->take(14)->get();
         $allNovel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->get();
         $top8_novel = Novel::orderBy('novel_views', 'DESC')->where('status', 0)->take(8)->get();
         $completed_novel = Novel::orderBy('id', 'DESC')->where('status', 0)->where('state', 1)->take(6)->get();
+        $most_favorite = Favorite::with('novel')->select('novel_id', Favorite::raw('count(*) as favorites'))->groupBy('novel_id')->orderBy('favorites', 'DESC')->take(10)->get();
+        // dd($most_favorite);  
         // $new_chapter = Chapter::with('novel')->orderBy('created_at', 'DESC')->where('novel_id', $allNovel->id)->where('status', 0)->take(6)->get();
 
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
         }
-        return view('pages.home')->with(compact('category', 'novel', 'top8_novel', 'completed_novel', 'allNovel'));
+        return view('pages.home')->with(compact('category', 'novel', 'top8_novel', 'completed_novel', 'allNovel', 'most_favorite'));
     }
 
     public function listnewnovel() {

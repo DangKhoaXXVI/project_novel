@@ -28,7 +28,7 @@
                             <div class="col-12 col-md-9">
                                 <div class="series-name-group" >
                                     <span class="series-name" >
-                                        <a href="">
+                                        <a href="#">
                                             {{ $novel->novelname }}
                                         </a>
                                     </span>

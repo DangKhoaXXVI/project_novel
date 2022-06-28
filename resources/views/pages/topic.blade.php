@@ -1,5 +1,7 @@
 
-        <div class="col-xs-12 col-sm-12 col-md-3">
+<div class="col-xs-12 col-sm-12 col-md-3">
+    <div class="maincontent-area">    
+        <div class="container">   
             <div class="tin-tuc">
                 <div class="b_title"><strong><i class="far fa-newspaper"></i> Tin Tức</strong></div>
                 <p><a title="" href="">
@@ -11,4 +13,3 @@
             </div>
         </div>
     </div>
-</div>
