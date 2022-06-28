@@ -20,12 +20,11 @@ class CreateNovelTable extends Migration
             $table->string('slug_novelname');
             $table->string('author');
             $table->string('slug_author');
-            $table->text('summary');
+            $table->text('summary')->nullable();
             $table->bigInteger('novel_views')->unsigned()->default(0);
             $table->bigInteger('type_id')->unsigned();
-            $table->bigInteger('category_id')->unsigned();
             $table->integer('state');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->integer('status');
             $table->timestamps();
         });

@@ -13,19 +13,34 @@ class CreateForeignKeysTable extends Migration
      */
     public function up()
     {
-        Schema::table('incategory', function (Blueprint $table) {
-            $table->foreign('category_id')->references('id')->on('category');
-            $table->foreign('novel_id')->references('id')->on('novel');             
-        });
-
         Schema::table('chapter', function (Blueprint $table) {
-            $table->foreign('novel_id')->references('id')->on('novel');             
+            $table->foreign('novel_id')->references('id')->on('novel')->onDelete('cascade');             
         });
 
         Schema::table('novel', function (Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users');      
-            $table->foreign('type_id')->references('id')->on('type');
-            $table->foreign('category_id')->references('id')->on('category');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');      
+            $table->foreign('type_id')->references('id')->on('type')->onDelete('cascade');
+        });
+
+        Schema::table('rating', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('novel_id')->references('id')->on('novel')->onDelete('cascade');               
+        });
+
+        Schema::table('favorite', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('novel_id')->references('id')->on('novel')->onDelete('cascade');              
+        });
+
+        Schema::table('incategory', function (Blueprint $table) {
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
+            $table->foreign('novel_id')->references('id')->on('novel')->onDelete('cascade');             
+        });
+
+
+        Schema::table('comment', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('novel_id')->references('id')->on('novel')->onDelete('cascade');  
         });
     }
 
