@@ -86,6 +86,10 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
 
     Route::put('/member/edit/{id}', [UserController::class, 'admin_update'])->name('admin_update_member');
 
+    Route::get('/novel/list-chapter/{novel_id}', [NovelController::class, 'showListChapter'])->name('list_chapter');
+
+    Route::get('/novel/list-chapter/{novel_id}/add-chapter', [NovelController::class, 'showAddChapter'])->name('index_add_chapter');
+
 
 });
 

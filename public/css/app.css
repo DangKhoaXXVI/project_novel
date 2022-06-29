@@ -53,6 +53,11 @@ a {
     color: inherit;
     text-decoration: none;
 }
+
+a:hover {
+    text-decoration: none!important;
+}
+
 a:-webkit-any-link {
     cursor: pointer;
 }
@@ -284,12 +289,14 @@ ul.others-list li .others-name {
     padding-bottom: 4px;
     text-overflow: ellipsis;
     white-space: nowrap;
+    color: var(--darkest);
 }
 
 ul.others-list li small.series-summary-2 {
     white-space: nowrap ;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--black);
 }
 
 ul.others-list li small {
@@ -664,6 +671,7 @@ a.series-name:hover {
 
 #main {
     min-height: calc(100% - 100px);
+    background-color: var(--chapter-theme);
 }
 
 .container-fluid {
@@ -1728,3 +1736,9 @@ section#series-comments main.comment-wrapper {
 /* .rank-count {
     color: var(--darkest);
 } */
+
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

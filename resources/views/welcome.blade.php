@@ -18,7 +18,9 @@
                         <!---------------Bài viết--------------->
                         @yield('topic')
                         <!------------Chương Mới Nhất------------------->
-                        <!-- ('novel_new_chapter) -->
+                        @yield('novel_new_chapter')
+                        <!---------Có thể bạn sẽ thích----------------->
+                        @yield('maybe')
                         <!------------Truyện Mới Nhất------------------->
                         @yield('content')
                         <!---------Top truyện yêu thích----------------->

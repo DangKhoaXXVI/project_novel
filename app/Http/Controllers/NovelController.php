@@ -221,4 +221,52 @@ class NovelController extends Controller
         $novel->delete();
         return redirect()->back()->with('status', 'Xóa truyện thành công!');
     }
+
+    public function showListChapter($novel_id) {
+        $category = Category::orderBy('id', 'DESC')->get();
+        $novel = Novel::find($novel_id);
+        $chapter = Chapter::with('novel')->orderBy('created_at', 'ASC')->where('novel_id', $novel_id)->get();
+        
+        return view('admin_cpanel.novel.list_chapter')->with(compact('category', 'novel', 'chapter'));
+    }
+
+    public function showAddChapter($novel_id) {
+        $category = Category::orderBy('id', 'DESC')->get();
+        $novel = Novel::find($novel_id);
+        return view('admin_cpanel.novel.index_add_chapter')->with(compact('category', 'novel'));
+    }
+
+
+    public function addChapter(Request $request) {
+        $chapter = new chapter;
+        $chapter->id = $request->id;
+        $chapter->story_id = $request->story_id;
+        $chapter->name = $request->name;
+        $chapter->name_convert = $request->name_convert;
+        $chapter->save();
+
+        $image_name = $request->file('image');
+
+        foreach( $image_name as $image) {
+
+            $image->getRealPath();
+            Cloudder::upload($image, null, array(
+                "folder" => "$request->folder/$request->name_convert",  "overwrite" => FALSE,
+                "resource_type" => "image", "responsive" => TRUE, "transformation" => array("quality" => "70", "width" => "1000", "height" => "1423", "crop" => "scale")
+            ));
+
+        $image_url = Cloudder::getResult();
+
+        $image_chapter = new imagechapter;
+        $image_chapter->name = $image_url['secure_url'];
+        $image_chapter->chapter_id = $request->id;
+        $image_chapter->save();
+        }
+        $story_id = $request->story_id;
+        // return redirect()->route('list-chapter,['id' => Truyen20220627060614001]'); 
+        return redirect()->route('list-chapter', ['id' => $story_id]);
+        // return view('user/list_chapter', compact('id_story'));
+
+    }
+
 }

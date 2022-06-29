@@ -66,6 +66,7 @@
                                     {{ $novel->updated_at }}
                                 </td>
                                 <td>
+                                    <a href="{{route('list_chapter', [$novel->id])}}" class="btn btn-success">Danh sách chương</a>
                                     <a href="{{route('novel.edit', [$novel->id])}}" class="btn btn-primary">Chỉnh sửa</a>
                                     <form action="{{route('novel.destroy', [$novel->id])}}" method="POST">
                                         @method('DELETE')

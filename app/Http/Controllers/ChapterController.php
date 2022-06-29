@@ -14,12 +14,12 @@ class ChapterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($chapter_id)
     {
         $listchapter = Chapter::with('novel')->orderBy('id', 'DESC')->get();
         return view('admin_cpanel.chapter.index')->with(compact('listchapter'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -86,9 +86,8 @@ class ChapterController extends Controller
      */
     public function edit($id)
     {
-        $chapter = Chapter::find($id);
-        $listnovel = Novel::orderBy('id', 'DESC')->get();
-        return view('admin_cpanel.chapter.edit')->with(compact('listnovel', 'chapter'));
+        $chapter = Chapter::with('novel')->find($id);
+        return view('admin_cpanel.chapter.edit')->with(compact('chapter'));
     }
 
     /**
@@ -102,7 +101,6 @@ class ChapterController extends Controller
     {
         $data = $request->validate(
             [
-                'novel_id' => 'required',
                 'title' => 'required|max:255',
                 'slug_chapter' => 'required|max:255',
                 'content' =>  'required',
@@ -115,7 +113,6 @@ class ChapterController extends Controller
             ]
         );
         $chapter = Chapter::find($id);
-        $chapter->novel_id = $data['novel_id'];
         $chapter->title = $data['title'];
         $chapter->slug_chapter = $data['slug_chapter'];
         $chapter->content = $data['content'];

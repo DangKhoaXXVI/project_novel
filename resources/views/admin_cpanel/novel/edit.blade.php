@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group">
                             <label style="font-weight: 700">Tóm tắt</label>
-                            <textarea class="form-control" id="summary_content" name="summary" rows="5" style="resize: none">{{$novel->summary}}</textarea>
+                            <textarea class="form-control" id="summary_content" name="summary" rows="5" style="resize: none">{!!$novel->summary!!}</textarea>
                         </div>
                         <div class="form-group">
                             <label style="font-weight: 700">Loại truyện</label>

@@ -56,6 +56,10 @@
     @include('pages.completed')
 @endsection
 
+@section('maybe')
+    @include('pages.maybe_you_will_like')
+@endsection
+
 @section('favorite')
     @include('pages.most_novel_favorite')
 @endsection
