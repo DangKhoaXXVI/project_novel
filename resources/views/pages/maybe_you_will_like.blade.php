@@ -18,7 +18,6 @@
                                 </div>
                                 <div class="others-info">
                                     <h5 class="others-name"><a href="{{url('novel/'.$maybe->slug_novelname)}}">{{ $maybe->novelname }}</a></h5>
-                                    <!-- <a class="text-truncate block" href="#">Chương 04 - Đã quyết định không vướng bận lấy nhau vậy mà</a> -->
                                     <small class="series-summary-2">{!! $maybe->summary !!}</small>
                                 </div>
                             </li>

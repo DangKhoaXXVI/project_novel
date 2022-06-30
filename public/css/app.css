@@ -293,10 +293,20 @@ ul.others-list li .others-name {
 }
 
 ul.others-list li small.series-summary-2 {
-    white-space: nowrap ;
+    white-space: nowrap;
+    color: var(--black);
+}
+
+ul.others-list li small {
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--black);
+    white-space: nowrap;
+}
+
+ul.others-list li small p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 ul.others-list li small {
@@ -449,6 +459,28 @@ input[type=checkbox], input[type=radio] {
     margin-bottom: 50px;
 }
 
+.gridlist .glitem .series-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 90%;
+    margin-left: 5%;
+    padding: 10px;
+    font-weight: 500;
+    background-image: linear-gradient(180deg,transparent,rgba(0,0,0,.5) 20%,rgba(0,0,0,.9));
+}
+
+.gridlist .glitem .series-info .chap {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    color: #f0f0f0;
+    text-decoration: none;
+    display: block;
+}
+
+
 a.series-name {
     margin-left: 5%;
     position: absolute;
@@ -534,9 +566,14 @@ a.series-name:hover {
     font-size: 20px;
 }   
 
-.reading-page {
-    background-color: var(--chapter-theme);
+#chapter-content p {
+    font-family: ChimBienNang!important;
+    font-size: 20px;
 }   
+
+/* .reading-page {
+    background-color: var(--chapter-theme);
+}    */
 
 
 
@@ -671,7 +708,6 @@ a.series-name:hover {
 
 #main {
     min-height: calc(100% - 100px);
-    background-color: var(--chapter-theme);
 }
 
 .container-fluid {

@@ -10,11 +10,14 @@
                             <img class="lazy loaded" src="{{ asset('uploads/novel/'.$value->novel->image) }}" alt="{{$value->novel->novelname}}" width="100%" height="100%" data-was-processed="true">
                         </div>
                     </a>
+                    <div class="series-info">
+                        <a class="chap" title="{{$value->title}}" href="{{url('chapter/'.$value->id.'-'.$value->slug_chapter)}}">{{ $value->title }}</a>
+                    </div>
                     <a class="series-name" href="{{url('novel/'.$value->novel->slug_novelname)}}">{{$value->novel->novelname}}</a>
                 </div>
                 @endforeach
                 <div class="glitem glitem-see-more">
-                    <a title="" href="{{ url('All-New-Novel') }}">
+                    <a title="" href="{{ route('AllNewChapter') }}">
                         <div class="image lazy" style="">
                             <img class="lazy loaded" src="{{ asset('images/readmore.jpg') }}" alt="" width="100%" height="100%" data-was-processed="true">
                         </div>
@@ -23,7 +26,7 @@
                         </div>
                     </a>
                 </div>
-                <a class="series-name" title="Xem Thêm" href="{{ url('All-New-Novel') }}">Xem Thêm</a>
+                <a class="series-name" title="Xem Thêm" href="{{ route('AllNewChapter') }}">Xem Thêm</a>
             </div>
         </div>
     </div>

@@ -13,6 +13,8 @@ use App\Models\Favorite;
 use App\Models\Comment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class IndexController extends Controller
 {
@@ -30,9 +32,11 @@ class IndexController extends Controller
         $top8_novel = Novel::orderBy('novel_views', 'DESC')->where('status', 0)->take(8)->get();
         $completed_novel = Novel::orderBy('id', 'DESC')->where('status', 0)->where('state', 1)->take(6)->get();
         $most_favorite = Favorite::with('novel')->select('novel_id', Favorite::raw('count(*) as favorites'))->groupBy('novel_id')->orderBy('favorites', 'DESC')->take(10)->get();
-        $new_chapter = Chapter::with('novel')->select('novel_id')->where('status', 0)->groupBy('novel_id')->orderBy(Chapter::raw('MAX(created_at)'), 'DESC')->take(14)->get();
+        // $new_chapter = Chapter::with('novel')->where('status', 0)->groupBy('novel_id')->orderBy(Chapter::raw('MAX(created_at)'), 'DESC')->take(14)->get();
         $maybe_you_will_like = Novel::with('chapter')->where('status', 0)->inRandomOrder()->take(7)->get();
-        // dd($most_favorite);  
+        $a = Chapter::with('novel')->where('status', 0)->orderBy('created_at', 'DESC')->get();
+        $new_chapter = $a->unique('novel_id')->take(14);
+        // dd($b);
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
         }
@@ -41,7 +45,7 @@ class IndexController extends Controller
 
     public function listnewnovel() {
         $category = Category::orderBy('id', 'DESC')->get();
-        $new_novel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->paginate(20);
+        $new_novel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->paginate(35);
         
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
@@ -52,9 +56,8 @@ class IndexController extends Controller
 
     public function listnewchapter() {
         $category = Category::orderBy('id', 'DESC')->get();
-        $allNovel = Novel::get();
-        $new_chapter = Chapter::with('novel')->select('novel_id')->where('status', 0)->groupBy('novel_id')->orderBy(Favorite::raw('MAX(created_at)'), 'DESC')->paginate(20);
-        // dd($new_chapter);
+        $a = Chapter::with('novel')->where('status', 0)->orderBy('created_at', 'DESC')->get();
+        $new_chapter = Chapter::with('novel')->where('status', 0)->groupBy('novel_id')->orderBy(Chapter::raw('MAX(created_at)'), 'DESC')->paginate(35);
         
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
@@ -65,7 +68,7 @@ class IndexController extends Controller
 
     public function listcompletednovel() {
         $category = Category::orderBy('id', 'DESC')->get();
-        $list_completed_novel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->where('state', 1)->paginate(20);
+        $list_completed_novel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->where('state', 1)->paginate(35);
         
         if(Auth::check()) {
             view()->share('nguoidung', Auth::user());
@@ -160,7 +163,7 @@ class IndexController extends Controller
     public function author($author) {
         $category = Category::orderBy('id', 'DESC')->get();
 
-        $novel_author = Novel::orderBy('created_at', 'DESC')->where('status', 0)->where('slug_author', $author)->paginate(20);
+        $novel_author = Novel::orderBy('created_at', 'DESC')->where('status', 0)->where('slug_author', $author)->paginate(35);
         $novel_author_name = Novel::orderBy('created_at', 'DESC')->where('status', 0)->where('slug_author', $author)->first();
 
         if(Auth::check()) {

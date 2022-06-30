@@ -30,7 +30,6 @@
                             <input type="text" class="form-control" value="{{old('title')}}" onkeyup="ChangeToSlug();" name="title" id="slug" placeholder="Tên chương truyện...">
                         </div>
                         <div class="form-group">
-                            <label style="font-weight: 700">Slug chương</label>
                             <input type="hidden" class="form-control" value="{{old('slug_chapter')}}" name="slug_chapter" id="convert_slug"  placeholder="Slug chương truyện...">
                         </div>
                         <div class="form-group">
