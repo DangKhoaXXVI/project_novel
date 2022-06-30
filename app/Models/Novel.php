@@ -38,7 +38,7 @@ class Novel extends Model
     }
 
     public function favorite(){
-        return $this->belongsToMany(Category::class, 'favorite','novel_id', 'user_id');
+        return $this->belongsToMany(Favorite::class, 'favorite','novel_id', 'user_id');
     }
 
     public function comment() {

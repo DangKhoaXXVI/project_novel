@@ -61,7 +61,7 @@
                                             @endif
                                         </span>
                                     </div>
-                                    @if(isset($nguoidung))
+                                    @if(Auth::check())
                                         @if(isset($ratingUser) || $ratingUser>0)
                                             <div class="info-item" >
                                                 <i class="fa fa-star"></i>
@@ -110,7 +110,7 @@
                                         <div class="col-4 col-md feature-item width-auto-x1">
                                             <div class="side-feature-button button-rate wishlist">
                                                 <span class="block feature-value">
-                                                    @if(isset($nguoidung))
+                                                    @if(Auth::check())
                                                         @if($favoritedUser)
                                                             <i class="fas fa-heart" style="font-weight: 900!important;" onclick="submitFavorite()">
                                                         @else
@@ -145,7 +145,7 @@
                                                 </label>
                                                 <input type="checkbox" id="open-rating">
                                                     <div class="series-evaluation clear">
-                                                        @if(isset($nguoidung))
+                                                        @if(Auth::check())
                                                             <div class="rating text-center">
                                                                 <div class='starrr' id='star1'></div>
                                                             </div>
@@ -331,7 +331,7 @@
                     <div class="tab-content clear">
                         <section class="ln-comment">
                             <main class="ln-comment-body">
-                                @if(isset($nguoidung))
+                                @if(Auth::check())
                                 <div class="ln-commemt-form">
                                     <form class="comment_form" action="{{ route('comment', $novel->id) }}" method="POST">
                                         @csrf
@@ -399,7 +399,7 @@
                                                     <i class="fas fa-angle-down"></i>
                                                 </div>
                                                 <div class="ln-comment-toolkit" x-show="show" @click.outside="show = false" style="display: none;">            
-                                                @if(isset($nguoidung))    
+                                                @if(Auth::check())    
                                                     @if(Auth::user()->id == $com->user_id)
                                                     <span onclick="formEditComment{{$com->id}}()" class="ln-comment-toolkit-item span-edit"><i class="fas fa-edit"></i> Chỉnh sửa</span>
                                                     <form action="{{route('deletecomment', [$com->id])}}" method="POST">
@@ -539,7 +539,7 @@
                                                         <i class="fas fa-angle-down"></i>
                                                     </div>
                                                     <div class="ln-comment-toolkit" x-show="show" @click.outside="show = false" style="display: none;">            
-                                                    @if(isset($nguoidung))
+                                                    @if(Auth::check())
                                                         @if(Auth::user()->id == $child->user_id)
                                                         <span onclick="formEditCommentChild{{$child->id}}()" class="ln-comment-toolkit-item span-edit"><i class="fas fa-edit"></i> Chỉnh sửa</span>
                                                         <form action="{{route('deletecomment', [$child->id])}}" method="POST">

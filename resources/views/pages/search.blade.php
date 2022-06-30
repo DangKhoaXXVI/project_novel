@@ -13,7 +13,7 @@
         @endphp
 
         @if($count == 0)
-            <p>Không tìm thấy truyện nào...</p>
+            <p style="color: var(--black);">Không tìm thấy truyện nào...</p>
         @else
             @foreach($novel as $key => $value)
             <div class="glitem">
@@ -28,7 +28,4 @@
         @endif
     </div>
     </div>
-    
-
-    
 @endsection

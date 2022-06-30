@@ -20,6 +20,7 @@
                                 <th class="col-4 col-md-2 text-right">Loại bỏ</th>
                             </tr>
                             @foreach($listFavorite as $key => $favorite)
+                            @if($favorite->novel->status == 0)
                             <tr>
                                 <td>
                                     <div class="a6-ratio series-cover">
@@ -56,6 +57,7 @@
                                     </span>
                                 </td>
                             </tr>
+                            @endif
                             @endforeach
                         </tbody>
                     </table>

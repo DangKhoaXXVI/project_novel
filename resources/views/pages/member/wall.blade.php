@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="profile-function at-desktop none block-m">
-                        @if(isset($nguoidung)) 
+                        @if(Auth::check()) 
                             @php
                             $id_user = Auth::user()->id
                             @endphp

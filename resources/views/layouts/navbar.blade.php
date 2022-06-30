@@ -35,7 +35,7 @@
                             <div class="toggle"></div>
                         </li>
 
-                        @if(!isset($nguoidung))
+                        @if(!(Auth::check()))
                             <li class="ml-12" style="font-size: 18px; padding: 15px; color: #799a19; font-weight: 700;"><a href="{{ url('log-in') }}">Đăng Nhập</a></li>
                         @else
                             <li class="nav-item dropdown ml-12">

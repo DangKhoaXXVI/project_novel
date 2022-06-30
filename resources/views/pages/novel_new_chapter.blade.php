@@ -4,6 +4,7 @@
             <div class="b_title"><strong>Chương mới cập nhật</strong></div>
             <div class="gridlist">
                 @foreach($new_chapter as $key => $value)
+                @if($value->novel->status == 0)
                 <div class="glitem">
                     <a href="{{url('novel/'.$value->novel->slug_novelname)}}">
                         <div class="image">
@@ -15,6 +16,7 @@
                     </div>
                     <a class="series-name" href="{{url('novel/'.$value->novel->slug_novelname)}}">{{$value->novel->novelname}}</a>
                 </div>
+                @endif
                 @endforeach
                 <div class="glitem glitem-see-more">
                     <a title="" href="{{ route('AllNewChapter') }}">

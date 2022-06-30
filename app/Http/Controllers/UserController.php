@@ -74,9 +74,7 @@ class UserController extends Controller
         $category = Category::orderBy('id', 'DESC')->get();
         $novel_uploaded = Novel::where('user_id', $id)->get();
 
-        if(Auth::check()) {
-            view()->share('nguoidung', Auth::user());
-        }
+        
         return view('pages.member.wall')->with(compact('member', 'category', 'novel_uploaded'));
     }
 
@@ -204,9 +202,7 @@ class UserController extends Controller
     public function favorite_page() {
         $category = Category::orderBy('id', 'DESC')->get();
         $listFavorite = Favorite::where('user_id', Auth::user()->id)->paginate(10);
-        if(Auth::check()) {
-            view()->share('nguoidung', Auth::user());
-        }
+        
         return view('pages.member.favorite')->with(compact('category', 'listFavorite'));
     }
 

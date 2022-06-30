@@ -8,6 +8,8 @@ use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TopicController;
+
 
 
 /*
@@ -54,6 +56,10 @@ Route::get('/search', [IndexController::class, 'search'])->name('search');
 
 Route::get('/member/{id}', [UserController::class, 'member_wall'])->name('member_wall');
 
+Route::get('/topic', [TopicController::class, 'index'])->name('index_topic');
+
+Route::get('/topic/{id}-{slug}', [TopicController::class, 'detail'])->name('detail_topic');
+
 
 Auth::routes();
 
@@ -66,6 +72,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/comment/{novel_id}', [UserController::class, 'comment'])->name('comment');
     Route::put('/comment/update/{cmt_id}', [UserController::class, 'updatecomment'])->name('updatecomment');
     Route::put('/comment/delete/{cmt_id}', [UserController::class, 'deletecomment'])->name('deletecomment');
+    Route::get('/topic/create', [TopicController::class, 'create'])->name('create_topic');
+    Route::post('/topic/store', [TopicController::class, 'store'])->name('store_topic');
 });
 
 Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
