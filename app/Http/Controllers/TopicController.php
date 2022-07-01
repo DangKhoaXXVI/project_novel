@@ -66,7 +66,55 @@ class TopicController extends Controller
 
         $topic->save();
 
-        return view('pages.topic.index')->with('status', 'Thêm bài viết thành công!');
+        return redirect()->back()->with('status', 'Thêm bài viết thành công!');
+    }
+
+    public function edit($id)
+    {
+        $topic = Topic::find($id);
+        $category = Category::orderBy('id', 'DESC')->get();
+
+        return view('pages.topic.edit')->with(compact('topic', 'category'));
+    }
+
+
+    public function update(Request $request, $id) {
+        $data = $request->validate(
+            [
+                'type_topic' => 'required',
+                'title' => 'required',
+                'slug_title' => 'required',
+                'content' =>  'required',
+            ],
+            [
+                'type_topic.required' => 'Phải chọn mục bài viết!',
+                'title.required' => 'Phải có tiêu đề bài viết!',
+                'slug_title.required' => 'Phải có slug tiêu đề!',
+                'content.required' => 'Bài viết phải có nội dung!',
+            ]
+        );
+
+        $topic = Topic::find($id);
+        $topic->type_topic = $data['type_topic'];
+        $topic->title = $data['title'];
+        $topic->slug_title = $data['slug_title'];
+        $topic->content = $data['content'];
+
+        $topic->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
+
+        $topic->save();
+
+        return redirect('/topic/'.$id.'-'.$request->slug_title)->with('status', 'Cập nhật bài viết thành công!');
+    }
+
+    public function delete($id) {
+
+        $topic = Topic::find($id);
+        $topic->status = 1;
+
+        $topic->save();
+
+        return redirect('/topic')->with('status', 'Xóa bài viết thành công!');
     }
 
 }

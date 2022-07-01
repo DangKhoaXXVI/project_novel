@@ -29,7 +29,7 @@
                                         </div>
                                     </div>
                                     <div class="series-name">
-                                        <a href="{{url('novel/'.$favorite->novel->slug_novelname)}}">{{ $favorite->novel->novelname }}</a>
+                                        <a href="{{ route('novel', ['slug' => $favorite->novel->slug_novelname] ) }}">{{ $favorite->novel->novelname }}</a>
                                         <small class="type-translation">
                                             @if($favorite->novel->state==0)
                                                 <p style="color: #007bff;">Đang tiến hành</p>
@@ -42,7 +42,7 @@
                                     </div>
                                 </td>
                                 <td class="none table-cell-m">
-                                    <a href="{{ url('author/'.$favorite->novel->slug_author ) }}">{{ $favorite->novel->author }}</a>
+                                    <a href="{{ route('ListNovelAuthor', ['author' => $favorite->novel->slug_author] ) }}">{{ $favorite->novel->author }}</a>
                                 </td>
                                 <td class="text-right update-action">
                                     <span class="remove-favorite">

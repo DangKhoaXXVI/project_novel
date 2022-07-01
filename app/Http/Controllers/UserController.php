@@ -72,7 +72,7 @@ class UserController extends Controller
     public function member_wall($id) {
         $member = User::where('id', $id)->first();
         $category = Category::orderBy('id', 'DESC')->get();
-        $novel_uploaded = Novel::where('user_id', $id)->get();
+        $novel_uploaded = Novel::where('user_id', $id)->orderBy('created_at', 'DESC')->get();
 
         
         return view('pages.member.wall')->with(compact('member', 'category', 'novel_uploaded'));

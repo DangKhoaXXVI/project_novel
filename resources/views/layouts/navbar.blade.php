@@ -1,11 +1,11 @@
 
                 <nav class="navbar navbar-expand-lg navbar-light mainmenu-area">
                     <div class="container">
-                    <a class="navbar-brand" href="{{url('/')}}"><div class="logo"></div></a>
+                    <a class="navbar-brand" href="{{ route('home') }}"><div class="logo"></div></a>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link" style="color: var(--lightgreen);" href="{{ url('All-New-Novel') }}">
+                                <a class="nav-link" style="color: var(--lightgreen);" href="{{ route('AllNewNovel') }}">
                                 Danh Sách Truyện
                                 </a>
                             </li>
@@ -15,12 +15,12 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     @foreach($category as $key => $categories)
-                                    <a class="dropdown-item" href="{{url('category/'.$categories->slug_category)}}">{{$categories->categoryname}}</a>
+                                    <a class="dropdown-item" href="{{route('category', ['slug' => $categories->slug_category] )}}">{{$categories->categoryname}}</a>
                                     @endforeach
                                 </div>
                             </li>
                         </ul>
-                        <form autocomplete="off" method="GET" action="{{ url('search') }}" accept-charset="UTF-8" class="navbar-form navbar-right">
+                        <form autocomplete="off" method="GET" action="{{ route('search') }}" accept-charset="UTF-8" class="navbar-form navbar-right">
                             @csrf
                             <div class="input-group">
                                 <input type="search" id="keywords" class="search-input search_input form-control" placeholder="Tìm kiếm..." name="keywords">
@@ -36,7 +36,7 @@
                         </li>
 
                         @if(!(Auth::check()))
-                            <li class="ml-12" style="font-size: 18px; padding: 15px; color: #799a19; font-weight: 700;"><a href="{{ url('log-in') }}">Đăng Nhập</a></li>
+                            <li class="ml-12" style="font-size: 18px; padding: 15px; color: #799a19; font-weight: 700;"><a href="{{ route('log-in') }}">Đăng Nhập</a></li>
                         @else
                             <li class="nav-item dropdown ml-12">
                                 <a id="navbarDropdown" class="nav-link usernamelogin" style="color: var(--lightgreen);" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -60,7 +60,7 @@
                                             <i class="fas fa-heart" style="font-weight: 900!important;"></i>
                                             Yêu thích
                                         </a>
-                                        <a class="dropdown-item" href="{{ url('log-out') }}">
+                                        <a class="dropdown-item" href="{{ route('log-out') }}">
                                             <i class="fa fa-btn fa-sign-out"></i>
                                             Đăng xuất
                                         </a>
@@ -74,7 +74,7 @@
                                             <i class="fas fa-heart" style="font-weight: 900!important;"></i>
                                             Yêu thích
                                         </a>
-                                        <a class="dropdown-item" href="{{ url('log-out') }}">
+                                        <a class="dropdown-item" href="{{ route('log-out') }}">
                                             <i class="fa fa-btn fa-sign-out"></i>
                                             Đăng xuất
                                         </a>

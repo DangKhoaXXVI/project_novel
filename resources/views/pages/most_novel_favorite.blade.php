@@ -17,7 +17,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a class="title-favorite-list" href="{{url('novel/'.$favorite->novel->slug_novelname)}}" title="{{ $favorite->novel->novelname }}">
+                            <a class="title-favorite-list" href="{{ route('novel', ['slug' => $favorite->novel->slug_novelname]) }}" title="{{ $favorite->novel->novelname }}">
                                 <h5 class="series-title">{{ $favorite->novel->novelname }}</h5>
                             </a>
                             <small class="rank-count">{{ $favorite->favorites }} lượt yêu thích</small>

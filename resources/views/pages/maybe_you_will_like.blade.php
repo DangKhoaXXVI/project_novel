@@ -17,7 +17,7 @@
                                     </div>
                                 </div>
                                 <div class="others-info">
-                                    <h5 class="others-name"><a href="{{url('novel/'.$maybe->slug_novelname)}}">{{ $maybe->novelname }}</a></h5>
+                                    <h5 class="others-name"><a href="{{ route('novel', ['slug' => $maybe->slug_novelname]) }}">{{ $maybe->novelname }}</a></h5>
                                     <small class="series-summary-2">{!! $maybe->summary !!}</small>
                                 </div>
                             </li>

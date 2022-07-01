@@ -5,16 +5,16 @@
             <div class="gridlist">
                 @foreach($completed_novel as $key => $completed)
                 <div class="glitem">
-                    <a href="{{url('novel/'.$completed->slug_novelname)}}">
+                    <a href="{{ route('novel', ['slug' => $completed->slug_novelname]) }}">
                         <div class="image">
                             <img class="lazy loaded" src="{{ asset('uploads/novel/'.$completed->image) }}" alt="{{$completed->novelname}}" width="100%" height="100%" data-was-processed="true">
                         </div>
                     </a>
-                    <a class="series-name" href="{{url('novel/'.$completed->slug_novelname)}}">{{$completed->novelname}}</a>
+                    <a class="series-name" href="{{ route('novel', ['slug' => $completed->slug_novelname]) }}">{{$completed->novelname}}</a>
                 </div>
                 @endforeach
                 <div class="glitem glitem-see-more">
-                    <a title="" href="{{ url('All-Completed-Novel') }}">
+                    <a title="" href="{{ route('AllCompleted') }}">
                         <div class="image lazy" style="">
                             <img class="lazy loaded" src="{{ asset('images/readmore.jpg') }}" alt="" width="100%" height="100%" data-was-processed="true">
                         </div>
@@ -23,7 +23,7 @@
                         </div>
                     </a>
                 </div>
-                <a class="series-name" title="Xem Thêm" href="{{ url('All-Completed-Novel') }}">Xem Thêm</a>
+                <a class="series-name" title="Xem Thêm" href="{{ route('AllCompleted') }}">Xem Thêm</a>
             </div>
         </div>
     </div>

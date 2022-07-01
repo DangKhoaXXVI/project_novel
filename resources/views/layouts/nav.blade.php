@@ -9,7 +9,7 @@
                         <a class="nav-link" href="{{route('typenovel.index')}}">Loại truyện</span></a>
                         <a class="nav-link" href="{{route('category.index')}}">Thể loại</span></a>
                         <a class="nav-link" href="{{route('chapter.index')}}">Chương</span></a>
-                        <a class="nav-link" href="{{url('/admin/member')}}">Thành viên</span></a>
+                        <a class="nav-link" href="{{route('admin_index_member')}}">Thành viên</span></a>
 
             </ul>
             <form class="form-inline my-2 my-lg-0">

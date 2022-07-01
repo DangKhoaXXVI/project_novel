@@ -6,7 +6,7 @@
             <div class="owl-carousel owl-theme mt-5">
                 @foreach($top8_novel as $key => $top)
                     <div class="slide-item">
-                        <a href="{{url('novel/'.$top->slug_novelname)}}" title="">
+                        <a href="{{ route('novel', ['slug' => $top->slug_novelname]) }}" title="">
                             <div class="item">
                                 <img class="image lazy" src="{{ asset('uploads/novel/'.$top->image) }}">
                             </div>

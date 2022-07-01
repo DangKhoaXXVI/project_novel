@@ -12,6 +12,9 @@
         <section class="page-content basic-section">
             <header class="sect-header">
                 <span class="sect-title">{{ $topic->title }}</span>
+                @if(Auth::check() && Auth::user()->id == $user->id)
+                <a style="margin-left: 10px; float: right; font-size: 20px;" class="edit-icon" href="{{ route('edit_topic', ['topic_id' => $topic->id] ) }}"><i class="fas fa-edit"></i></a>
+                @endif
             </header>
             <main class="sect-body">
                 <div class="row">
@@ -31,7 +34,7 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <time class="topic-time timeago">{{ $topic->created_at->toDateString() }}</time>
+                        <time class="topic-time timeago">{{ $topic->updated_at }}</time>
                     </div>
                 </div>
                 <div class="forum-page-content long-text">
@@ -71,7 +74,7 @@
                                         <div class="ln-comment-info">
                                             <div class="ln-comment-wrapper">
                                                 <div class="ln-comment-user_name">
-                                                    <a href="{{ url('member/'.$com->user->id) }}" class="strong">{{$com->user->name}}</a>
+                                                    <a href="{{ route('member_wall', ['id' => $com->user->id] ) }}" class="strong">{{$com->user->name}}</a>
                                                     @if($com->user->id == $user->id)
                                                     <div class="ln-comment-user_badge comment-owner">
                                                         <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
@@ -148,7 +151,7 @@
                                         <div class="ln-comment-info">
                                             <div class="ln-comment-wrapper">
                                                 <div class="ln-comment-user_name">
-                                                    <a href="{{ url('member/'.$com->user->id) }}" class="strong">{{$com->user->name}}</a>
+                                                    <a href="{{ route('member_wall', ['id' => $com->user->id] ) }}" class="strong">{{$com->user->name}}</a>
                                                     @if($com->user->id == $user->id)
                                                     <div class="ln-comment-user_badge comment-owner">
                                                         <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
@@ -213,7 +216,7 @@
                                             <div class="ln-comment-info">
                                                 <div class="ln-comment-wrapper">
                                                     <div class="ln-comment-user_name">
-                                                        <a href="{{ url('member/'.$child->user->id) }}" class="strong">{{$child->user->name}}</a>
+                                                        <a href="{{ route('member_wall', ['id' => $child->user->id] ) }}" class="strong">{{$child->user->name}}</a>
                                                         @if($child->user->id == $user->id)
                                                         <div class="ln-comment-user_badge comment-owner">
                                                             <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
@@ -285,7 +288,7 @@
                                             <div class="ln-comment-info">
                                                 <div class="ln-comment-wrapper">
                                                     <div class="ln-comment-user_name">
-                                                        <a href="{{ url('member/'.$child->user->id) }}" class="strong">{{$child->user->name}}</a>
+                                                        <a href="{{ route('member_wall', ['id' => $child->user->id] ) }}" class="strong">{{$child->user->name}}</a>
                                                         @if($child->user->id == $user->id)
                                                         <div class="ln-comment-user_badge comment-owner">
                                                             <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post

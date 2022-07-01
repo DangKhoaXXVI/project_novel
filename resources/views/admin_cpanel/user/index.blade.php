@@ -39,7 +39,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{url('admin/member/edit/'.$values->id)}}" class="btn btn-primary">Chỉnh sửa</a>
+                                    <a href="{{ route('admin_edit_member', ['id' => $values->id] ) }}" class="btn btn-primary">Chỉnh sửa</a>
                                     <form action="" method="POST">
                                         @method('DELETE')
                                         @csrf

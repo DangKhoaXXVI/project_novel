@@ -58,7 +58,7 @@
                                 @endif
                             </td>
                             <td class="col-md-4 col-lg-2 d-none d-md-block">
-                                <time class="topic-time timeago">{{ $topic->created_at->toDateString() }}</time>
+                                <time class="topic-time timeago">{{ $topic->created_at }}</time>
                             </td>
                             <td class="col-4 col-md-5 col-lg-3 text-right">
                                 <div class="topic-avatar none block-m">

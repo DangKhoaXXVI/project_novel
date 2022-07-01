@@ -34,10 +34,6 @@
                 <!-------------Footer------------->
                 @include('layouts.footer')
         </section>
-
-
-
-
     </body>
 </html>
 

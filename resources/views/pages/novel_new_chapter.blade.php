@@ -6,15 +6,15 @@
                 @foreach($new_chapter as $key => $value)
                 @if($value->novel->status == 0)
                 <div class="glitem">
-                    <a href="{{url('novel/'.$value->novel->slug_novelname)}}">
+                    <a href="{{ route('novel', ['slug' => $value->novel->slug_novelname]) }}">
                         <div class="image">
                             <img class="lazy loaded" src="{{ asset('uploads/novel/'.$value->novel->image) }}" alt="{{$value->novel->novelname}}" width="100%" height="100%" data-was-processed="true">
                         </div>
                     </a>
                     <div class="series-info">
-                        <a class="chap" title="{{$value->title}}" href="{{url('chapter/'.$value->id.'-'.$value->slug_chapter)}}">{{ $value->title }}</a>
+                        <a class="chap" title="{{$value->title}}" href="{{ route('chapter', ['id' => $value->id, 'slug' => $value->slug_chapter]) }}">{{ $value->title }}</a>
                     </div>
-                    <a class="series-name" href="{{url('novel/'.$value->novel->slug_novelname)}}">{{$value->novel->novelname}}</a>
+                    <a class="series-name" href="{{ route('novel', ['slug' => $value->novel->slug_novelname]) }}">{{$value->novel->novelname}}</a>
                 </div>
                 @endif
                 @endforeach

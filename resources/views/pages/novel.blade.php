@@ -36,14 +36,14 @@
                                 <div class="series-information" >
                                     <div class="series-categories">
                                         @foreach($novel->belongstomanycategory as $incategories)
-                                        <a class="series-gerne-item"  href="{{url('category/'.$incategories->slug_category)}}">{{ $incategories->categoryname }}</a>
+                                        <a class="series-gerne-item"  href="{{ route('category', ['slug' => $incategories->slug_category]) }}">{{ $incategories->categoryname }}</a>
                                         @endforeach
                                     </div>
                                     <div class="info-item" >
                                     <i class="fa fa-user"></i>
                                         <span class="info-name" >Tác giả:</span>
                                         <span class="info-value ">
-                                            <a href="{{ url('author/'.$novel->slug_author ) }}">
+                                            <a href="{{ route('ListNovelAuthor', ['author' => $novel->slug_author]) }}">
                                             {{ $novel->author }}
                                             </a>
                                         </span>
@@ -200,7 +200,7 @@
                             <div class="series-owner group-mem">
                                 <img src="{{ asset('uploads/user/'.$user->avatar) }}" alt="Poster's avatar">
                                     <div class="series-owner-title">
-                                        <span class="series-owner_name"><a href="{{ url('member/'.$user->id) }}">{{ $user->name }}</a></span>
+                                        <span class="series-owner_name"><a href="{{ route('member_wall', ['id' => $user->id] ) }}">{{ $user->name }}</a></span>
                                     </div>
                             </div>
                         </main>
@@ -227,7 +227,7 @@
                                         </div>
                                     </div>
                                     <div class="others-info">
-                                        <h5 class="others-name"><a href="{{url('novel/'.$novel_up->slug_novelname)}}">{{ $novel_up->novelname }}</a></h5>
+                                        <h5 class="others-name"><a href="{{ route('novel', ['slug' => $novel_up->slug_novelname]) }}">{{ $novel_up->novelname }}</a></h5>
                                         <small class="series-summary-2">{!! $novel_up->summary !!}</small>
                                     </div>
                                 </li>
@@ -252,7 +252,7 @@
                                     </div>
                                 </div>
                                 <div class="others-info">                                        
-                                    <h5 class="others-name"><a href="{{url('novel/'.$top4->slug_novelname)}}">{{ $top4->novelname }}</a></h5>
+                                    <h5 class="others-name"><a href="{{ route('novel', ['slug' => $top4->slug_novelname]) }}">{{ $top4->novelname }}</a></h5>
                                     <i class="fa fa-eye"></i>
                                         <span>Lượt xem:</span>
                                         <span>
@@ -285,7 +285,7 @@
                                 @foreach($chapter as $key => $chapters)
                                     <li>
                                         <div class="chapter-name">
-                                            <a href="{{url('chapter/'.$chapters->id.'-'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
+                                            <a href="{{ route('chapter', ['id' => $chapters->id, 'slug' => $chapters->slug_chapter]) }}">{{ $chapters->title }}</a>
                                         </div>
                                         <div class="chapter-time">{{ $chapters->created_at->toDateString() }}</div>
                                     </li>
@@ -311,7 +311,7 @@
                                 @foreach($chapter as $key => $chapters)
                                     <li>
                                         <div class="chapter-name">
-                                            <a href="{{url('chapter/'.$chapters->id.'-'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
+                                            <a href="{{ route('chapter', ['id' => $chapters->id, 'slug' => $chapters->slug_chapter]) }}">{{ $chapters->title }}</a>
                                         </div>
                                         <div class="chapter-time">{{ $chapters->created_at->toDateString() }}</div>
                                     </li>
@@ -355,7 +355,7 @@
                                             <div class="ln-comment-info">
                                                 <div class="ln-comment-wrapper">
                                                     <div class="ln-comment-user_name">
-                                                        <a href="{{ url('member/'.$com->user->id) }}" class="strong">{{$com->user->name}}</a>
+                                                        <a href="{{ route('member_wall', ['id' => $com->user->id] ) }}" class="strong">{{$com->user->name}}</a>
                                                         @if($com->user->id == $user->id)
                                                         <div class="ln-comment-user_badge comment-owner">
                                                             <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
@@ -433,7 +433,7 @@
                                             <div class="ln-comment-info">
                                                 <div class="ln-comment-wrapper">
                                                     <div class="ln-comment-user_name">
-                                                        <a href="{{ url('member/'.$com->user->id) }}" class="strong">{{$com->user->name}}</a>
+                                                        <a href="{{ route('member_wall', ['id' => $com->user->id] ) }}" class="strong">{{$com->user->name}}</a>
                                                         @if($com->user->id == $user->id)
                                                         <div class="ln-comment-user_badge comment-owner">
                                                             <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
@@ -498,7 +498,7 @@
                                                     <div class="ln-comment-info">
                                                         <div class="ln-comment-wrapper">
                                                             <div class="ln-comment-user_name">
-                                                                <a href="{{ url('member/'.$child->user->id) }}" class="strong">{{$child->user->name}}</a>
+                                                                <a href="{{ route('member_wall', ['id' => $child->user->id] ) }}" class="strong">{{$child->user->name}}</a>
                                                                 @if($child->user->id == $user->id)
                                                                 <div class="ln-comment-user_badge comment-owner">
                                                                     <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
@@ -570,7 +570,7 @@
                                                     <div class="ln-comment-info">
                                                         <div class="ln-comment-wrapper">
                                                             <div class="ln-comment-user_name">
-                                                                <a href="{{ url('member/'.$child->user->id) }}" class="strong">{{$child->user->name}}</a>
+                                                                <a href="{{ route('member_wall', ['id' => $child->user->id] ) }}" class="strong">{{$child->user->name}}</a>
                                                                 @if($child->user->id == $user->id)
                                                                 <div class="ln-comment-user_badge comment-owner">
                                                                     <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
