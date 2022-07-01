@@ -18,7 +18,7 @@
                 @endif
                 
                 <div class="card-body">
-                    <form method="POST" action="{{route('novel.store')}}" enctype='multipart/form-data'>
+                    <form method="POST" action="{{route('truyen.store')}}" enctype='multipart/form-data'>
                         @csrf
                         <div class="form-group">
                             <label style="font-weight: 700">Tên truyện</label>

@@ -18,7 +18,7 @@
                 @endif
                 
                 <div class="card-body">
-                    <form method="POST" action="{{route('chapter.store')}}">
+                    <form method="POST" action="{{route('chuong.store')}}">
                         @csrf
                         <div class="form-group">
                             <label style="font-weight: 700">Thuộc truyện</label>

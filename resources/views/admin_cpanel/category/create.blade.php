@@ -18,7 +18,7 @@
                 @endif
                 
                 <div class="card-body">
-                    <form method="POST" action="{{route('category.store')}}">
+                    <form method="POST" action="{{route('the-loai.store')}}">
                         @csrf
                         <div class="form-group">
                             <label style="font-weight: 700">Tên thể loại</label>

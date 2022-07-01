@@ -10,7 +10,7 @@
 
                 <div class="card-body">
                     <div class="container">
-                        <a href="{{route('chapter.create')}}" class="btn btn-success">+ Thêm</a>
+                        <a href="{{route('chuong.create')}}" class="btn btn-success">+ Thêm</a>
                     </div>
                     <table class="table">
                         <thead class="thead-dark">
@@ -46,8 +46,8 @@
                                     {{ $chapter->updated_at }}
                                 </td>
                                 <td>
-                                    <a href="{{route('chapter.edit', [$chapter->id])}}" class="btn btn-primary">Chỉnh sửa</a>
-                                    <form action="{{route('chapter.destroy', [$chapter->id])}}" method="POST">
+                                    <a href="{{route('chuong.edit', [$chapter->id])}}" class="btn btn-primary">Chỉnh sửa</a>
+                                    <form action="{{route('chuong.destroy', [$chapter->id])}}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button onclick="return confirm('Bạn có chắc là muốn xóa chương truyện này không?');" class="btn btn-danger">

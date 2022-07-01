@@ -10,7 +10,7 @@
 
                 <div class="card-body">
                     <div class="container">
-                        <a href="{{route('typenovel.create')}}" class="btn btn-success">+ Thêm</a>
+                        <a href="{{route('loai-truyen.create')}}" class="btn btn-success">+ Thêm</a>
                     </div>
                     <table class="table">
                         <thead class="thead-dark">
@@ -36,8 +36,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('typenovel.edit', [$type->id])}}" class="btn btn-primary">Chỉnh sửa</a>
-                                    <form action="{{route('typenovel.destroy', [$type->id])}}" method="POST">
+                                    <a href="{{route('loai-truyen.edit', [$type->id])}}" class="btn btn-primary">Chỉnh sửa</a>
+                                    <form action="{{route('loai-truyen.destroy', [$type->id])}}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button onclick="return confirm('Bạn có chắc là muốn xóa loại truyện này không?');" class="btn btn-danger">

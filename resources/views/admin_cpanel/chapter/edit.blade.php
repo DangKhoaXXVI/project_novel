@@ -18,7 +18,7 @@
                 @endif
                 
                 <div class="card-body">
-                    <form method="POST" action="{{route('chapter.update',[$chapter->id])}}">
+                    <form method="POST" action="{{route('chuong.update',[$chapter->id])}}">
                         @method('PUT')
                         @csrf
                         <div class="form-group">

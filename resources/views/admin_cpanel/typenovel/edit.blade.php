@@ -18,7 +18,7 @@
                 @endif
                 
                 <div class="card-body">
-                    <form method="POST" action="{{route('typenovel.update', [$type->id])}}">
+                    <form method="POST" action="{{route('loai-truyen.update', [$type->id])}}">
                         @method('PUT')
                         @csrf
                         <div class="form-group">

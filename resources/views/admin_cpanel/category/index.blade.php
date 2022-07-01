@@ -10,7 +10,7 @@
 
                 <div class="card-body">
                     <div class="container">
-                        <a href="{{route('category.create')}}" class="btn btn-success">+ Thêm</a>
+                        <a href="{{route('the-loai.create')}}" class="btn btn-success">+ Thêm</a>
                     </div>
                     <table class="table">
                         <thead class="thead-dark">
@@ -36,8 +36,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('category.edit', [$categories->id])}}" class="btn btn-primary">Chỉnh sửa</a>
-                                    <form action="{{route('category.destroy', [$categories->id])}}" method="POST">
+                                    <a href="{{route('the-loai.edit', [$categories->id])}}" class="btn btn-primary">Chỉnh sửa</a>
+                                    <form action="{{route('the-loai.destroy', [$categories->id])}}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button onclick="return confirm('Bạn có chắc là muốn xóa thể loại này không?');" class="btn btn-danger">

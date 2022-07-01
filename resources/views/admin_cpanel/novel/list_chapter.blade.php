@@ -44,7 +44,7 @@
                         <a href="" > </a>
                         <i class="fa-solid fa-list"></i>
                     </button>
-                    <a href="{{route('chapter.edit', [$chap->id])}}">
+                    <a href="{{route('chuong.edit', [$chap->id])}}">
                     <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" title="Sửa Chương">
                          
                         <i class="fa-solid fa-pen-to-square"></i>

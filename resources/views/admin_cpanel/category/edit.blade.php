@@ -18,7 +18,7 @@
                 @endif
                 
                 <div class="card-body">
-                    <form method="POST" action="{{route('category.update', [$category->id])}}">
+                    <form method="POST" action="{{route('the-loai.update', [$category->id])}}">
                         @method('PUT')
                         @csrf
                         <div class="form-group">

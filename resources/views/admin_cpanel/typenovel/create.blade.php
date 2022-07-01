@@ -18,7 +18,7 @@
                 @endif
                 
                 <div class="card-body">
-                    <form method="POST" action="{{route('typenovel.store')}}">
+                    <form method="POST" action="{{route('loai-truyen.store')}}">
                         @csrf
                         <div class="form-group">
                             <label style="font-weight: 700">Tên loại truyện</label>
