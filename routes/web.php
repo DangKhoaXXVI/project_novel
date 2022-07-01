@@ -9,6 +9,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\CommentTopicController;
+
 
 
 
@@ -66,12 +68,20 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::put('/member/{id}', [UserController::class, 'update'])->name('update_member');
+
     Route::post('/rating-novel', [UserController::class, 'rating'])->name('rating-novel');
     Route::post('/favorite', [UserController::class, 'favorite'])->name('favorite');
+
     Route::get('/favorite', [UserController::class, 'favorite_page'])->name('favorite_page');
-    Route::post('/comment/{novel_id}', [UserController::class, 'comment'])->name('comment');
-    Route::put('/comment/update/{cmt_id}', [UserController::class, 'updatecomment'])->name('updatecomment');
-    Route::put('/comment/delete/{cmt_id}', [UserController::class, 'deletecomment'])->name('deletecomment');
+
+    Route::post('novel/comment/{novel_id}', [UserController::class, 'comment'])->name('comment');
+    Route::put('novel/comment/update/{cmt_id}', [UserController::class, 'updatecomment'])->name('updatecomment');
+    Route::put('novel/comment/delete/{cmt_id}', [UserController::class, 'deletecomment'])->name('deletecomment');
+
+    Route::post('topic/comment/{topic_id}', [CommentTopicController::class, 'comment_topic'])->name('comment_topic');
+    Route::put('topic/comment/update/{cmt_id}', [CommentTopicController::class, 'updatecomment_topic'])->name('updatecomment_topic');
+    Route::put('topic/comment/delete/{cmt_id}', [CommentTopicController::class, 'deletecomment_topic'])->name('deletecomment_topic');
+
     Route::get('/topic/create', [TopicController::class, 'create'])->name('create_topic');
     Route::post('/topic/store', [TopicController::class, 'store'])->name('store_topic');
 });

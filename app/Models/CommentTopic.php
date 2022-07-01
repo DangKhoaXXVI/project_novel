@@ -25,6 +25,6 @@ class CommentTopic extends Model
     }
 
     public function replies() {
-        return $this->hasMany(Comment::class, 'comment_parent_id', 'id');
+        return $this->hasMany(CommentTopic::class, 'comment_parent_id', 'id');
     }
 }
