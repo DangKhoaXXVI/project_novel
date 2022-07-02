@@ -93,7 +93,56 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
 
     Route::get('/trang-quan-ly', [HomeController::class, 'index'])->name('homeAdmin');
+
+    // Route::get('/management', [HomeController::class, 'management'])->name('management');
+
+
+
+    Route::get('/quan-ly/truyen', [NovelController::class, 'management_index'])->name('novel_index');
+
+    Route::get('/quan-ly/truyen/{id}/chinh-sua', [NovelController::class, 'management_edit'])->name('novel_edit');
+
+    Route::get('/quan-ly/truyen/them-truyen', [NovelController::class, 'management_create'])->name('novel_create');
+
+
+
+    Route::get('/quan-ly/truyen/{novel_id}/danh-sach-chuong', [ChapterController::class, 'management_chapter_index'])->name('chapter_index');
+
+    Route::get('/quan-ly/chuong/{id}/chinh-sua', [ChapterController::class, 'management_chapter_edit'])->name('chapter_edit');
+
+    Route::get('/quan-ly/truyen/{novel_id}/danh-sach-chuong/them-chuong', [ChapterController::class, 'management_chapter_create'])->name('chapter_create');
+
+
+
+    Route::get('/quan-ly/loai-truyen', [TypeNovelController::class, 'management_type_index'])->name('typenovel_index');
+
+    Route::get('/quan-ly/loai-truyen/{id}/chinh-sua', [TypeNovelController::class, 'management_type_edit'])->name('typenovel_edit');
+
+    Route::get('/quan-ly/loai-truyen/them-loai-truyen', [TypeNovelController::class, 'management_type_create'])->name('typenovel_create');
+
+
+
+    Route::get('/quan-ly/the-loai', [CategoryController::class, 'management_category_index'])->name('category_index');
+
+    Route::get('/quan-ly/the-loai/{id}/chinh-sua', [CategoryController::class, 'management_category_edit'])->name('category_edit');
+
+    Route::get('/quan-ly/the-loain/them-the-loai', [CategoryController::class, 'management_category_create'])->name('category_create');
+
     
+
+    Route::get('/quan-ly/thanh-vien', [UserController::class, 'index'])->name('member_index');
+
+    Route::get('/quan-ly/thanh-vien/{id}/chinh-sua', [UserController::class, 'edit'])->name('member_edit');
+
+    Route::put('/quan-ly/thanh-vien/{id}/chinh-sua', [UserController::class, 'admin_update'])->name('member_update');
+
+
+
+    Route::get('/quan-ly/bai-viet', [TopicController::class, 'management_topic_index'])->name('topic_index');
+
+
+
+
     Route::resource('/loai-truyen', TypeNovelController::class);
 
     Route::resource('/truyen', NovelController::class);
@@ -101,12 +150,6 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
     Route::resource('/chuong', ChapterController::class);
 
     Route::resource('/the-loai', CategoryController::class);
-
-    Route::get('/thanh-vien', [UserController::class, 'index'])->name('admin_index_member');
-
-    Route::get('/thanh-vien/{id}/chinh-sua', [UserController::class, 'edit'])->name('admin_edit_member');
-
-    Route::put('/thanh-vien/{id}/chinh-sua', [UserController::class, 'admin_update'])->name('admin_update_member');
 
     Route::get('/truyen/{novel_id}/danh-sach-chuong', [NovelController::class, 'showListChapter'])->name('list_chapter');
 

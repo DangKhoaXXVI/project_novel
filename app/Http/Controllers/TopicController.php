@@ -117,4 +117,9 @@ class TopicController extends Controller
         return redirect('/topic')->with('status', 'Xóa bài viết thành công!');
     }
 
+    public function management_topic_index() {
+        $list_topic = Topic::with('user')->orderBy('created_at', 'DESC')->get();
+        return view('admin_cpanel.topic.topic_index')->with(compact('list_topic'));
+    }
+
 }

@@ -9,34 +9,20 @@ use Carbon\Carbon;
 
 class ChapterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index($chapter_id)
-    {
-        $listchapter = Chapter::with('novel')->orderBy('id', 'DESC')->get();
-        return view('admin_cpanel.chapter.index')->with(compact('listchapter'));
-    }
-    
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $listnovel = Novel::orderBy('id', 'DESC')->get();
-        return view('admin_cpanel.chapter.create')->with(compact('listnovel'));
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // public function index()
+    // {
+    //     $listchapter = Chapter::with('novel')->orderBy('id', 'DESC')->get();
+    //     return view('admin_cpanel.chapter.index')->with(compact('listchapter'));
+    // }
+    
+    // public function create()
+    // {
+    //     $listnovel = Novel::orderBy('id', 'DESC')->get();
+    //     return view('admin_cpanel.chapter.create')->with(compact('listnovel'));
+    // }
+
+
     public function store(Request $request)
     {
         $data = $request->validate(
@@ -64,39 +50,15 @@ class ChapterController extends Controller
         $chapter->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
         $chapter->save();
-        return redirect()->back()->with('status', 'Thêm chương thành công!'); 
+        return redirect()->route('chapter_index', ['novel_id' => $request->novel_id])->with('status', 'Thêm chương thành công!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+    // public function edit($id)
+    // {
+    //     $chapter = Chapter::with('novel')->find($id);
+    //     return view('admin_cpanel.chapter.edit')->with(compact('chapter'));
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $chapter = Chapter::with('novel')->find($id);
-        return view('admin_cpanel.chapter.edit')->with(compact('chapter'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $data = $request->validate(
@@ -119,21 +81,35 @@ class ChapterController extends Controller
         $chapter->status = $data['status'];
 
         $chapter->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
-        $chapter->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
         $chapter->save();
-        return redirect()->back()->with('status', 'Cập nhật chương thành công!'); 
+        return redirect()->route('chapter_index', ['novel_id' => $request->novel_id])->with('status', 'Cập nhật chương thành công!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         Chapter::find($id)->delete();
         return redirect()->back()->with('status', 'Xóa chương thành công!'); 
     }
+
+    public function management_chapter_index($novel_id)
+    {
+        $novel = Novel::find($novel_id);
+        $chapter = Chapter::with('novel')->orderBy('created_at', 'ASC')->where('novel_id', $novel_id)->get();
+        return view('admin_cpanel.chapter.chapter_index')->with(compact('novel', 'chapter'));
+    }
+    
+    public function management_chapter_create($novel_id)
+    {
+        $novel = Novel::find($novel_id);
+        return view('admin_cpanel.chapter.chapter_create')->with(compact('novel'));
+    }
+
+    public function management_chapter_edit($id)
+    {
+        $chapter = Chapter::with('novel')->find($id);
+        return view('admin_cpanel.chapter.chapter_edit')->with(compact('chapter'));
+    }
+
 }

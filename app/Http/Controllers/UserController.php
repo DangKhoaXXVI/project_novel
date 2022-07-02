@@ -145,13 +145,13 @@ class UserController extends Controller
     public function index()
     {
         $user = User::orderBy('id', 'DESC')->get();
-        return view('admin_cpanel.user.index')->with(compact('user'));
+        return view('admin_cpanel.user.member_index')->with(compact('user'));
     }
 
     public function edit($id)
     {
         $user = User::find($id);
-        return view('admin_cpanel.user.edit')->with(compact('user'));
+        return view('admin_cpanel.user.member_edit')->with(compact('user'));
     }
 
     public function admin_update(Request $request, $id) {
@@ -165,7 +165,7 @@ class UserController extends Controller
         $member->role = $data['role'];
 
         $member->save();
-        return redirect()->back()->with('status', 'Cập nhật thành viên thành công!');
+        return redirect()->route('member_index')->with('status', 'Cập nhật thành viên thành công!');
     }
 
     public function destroy($id)
