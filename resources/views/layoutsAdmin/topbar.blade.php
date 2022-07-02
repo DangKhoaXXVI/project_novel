@@ -31,19 +31,19 @@
                                     <hr class="dropdown-divider border-white/[0.08]">
                                 </li>
                                 <li>
-                                    <a href="" class="dropdown-item hover:bg-white/5"> <i data-lucide="layers" class="w-4 h-4 mr-2"></i> Trang quản lý </a>
+                                    <a href="{{ route('homeAdmin') }}" class="dropdown-item hover:bg-white/5"> <i data-lucide="layers" class="w-4 h-4 mr-2"></i> Trang quản lý </a>
                                 </li>
                                 <li>
-                                    <a href="" class="dropdown-item hover:bg-white/5"> <i data-lucide="user" class="w-4 h-4 mr-2"></i> Trang cá nhân </a>
+                                    <a href="{{ route('member_wall', ['id' => Auth::user()->id]) }}" class="dropdown-item hover:bg-white/5"> <i data-lucide="user" class="w-4 h-4 mr-2"></i> Trang cá nhân </a>
                                 </li>
                                 <li>
-                                    <a href="" class="dropdown-item hover:bg-white/5"> <i data-lucide="heart" class="w-4 h-4 mr-2"></i> Yêu thích </a>
+                                    <a href="{{ route('favorite_page') }}" class="dropdown-item hover:bg-white/5"> <i data-lucide="heart" class="w-4 h-4 mr-2"></i> Yêu thích </a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider border-white/[0.08]">
                                 </li>
                                 <li>
-                                    <a href="" class="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right" class="w-4 h-4 mr-2"></i> Đăng xuất </a>
+                                    <a href="{{ route('log-out') }}" class="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right" class="w-4 h-4 mr-2"></i> Đăng xuất </a>
                                 </li>
                             </ul>
                         </div>

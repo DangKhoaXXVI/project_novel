@@ -30,6 +30,14 @@
     src: url(fonts/UVNChimBienNang.TTF);
 }
 
+.w-4 {
+    width: 1rem;
+}
+
+.h-4 {
+    height: 1rem;
+}
+
 /* Navbar  */
 
 .nav-item a:hover {
@@ -1629,6 +1637,7 @@ section#series-comments main.comment-wrapper {
 
 .ln-comment-toolkit button {
     background-color: var(--white);
+    color: var(--black);
     text-align: left;
 }
 
@@ -1846,8 +1855,9 @@ select.input-sm {
 /*  Topic Index   */
 
 .board-list {
-    background-color: #fff;
-    border-color: #e4e5e7 #dadbdd hsla(210,4%,80%,.8);
+    background-color: var(--white);
+    color: var(--black);
+    border-color: var(--border-cover);
     border-radius: 4px;
     border-style: solid;
     border-width: 1px;
@@ -1864,13 +1874,14 @@ table.board-table tr:nth-child(odd) {
 
 table.board-table tr th {
     float: none;
-    background-color: #f4f5f6;
-    border-bottom: 1px solid #dadbdd;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--bordercolor);
     padding: 10px;
+    color: var(--darkest);
 }
 
 table.board-table tr td .topic-time {
-    color: rgba(0,0,0,.4);
+    color: var(--icon-infor);
     font-size: 14px;
 }
 
@@ -1895,6 +1906,10 @@ table.board-table tr td .topic-username {
 
 table.board-table tr td .topic-username a:hover {
     color: #5cb85c!important;
+}
+
+.topic-title, .topic_type, .topic-username a {
+    color: var(--darkest);
 }
 
 .topic-title:hover {
@@ -1959,7 +1974,7 @@ table.board-table tr td .topic-username a:hover {
 }
 
 .page-content .topic-time {
-    color: rgba(0,0,0,.4);
+    color: var(--icon-infor);
     float: right;
 }
 

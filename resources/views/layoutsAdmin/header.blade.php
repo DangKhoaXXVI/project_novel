@@ -1,6 +1,5 @@
 <meta charset="utf-8">
 <link rel="shortcut icon" type="image" href="{{ asset('images/ShinoNovelLogo.jpg') }}">
-<title>Shino Novel</title>
 <!-- BEGIN: CSS Assets-->
 <link rel="stylesheet" href="{{ asset('template/admin/dist/css/app.css') }}" />
 <link rel="shortcut icon" type="image" href="{{ asset('images/ShinoNovelLogo.jpg') }}">

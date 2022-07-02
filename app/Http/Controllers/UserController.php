@@ -19,15 +19,27 @@ class UserController extends Controller
     public function logIn(Request $request)
     {
         // dd($request);
+        $data = $request->validate(
+            [
+                'email' => 'required|email',
+                'password' => 'required|min:6',
+            ],
+            [
+                'email.required' => 'Bạn chưa nhập email!',
+                'email.email' => 'Phải nhập đúng định dạng email!',
+                'email.exists' => 'Email chưa được đăng ký!',
+                'password.required' => 'Bạn chưa nhập mật khẩu!',
+                'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự!',
+            ]
+        );
         if (Auth::attempt(['email' => $request->email, 'password' =>
-        $request->password])) {
+        $request->password], $request->remember)) {
             if(auth()->user()->role == 1){
                 return redirect()->route('homeAdmin');
             }
             return redirect()->route('home');
-
         } else {
-            echo("fail");
+            return redirect()->back()->withErrors(['msg' => 'Sai mật khẩu hoặc tài khoản chưa được đăng ký!']);
         }
     }
 
@@ -56,7 +68,7 @@ class UserController extends Controller
     // }
 
     public function ViewsignUp(Request $request)  {
-        return view('auth.register');
+        return view('auth.sign-up');
     }
 
     public function logOut()
@@ -66,7 +78,7 @@ class UserController extends Controller
     }
 
     public function viewLogin() {
-        return view('auth.login');
+        return view('auth.log-in');
     }
 
     public function member_wall($id) {

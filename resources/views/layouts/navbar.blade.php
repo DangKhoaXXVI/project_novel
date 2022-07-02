@@ -49,33 +49,39 @@
                                     @endphp
                                     @if($role == 1)
                                         <a class="dropdown-item" href="{{ route('homeAdmin') }}">
-                                            <i class="fa-solid fa-house-chimney-user"></i>
+                                            <i class="fa-solid fa-house-chimney-user mr-2 w-4 h-4 text-center"></i>
                                             Trang quản lý
                                         </a>
                                         <a class="dropdown-item" href="{{ route('member_wall', ['id' => Auth::user()->id ] ) }}">
-                                            <i class="fa fa-btn fa-user"></i>
+                                            <i class="fa fa-btn fa-user mr-2 w-4 h-4 text-center"></i>
                                             Tài khoản
                                         </a>
                                         <a class="dropdown-item" href="{{ route('favorite_page') }}">
-                                            <i class="fas fa-heart" style="font-weight: 900!important;"></i>
+                                            <i class="fas fa-heart mr-2 w-4 h-4 text-center" style="font-weight: 900!important;"></i>
                                             Yêu thích
                                         </a>
+                                        <a>
+                                            <hr class="dropdown-divider border-white/[0.08]">
+                                        </a>
                                         <a class="dropdown-item" href="{{ route('log-out') }}">
-                                            <i class="fa fa-btn fa-sign-out"></i>
+                                            <i class="fa fa-btn fa-sign-out mr-2 w-4 h-4 text-center"></i>
                                             Đăng xuất
                                         </a>
                                     @else
                                         </a>
                                         <a class="dropdown-item" href="{{ route('member_wall', ['id' => Auth::user()->id ] ) }}">
-                                            <i class="fa fa-btn fa-user"></i>
+                                            <i class="fa fa-btn fa-user mr-2 w-4 h-4 text-center"></i>
                                             Tài khoản
                                         </a>
                                         <a class="dropdown-item" href="{{ route('favorite_page') }}">
-                                            <i class="fas fa-heart" style="font-weight: 900!important;"></i>
+                                            <i class="fas fa-heart mr-2 w-4 h-4 text-center" style="font-weight: 900!important;"></i>
                                             Yêu thích
                                         </a>
+                                        <a>
+                                            <hr class="dropdown-divider border-white/[0.08]">
+                                        </a>
                                         <a class="dropdown-item" href="{{ route('log-out') }}">
-                                            <i class="fa fa-btn fa-sign-out"></i>
+                                            <i class="fa fa-btn fa-sign-out mr-2 w-4 h-4 text-center"></i>
                                             Đăng xuất
                                         </a>
                                     @endif

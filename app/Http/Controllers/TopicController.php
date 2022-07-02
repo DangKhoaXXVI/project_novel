@@ -25,13 +25,7 @@ class TopicController extends Controller
         return view('pages.topic.index')->with(compact('category', 'list_topic'));
     }
 
-    public function detail($id, $slug) {
-        $category = Category::orderBy('id', 'DESC')->get();
-        $topic = Topic::where('id', $id)->where('slug_title', $slug)->where('status', 0)->first();
-        $user = User::with('topic')->where('id', $topic->user_id)->first();
-        $comment = CommentTopic::where(['topic_id' => $topic->id, 'comment_parent_id' => 0])->orderBy('created_at', 'DESC')->get();
-        return view('pages.topic.detail')->with(compact('category', 'topic', 'user', 'comment'));
-    }
+
 
     public function create() {
         $category = Category::orderBy('id', 'DESC')->get();
@@ -67,6 +61,15 @@ class TopicController extends Controller
         $topic->save();
 
         return redirect()->back()->with('status', 'Thêm bài viết thành công!');
+    }
+
+
+    public function detail($id, $slug) {
+        $category = Category::orderBy('id', 'DESC')->get();
+        $topic = Topic::where('id', $id)->where('slug_title', $slug)->where('status', 0)->first();
+        $user = User::with('topic')->where('id', $topic->user_id)->first();
+        $comment = CommentTopic::where(['topic_id' => $topic->id, 'comment_parent_id' => 0])->orderBy('created_at', 'DESC')->get();
+        return view('pages.topic.detail')->with(compact('category', 'topic', 'user', 'comment'));
     }
 
     public function edit($id)

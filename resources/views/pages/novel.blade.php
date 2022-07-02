@@ -272,7 +272,9 @@
         @if($mucluc>0)
             <section class="volume-list at-series basic-section">
                 <header class="sect-header">
-                    <a style="margin-left: 10px; float: right; font-size: 20px;" class="edit-icon" href=""><i class="fas fa-edit"></i></a>
+                    @if(Auth::user()->id == $user->id)
+                    <a style="margin-left: 10px; float: right; font-size: 20px;" class="edit-icon" href="#"><i class="fas fa-edit"></i></a>
+                    @endif
                     <span class="sect-title"> Mục Lục </span>
                 </header>
                 <main class="d-lg-block">
@@ -391,7 +393,7 @@
                                                         </span>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> 
                                             </div>
 
                                             <div class="ln-comment-menu" x-data="{ show: false }">

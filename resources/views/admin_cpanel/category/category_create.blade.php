@@ -1,4 +1,9 @@
 @extends('admin.management')
+
+@section('title')
+    {{ "Thêm thể loại" }}
+@endsection
+
 @section('content')
 
     <div class="intro-y flex items-center mt-8">

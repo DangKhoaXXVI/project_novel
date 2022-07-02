@@ -60,7 +60,7 @@ Route::get('/thanh-vien/{id}', [UserController::class, 'member_wall'])->name('me
 
 Route::get('/bai-viet', [TopicController::class, 'index'])->name('index_topic');
 
-Route::get('/bai-viet/{id}-{slug}', [TopicController::class, 'detail'])->name('detail_topic');
+Route::get('/bai-viet/chi-tiet/{id}-{slug}', [TopicController::class, 'detail'])->name('detail_topic');
 
 
 Auth::routes();

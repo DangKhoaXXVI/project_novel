@@ -17,7 +17,7 @@
                     <tr class="d-flex">
                         <th class="col-8 col-md-4 col-lg-5 col-xl-5">Tiêu đề</th>
                         <th class="col-md-5 col-lg-2 d-none d-md-block">Chuyên mục</th>
-                        <th class="col-md-4 col-lg-2 d-none d-md-block">Thời gian đăng</th>
+                        <th class="col-md-4 col-lg-2 d-none d-md-block text-center">Thời gian đăng</th>
                         <th class="col-4 col-md-5 col-lg-3 text-right">Người đăng</th>
                     </tr>
                 </thead>
@@ -57,7 +57,7 @@
                                     <a href="#" class="topic_type">Thảo luận</a>
                                 @endif
                             </td>
-                            <td class="col-md-4 col-lg-2 d-none d-md-block">
+                            <td class="col-md-4 col-lg-2 d-none d-md-block text-center">
                                 <time class="topic-time timeago">{{ $topic->created_at }}</time>
                             </td>
                             <td class="col-4 col-md-5 col-lg-3 text-right">
