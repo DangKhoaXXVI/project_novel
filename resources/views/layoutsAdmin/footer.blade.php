@@ -173,15 +173,7 @@
             $('#removeFormFavorite').submit();
         }
 
-        function submitReportFail() {
-            Swal.fire({
-                icon: 'error',
-                title: 'Không thể báo cáo truyện...',
-                text: 'Bạn cần đăng nhập để báo cáo truyện!',
-                showConfirmButton: false,
-                footer: '<a href="/log-in">Đăng nhập</a>'
-            })
-        }
+
     </script>
 
     <script>

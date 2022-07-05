@@ -46,6 +46,14 @@
                             </div>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('report_index') }}" class="side-menu side-menu{{ Request::is('admin/quan-ly/bao-cao') ? '--active' : '' }}">
+                            <div class="side-menu__icon"> <i data-lucide="flag"></i> </div>
+                            <div class="side-menu__title">
+                                Báo cáo
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- END: Side Menu -->

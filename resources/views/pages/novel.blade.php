@@ -177,17 +177,8 @@
                                             <div class="side-feature-button button-rate viewed">
                                                 <span class="block feature-value">
                                                     @if(Auth::check())
-                                                        <!-- <i class="fa-solid fa-flag" onclick="submitReport()">
-                                                            <form action="{{ route('report') }}" method="POST" class="form-inline" id="formReport">
-                                                                @csrf
-                                                                <div class="form-group">
-                                                                    <input type="hidden" class="form-control" name="novel_id" value="{{ $novel->id }}">
-                                                                    <input type="hidden" class="form-control" name="user_id" value="{{ Auth::user()->id }}">
-                                                                </div>
-                                                            </form>
-                                                        </i> -->
                                                         <button class="btn-report" type="button" data-toggle="modal" data-target="#report_novel">
-                                                            <i class="fa-solid fa-flag" onclick="submitReport()"></i>
+                                                            <i class="fa-solid fa-flag"></i>
                                                         </button>
                                                         <div class="modal fade" id="report_novel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -213,11 +204,15 @@
                                                                                     <div class="field has-icon-left">
                                                                                         <label class="label" >Lý do</label>
                                                                                         <div class="control">
-                                                                                            <label class="icon-2 icon-left" >
-                                                                                                <div class="Basic___TooltipArea-sc-hic7b9-7 jQhXRe">
-                                                                                                <i class="fa-solid fa-flag"></i>                                                                                                </div>
-                                                                                            </label>
-                                                                                            <input name="reason" placeholder="Lý do" type="text" class="input">
+                                                                                            <input type="hidden" class="form-control" name="novel_id" value="{{ $novel->id }}">
+                                                                                            <p class="font-weight-bold mt-4">Vui lòng chọn lý do báo cáo</p>
+                                                                                            <select name="reason" class="selectpicker mt-2">
+                                                                                                <option value="1">Spam</option>
+                                                                                                <option value="2">Lỗi font</option>
+                                                                                                <option value="3">Sai nội dung</option>
+                                                                                                <option value="4">Nội dung không phù hợp</option>
+                                                                                                <option value="5">Khác</option>
+                                                                                            </select>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="Modal___ModalFooter-sc-1657dip-5 kGCHZn dialog-footer">
@@ -228,7 +223,6 @@
                                                                                         </button>
                                                                                         </div>
                                                                                     </div>
-
                                                                                 </div>
                                                                             </form>
                                                                         </div>

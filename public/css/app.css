@@ -2046,3 +2046,16 @@ table.board-table tr td .topic-username a:hover {
     border: 0;
     background: transparent;
 }
+
+
+.selectpicker {
+    min-height: 40px;
+    padding: 7.5px 32px 7.5px 12px;
+    background-size: 18px;
+    background-position: center right 0.6rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    border-color: #5cb85c;
+    border-width: 1px;
+}

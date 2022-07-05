@@ -38,6 +38,7 @@
         <script src="{{ asset('rating/starrr.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>        
+        
         <script type="text/javascript">
             $('.owl-carousel').owlCarousel({
                 loop:true,
@@ -172,6 +173,16 @@
 
         function submitRemoveFavoriteList() {
             $('#removeFormFavorite').submit();
+        }
+
+        function submitReportFail() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Không thể báo cáo truyện...',
+                text: 'Bạn cần đăng nhập để báo cáo truyện!',
+                showConfirmButton: false,
+                footer: '<a href="/log-in">Đăng nhập</a>'
+            })
         }
 
     </script>
