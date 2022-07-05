@@ -43,7 +43,11 @@
                                     </div>
                                 </div>
                             </td>
-                            <td><i class="fas fa-star"></i> {{ $topic->title }}</td>
+                            <td>
+                                <a href="{{ route('detail_topic', ['id' => $topic->id, 'slug' => $topic->slug_title]) }}">
+                                    <i class="fas fa-star"></i> {{ $topic->title }}
+                                </a>
+                            </td>
                             <td class="text-center">
                                 @if($topic->type_topic == 1)
                                     <span class="category-circle">
@@ -86,16 +90,21 @@
                                 @endif
                             </td>
                             <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <form action="{{ route('delete_topic', ['topic_id' => $topic->id] ) }}" method="POST">
-                                        @method('PUT')
-                                        @csrf
-                                        <button onclick="return confirm('Bạn có chắc là muốn ẩn bài viết này không?');">
-                                            <a class="flex items-center text-danger" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Ẩn </a>
-                                        </button>
-                                    </form>
-                                    <!-- <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa </a> -->
-                                </div>
+                                @if($topic->status == 0)
+                                <form id="changeStatus" method="GET" action="{{ route('change_status',['topic_id' => $topic->id]) }}">
+                                    <div class="form-check form-switch switch-hide">
+                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" onclick="submitChangeStatus()">
+                                        <label class="form-check-label" for="checkbox-switch-7">Ẩn bài viết</label>
+                                    </div>
+                                </form>
+                                @else
+                                <form id="changeStatus" method="GET" action="{{ route('change_status',['topic_id' => $topic->id]) }}">
+                                    <div class="form-check form-switch switch-hide">
+                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" checked onclick="submitChangeStatus()">
+                                        <label class="form-check-label" for="checkbox-switch-7">Ẩn bài viết</label>
+                                    </div>
+                                </form>
+                                @endif
                             </td>
                         </tr>
                     @empty
@@ -112,9 +121,16 @@
             </table>
         </div>
         <!-- END: Data List -->
-        <!-- BEGIN: Pagination -->
-
-        <!-- END: Pagination -->
+        <script>
+            function submitChangeStatus() {
+                $('#changeStatus').submit();
+            }
+        </script>
     </div>
+<!-- BEGIN: Pagination -->
+    <div class="mt-4 text-center center-pagination">
+        {{ $list_topic->links() }}
+    </div>
+ <!-- END: Pagination -->
 @endsection
             

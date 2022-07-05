@@ -65,7 +65,26 @@
                     {{ $listFavorite->links() }}
                     </div>
                     @else
-                        <h4>Bạn chưa thêm truyện nào vào danh sách yêu thích cả...</h4>
+                    <table class="table table-borderless listext-table has-covers">
+                        <tbody>
+                            <tr>
+                                <th class="col-8 col-md-6">Tên truyện</th>
+                                <th class="none table-cell-m col-md-4">Tên tác giả</th>
+                                <th class="col-4 col-md-2 text-right">Loại bỏ</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="series-name">
+                                        <a>Bạn chưa yêu thích truyện nào cả...</a>
+                                    </div>
+                                </td>
+                                <td class="none table-cell-m">
+                                </td>
+                                <td class="text-right update-action">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     @endif
                 </section>
             </div>

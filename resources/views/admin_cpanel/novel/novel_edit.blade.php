@@ -55,14 +55,6 @@
                         @endforeach
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Loại truyện</label>
-                        <select name="type" class="custom-select">
-                            @foreach($type as $key => $types)
-                                <option {{$types->id  == $novel->type_id ? 'selected' : ''}}  value="{{$types->id}}">{{$types->typename}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Tình trạng</label>
                         <select name="state" class="custom-select">
                             @if($novel->state==0)
@@ -106,6 +98,9 @@
                 </form>
             </div>
             <!-- END: Form Layout -->
+        </div>
+        <div class="intro-y col-span-12 lg:col-span-6">
+            <img  class="logo-icon-create" src="{{ asset('images/ShinoNovelLogo.png') }}">
         </div>
     </div>
 

@@ -63,7 +63,7 @@
                                 @endif
                             </td>
                             <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
+                                <!-- <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3 text-primary" href="{{ route('member_edit', ['id' => $values->id]) }}"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
                                     <form action="#" method="POST">
                                         @method('DELETE')
@@ -72,7 +72,22 @@
                                             <a class="flex items-center text-danger" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Xóa </a>
                                         </button>
                                     </form>
-                                </div>
+                                </div> -->
+                                @if($values->role == 0)
+                                <form id="changeRole" method="GET" action="{{ route('change_role',['id' => $values->id]) }}">
+                                    <div class="form-check form-switch switch-hide">
+                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" onclick="submitChangeRole()">
+                                        <label class="form-check-label" for="checkbox-switch-7">Quản trị viên</label>
+                                    </div>
+                                </form>
+                                @else
+                                <form id="changeRole" method="GET" action="{{ route('change_role',['id' => $values->id]) }}">
+                                    <div class="form-check form-switch switch-hide">
+                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" checked onclick="submitChangeRole()">
+                                        <label class="form-check-label" for="checkbox-switch-7">Quản trị viên</label>
+                                    </div>
+                                </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -80,9 +95,16 @@
             </table>
         </div>
         <!-- END: Data List -->
-        <!-- BEGIN: Pagination -->
-
-        <!-- END: Pagination -->
+        <script>
+            function submitChangeRole() {
+                $('#changeRole').submit();
+            }
+        </script>
     </div>
+<!-- BEGIN: Pagination -->
+    <div class="mt-4 text-center center-pagination">
+        {{ $user->links() }}
+    </div>
+ <!-- END: Pagination -->
 @endsection
             

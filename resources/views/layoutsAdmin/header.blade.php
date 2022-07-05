@@ -9,7 +9,7 @@
     
 .badge-dark {
 color: #fff;
-background-color: #343a40;
+background-color: #024806;
 }
 
 .badge {
@@ -55,5 +55,40 @@ background-color: #343a40;
     -moz-appearance: none;
     appearance: none;
 }
+
+.switch-hide {
+    display: block;
+    text-align: center;
+}
+
+.logo-icon-create {
+    margin-top: 250px;
+}
+
+/*  Pagination  */
+
+a.page-link{ 
+    transition: .4s; 
+} 
+
+.page-link {
+    color: #333;
+}
+
+a.page-link:hover { 
+    color: white !important; background: #799a19 !important; 
+}  
+
+.pagination>.active>span {
+    background-color: #749a19!important;
+    border-color: #749a19!important;
+    color: #fff!important;
+}
+
+.center-pagination nav {
+    display: inline-block;
+}
+
+
 </style>
 <!-- END: CSS Assets-->

@@ -31,14 +31,6 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('typenovel_index') }}" class="side-menu side-menu{{ Request::is('admin/quan-ly/loai-truyen') ? '--active' : '' }}">
-                            <div class="side-menu__icon"> <i data-lucide="clipboard"></i> </div>
-                            <div class="side-menu__title">
-                                Loại truyện
-                            </div>
-                        </a>
-                    </li>
-                    <li>
                         <a href="{{ route('category_index') }}" class="side-menu side-menu{{ Request::is('admin/quan-ly/the-loai') ? '--active' : '' }}">
                             <div class="side-menu__icon"> <i data-lucide="clipboard-list"></i> </div>
                             <div class="side-menu__title">

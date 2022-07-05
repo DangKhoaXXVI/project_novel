@@ -11,7 +11,7 @@
             Thêm truyện
         </h2>
     </div>
-    <div class="grid grid-cols-12 gap-6 mt-5" style="justify-content: center!important;">
+    <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 lg:col-span-6">
             <!-- BEGIN: Form Layout -->
             @if ($errors->any())
@@ -48,19 +48,11 @@
                         @endforeach
                     </div>
                     <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Loại truyện</label>
-                        <select name="type" class="custom-select">
+                        <label for="crud-form-1" class="form-label">Tình trạng</label>
+                        <select name="state" class="custom-select">
                             <option value="0">Đang tiến hành</option>
                             <option value="1">Đã hoàn thành</option>
                             <option value="2">Tạm ngưng</option>
-                        </select>
-                    </div>
-                    <div class="mt-3">
-                        <label for="crud-form-1" class="form-label">Tình trạng</label>
-                        <select name="state" class="custom-select">
-                            @foreach($type as $key => $types)
-                                <option value="{{$types->id}}">{{$types->typename}}</option>
-                            @endforeach
                         </select>
                     </div>
                     <div class="mt-3">
@@ -83,6 +75,10 @@
                 </form>
             </div>
             <!-- END: Form Layout -->
+        </div>
+
+        <div class="intro-y col-span-12 lg:col-span-6">
+            <img  class="logo-icon-create" src="{{ asset('images/ShinoNovelLogo.png') }}">
         </div>
     </div>
 

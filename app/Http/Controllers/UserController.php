@@ -156,7 +156,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $user = User::orderBy('id', 'DESC')->get();
+        $user = User::orderBy('id', 'DESC')->paginate(10);
         return view('admin_cpanel.user.member_index')->with(compact('user'));
     }
 
@@ -271,4 +271,18 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function change_role($id) {
+
+        $user = User::find($id);
+        if($user->role == 0) {
+            $user->role = 1;
+            $user->save();
+            return redirect('/admin/quan-ly/thanh-vien')->with('status', 'Đổi chức vụ thành công!');
+        }
+        if($user->role == 1) {
+            $user->role = 0;
+            $user->save();
+            return redirect('/admin/quan-ly/thanh-vien')->with('status', 'Đổi chức vụ thành công!');
+        }
+    }
 }

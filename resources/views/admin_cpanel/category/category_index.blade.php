@@ -46,7 +46,7 @@
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3 text-primary" href="{{ route('category_edit', ['id' => $cate->id]) }}"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Sửa </a>
-                                    <form action="{{route('loai-truyen.destroy', [$cate->id])}}" method="POST">
+                                    <form action="{{route('the-loai.destroy', [$cate->id])}}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button onclick="return confirm('Bạn có chắc là muốn xóa loại truyện này không?');">
@@ -59,7 +59,7 @@
                         </tr>
                     @empty
                         <tr class="intro-x">
-                            <td></td>
+                            <td>Chưa có thể loại nào</td>
                             <td class="text-center"></td>
                             <td class="table-report__action w-56"></td>
                         </tr>
@@ -68,9 +68,11 @@
             </table>
         </div>
         <!-- END: Data List -->
-        <!-- BEGIN: Pagination -->
-
-        <!-- END: Pagination -->
     </div>
+<!-- BEGIN: Pagination -->
+    <div class="mt-4 text-center center-pagination">
+        {{ $category->links() }}
+    </div>
+ <!-- END: Pagination -->
 @endsection
             
