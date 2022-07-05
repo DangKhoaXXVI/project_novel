@@ -67,7 +67,7 @@
                         </tr>
                     @empty
                         <tr class="intro-x">
-                            <td></td>
+                            <td>Truyện chưa có chương nào hết...</td>
                             <td class="w-40"></td>
                             <td class="text-center"></td>
                             <td class="text-center"></td>

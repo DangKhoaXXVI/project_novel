@@ -96,7 +96,7 @@ class ChapterController extends Controller
     public function management_chapter_index($novel_id)
     {
         $novel = Novel::find($novel_id);
-        $chapter = Chapter::with('novel')->orderBy('created_at', 'ASC')->where('novel_id', $novel_id)->get();
+        $chapter = Chapter::with('novel')->orderBy('created_at', 'ASC')->where('novel_id', $novel_id)->paginate(10);
         return view('admin_cpanel.chapter.chapter_index')->with(compact('novel', 'chapter'));
     }
     

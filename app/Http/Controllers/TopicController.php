@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Models\TypeNovel;
 use App\Models\Novel;
 use App\Models\Category;
 use App\Models\InCategory;
@@ -110,6 +109,7 @@ class TopicController extends Controller
         return redirect('/topic/'.$id.'-'.$request->slug_title)->with('status', 'Cập nhật bài viết thành công!');
     }
 
+
     public function delete($id) {
 
         $topic = Topic::find($id);
@@ -121,8 +121,24 @@ class TopicController extends Controller
     }
 
     public function management_topic_index() {
-        $list_topic = Topic::with('user')->orderBy('created_at', 'DESC')->get();
+        $list_topic = Topic::with('user')->orderBy('created_at', 'DESC')->paginate(10);
         return view('admin_cpanel.topic.topic_index')->with(compact('list_topic'));
+    }
+
+    public function change_status($id) {
+
+        $topic = Topic::find($id);
+        if($topic->status == 0) {
+            $topic->status = 1;
+            $topic->save();
+            return redirect('/admin/quan-ly/bai-viet')->with('status', 'Ẩn bài viết thành công!');
+        }
+        if($topic->status == 1) {
+            $topic->status = 0;
+            $topic->save();
+            return redirect('/admin/quan-ly/bai-viet')->with('status', 'Hiện bài viết thành công!');
+        }
+        
     }
 
 }

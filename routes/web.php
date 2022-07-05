@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TypeNovelController;
 use App\Http\Controllers\NovelController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CategoryController;
@@ -114,14 +113,6 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
 
 
 
-    Route::get('/quan-ly/loai-truyen', [TypeNovelController::class, 'management_type_index'])->name('typenovel_index');
-
-    Route::get('/quan-ly/loai-truyen/{id}/chinh-sua', [TypeNovelController::class, 'management_type_edit'])->name('typenovel_edit');
-
-    Route::get('/quan-ly/loai-truyen/them-loai-truyen', [TypeNovelController::class, 'management_type_create'])->name('typenovel_create');
-
-
-
     Route::get('/quan-ly/the-loai', [CategoryController::class, 'management_category_index'])->name('category_index');
 
     Route::get('/quan-ly/the-loai/{id}/chinh-sua', [CategoryController::class, 'management_category_edit'])->name('category_edit');
@@ -136,14 +127,16 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
 
     Route::put('/quan-ly/thanh-vien/{id}/chinh-sua', [UserController::class, 'admin_update'])->name('member_update');
 
+    Route::get('/quan-ly/thanh-vien/{id}/doi-chuc-vu', [UserController::class, 'change_role'])->name('change_role');
+
 
 
     Route::get('/quan-ly/bai-viet', [TopicController::class, 'management_topic_index'])->name('topic_index');
 
+    Route::get('/quan-ly/bai-viet/{topic_id}/doi-trang-thai', [TopicController::class, 'change_status'])->name('change_status');
 
 
 
-    Route::resource('/loai-truyen', TypeNovelController::class);
 
     Route::resource('/truyen', NovelController::class);
 

@@ -47,11 +47,10 @@ class IndexController extends Controller
 
     public function listnewchapter() {
         $category = Category::orderBy('id', 'DESC')->get();
+        // $a = Chapter::with('novel')->where('status', 0)->orderBy('created_at', 'DESC')->get();
+        // $new_chapter = Chapter::with('novel')->where('status', 0)->groupBy('novel_id')->orderBy(Chapter::raw('MAX(created_at)'), 'DESC')->paginate(35);
         $a = Chapter::with('novel')->where('status', 0)->orderBy('created_at', 'DESC')->get();
-        $new_chapter = Chapter::with('novel')->where('status', 0)->groupBy('novel_id')->orderBy(Chapter::raw('MAX(created_at)'), 'DESC')->paginate(35);
-        
-        
-
+        $new_chapter = $a->unique('novel_id');
         return view('pages.listall.list_all_new_chapter')->with(compact('category', 'new_chapter'));
     }
 
@@ -86,7 +85,7 @@ class IndexController extends Controller
 
     public function novel($slug) {
         $category = Category::orderBy('id', 'DESC')->get();
-        $novel = Novel::with('typenovel')->where('slug_novelname', $slug)->where('status', 0)->first();
+        $novel = Novel::where('slug_novelname', $slug)->where('status', 0)->first();
         $novel->novel_views = $novel->novel_views + 1;
         if(Auth::check()) {
             $ratingUser = Rating::where('novel_id', $novel->id)->where('user_id', Auth::user()->id)->first();

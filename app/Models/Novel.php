@@ -25,10 +25,6 @@ class Novel extends Model
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
-    public function typenovel(){
-        return $this->belongsTo('App\Models\TypeNovel', 'type_id', 'id');
-    }
-
     public function chapter(){
         return $this->hasMany('App\Models\Chapter', 'novel_id', 'id');
     }

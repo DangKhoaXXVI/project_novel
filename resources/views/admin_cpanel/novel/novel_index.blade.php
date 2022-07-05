@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($listnovel as $key => $novel)
+                    @forelse($listnovel as $key => $novel)
                         <tr class="intro-x">
                             <td class="w-40">
                                 <div class="flex">
@@ -86,14 +86,26 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr class="intro-x">
+                            <td class="w-40"></td>
+                            <td>Chưa có truyện nào hết...</td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="table-report__action w-56"></td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
-        <!-- END: Data List -->
-        <!-- BEGIN: Pagination -->
-
-        <!-- END: Pagination -->
+        <!-- END: Data List -->       
     </div>
+<!-- BEGIN: Pagination -->
+    <div class="mt-4 text-center center-pagination">
+        {{ $listnovel->links() }}
+    </div>
+ <!-- END: Pagination -->
 @endsection
             
