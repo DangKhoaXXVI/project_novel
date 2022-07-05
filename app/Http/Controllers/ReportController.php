@@ -38,7 +38,7 @@ class ReportController extends Controller
     }
 
     public function management_report_index() {
-        $list_report = Report::with('user', 'user')->where('approved_at', '')->orderBy('created_at', 'DESC')->paginate(40);
+        $list_report = Report::with('user', 'novel')->where('approved_at', NULL)->orderBy('created_at', 'DESC')->paginate(40);
         return view('admin_cpanel.report.report_index')->with(compact('list_report'));
     }
 
