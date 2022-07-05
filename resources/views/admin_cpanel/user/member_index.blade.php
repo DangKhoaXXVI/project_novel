@@ -74,32 +74,33 @@
                                     </form>
                                 </div> -->
                                 @if($values->role == 0)
-                                <form id="changeRole" method="GET" action="{{ route('change_role',['id' => $values->id]) }}">
+                                <form id="changeRole{{ $values->id }}" method="GET" action="{{ route('change_role',['id' => $values->id]) }}">
                                     <div class="form-check form-switch switch-hide">
-                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" onclick="submitChangeRole()">
+                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" onclick="submitChangeRole{{ $values->id }}()">
                                         <label class="form-check-label" for="checkbox-switch-7">Quản trị viên</label>
                                     </div>
                                 </form>
                                 @else
-                                <form id="changeRole" method="GET" action="{{ route('change_role',['id' => $values->id]) }}">
+                                <form id="changeRole{{ $values->id }}" method="GET" action="{{ route('change_role',['id' => $values->id]) }}">
                                     <div class="form-check form-switch switch-hide">
-                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" checked onclick="submitChangeRole()">
+                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" checked onclick="submitChangeRole{{ $values->id }}()">
                                         <label class="form-check-label" for="checkbox-switch-7">Quản trị viên</label>
                                     </div>
                                 </form>
                                 @endif
                             </td>
                         </tr>
+                        <script>
+                            function submitChangeRole{{ $values->id }}() {
+                                $('#changeRole{{ $values->id }}').submit();
+                            }
+                        </script>
                     @endforeach
                 </tbody>
             </table>
         </div>
         <!-- END: Data List -->
-        <script>
-            function submitChangeRole() {
-                $('#changeRole').submit();
-            }
-        </script>
+        
     </div>
 <!-- BEGIN: Pagination -->
     <div class="mt-4 text-center center-pagination">
