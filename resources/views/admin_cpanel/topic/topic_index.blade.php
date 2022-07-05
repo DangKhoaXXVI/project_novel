@@ -91,22 +91,27 @@
                             </td>
                             <td class="table-report__action w-56">
                                 @if($topic->status == 0)
-                                <form id="changeStatus" method="GET" action="{{ route('change_status',['topic_id' => $topic->id]) }}">
+                                <form id="changeStatus{{ $topic->id }}" method="GET" action="{{ route('change_status',['topic_id' => $topic->id]) }}">
                                     <div class="form-check form-switch switch-hide">
-                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" onclick="submitChangeStatus()">
+                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" onclick="submitChangeStatus{{ $topic->id }}()">
                                         <label class="form-check-label" for="checkbox-switch-7">Ẩn bài viết</label>
                                     </div>
                                 </form>
                                 @else
-                                <form id="changeStatus" method="GET" action="{{ route('change_status',['topic_id' => $topic->id]) }}">
+                                <form id="changeStatus{{ $topic->id }}" method="GET" action="{{ route('change_status',['topic_id' => $topic->id]) }}">
                                     <div class="form-check form-switch switch-hide">
-                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" checked onclick="submitChangeStatus()">
+                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" checked onclick="submitChangeStatus{{ $topic->id }}()">
                                         <label class="form-check-label" for="checkbox-switch-7">Ẩn bài viết</label>
                                     </div>
                                 </form>
                                 @endif
                             </td>
                         </tr>
+                        <script>
+                            function submitChangeStatus{{ $topic->id }}() {
+                                $('#changeStatus{{ $topic->id }}').submit();
+                            }
+                        </script>
                     @empty
                         <tr class="intro-x">
                             <td class="w-40"></td>
@@ -121,11 +126,7 @@
             </table>
         </div>
         <!-- END: Data List -->
-        <script>
-            function submitChangeStatus() {
-                $('#changeStatus').submit();
-            }
-        </script>
+        
     </div>
 <!-- BEGIN: Pagination -->
     <div class="mt-4 text-center center-pagination">

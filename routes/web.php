@@ -73,6 +73,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/danh-sach-yeu-thich', [UserController::class, 'favorite_page'])->name('favorite_page');
 
+    Route::post('/danh-sach-yeu-thich/xoa/{favorite_id}', [UserController::class, 'remove_favorite_list'])->name('removeFavoriteList');
+
     Route::post('truyen/binh-luan/{novel_id}', [UserController::class, 'comment'])->name('comment');
     Route::put('truyen/binh-luan/cap-nhat/{cmt_id}', [UserController::class, 'updatecomment'])->name('updatecomment');
     Route::put('truyen/binh-luan/xoa/{cmt_id}', [UserController::class, 'deletecomment'])->name('deletecomment');

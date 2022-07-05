@@ -45,20 +45,22 @@
                                     <a href="{{ route('ListNovelAuthor', ['author' => $favorite->novel->slug_author] ) }}">{{ $favorite->novel->author }}</a>
                                 </td>
                                 <td class="text-right update-action">
-                                    <span class="remove-favorite">
-                                        <i style="color: #e22590; cursor: pointer;" class="fa-solid fa-heart-circle-minus" onclick="submitRemoveFavoriteList()"></i>
-                                        <form action="{{ route('favorite') }}" method="POST" class="form-inline" id="removeFormFavorite">
-                                            @csrf
-                                            <div class="form-group">
-                                                <input type="hidden" class="form-control" name="novel_id" value="{{ $favorite->novel->id }}">
-                                                <input type="hidden" class="form-control" name="user_id" value="{{ Auth::user()->id }}">
-                                            </div>
-                                        </form>
-                                    </span>
+                                    <form action="{{ route('removeFavoriteList', ['favorite_id' => $favorite->id]) }}" method="POST" class="form-inline" id="removeFormFavorite{{ $favorite->id }}">
+                                        @csrf    
+                                        <span class="remove-favorite">
+                                            <i style="color: #e22590; cursor: pointer;" class="fa-solid fa-heart-circle-minus" onclick="submitRemoveFavoriteList{{ $favorite->id }}()"></i>   
+                                        </span>
+                                    </form>
                                 </td>
                             </tr>
                             @endif
+                            <script>
+                                function submitRemoveFavoriteList{{ $favorite->id }}() {
+                                    $('#removeFormFavorite{{ $favorite->id }}').submit();
+                                }
+                            </script>
                             @endforeach
+                            
                         </tbody>
                     </table>
                     <div class="text-center center-pagination">

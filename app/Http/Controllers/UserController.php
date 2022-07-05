@@ -211,6 +211,15 @@ class UserController extends Controller
         return redirect()->back()->with('status', 'Đã thêm vào danh sách yêu thích!');
     }
 
+
+    public function remove_favorite_list($favoriteID)
+    {
+        Favorite::find($favoriteID)->delete();
+        return redirect()->back()->with('status', 'Đã xóa truyện ra khỏi danh sách yêu thích!');
+    }
+
+
+
     public function favorite_page() {
         $category = Category::orderBy('id', 'DESC')->get();
         $listFavorite = Favorite::where('user_id', Auth::user()->id)->paginate(10);
