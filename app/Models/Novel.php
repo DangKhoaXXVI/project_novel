@@ -37,6 +37,10 @@ class Novel extends Model
         return $this->belongsToMany(Favorite::class, 'favorite','novel_id', 'user_id');
     }
 
+    public function report(){
+        return $this->belongsToMany(Report::class, 'report','novel_id', 'user_id');
+    }
+
     public function comment() {
         return $this->hasMany(Comment::class, 'novel_id', 'id');
     }

@@ -1993,3 +1993,56 @@ table.board-table tr td .topic-username a:hover {
 .cke_screen_reader_only {
     display: none;
 }
+
+.fa-flag {
+    color: red;
+}
+
+.btn-report {
+    background: none;
+}
+
+
+.report-img-wrapper {
+    bottom: 10px;
+    left: 20px;
+    position: absolute;
+}
+
+.report-img {
+    background-color: #fff;
+    border-radius: 100px;
+    box-shadow: 0 0 4px #333;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    width: 150px;
+}
+
+.report-img {
+    border-color: #666;
+    box-shadow: none;
+}
+.report-img img {
+    display: block;
+    width: 100%;
+}
+.report-img img, svg {
+    vertical-align: middle;
+}
+.report-img img {
+    border-style: none;
+}
+
+.field .icon-2 {
+    position: absolute;
+    top: 1px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(3.643rem + 1px);
+    height: 100%;
+    border: 0;
+    background: transparent;
+}

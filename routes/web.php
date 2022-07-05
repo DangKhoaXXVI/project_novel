@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/danh-gia-truyen', [UserController::class, 'rating'])->name('rating-novel');
     Route::post('/yeu-thich', [UserController::class, 'favorite'])->name('favorite');
+    Route::post('/bao-cao', [UserController::class, 'report'])->name('report');
 
     Route::get('/danh-sach-yeu-thich', [UserController::class, 'favorite_page'])->name('favorite_page');
 
