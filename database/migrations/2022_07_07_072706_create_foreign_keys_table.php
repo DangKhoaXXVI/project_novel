@@ -19,7 +19,6 @@ class CreateForeignKeysTable extends Migration
 
         Schema::table('novel', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');      
-            $table->foreign('type_id')->references('id')->on('type')->onDelete('cascade');
         });
 
         Schema::table('rating', function (Blueprint $table) {
@@ -42,6 +41,16 @@ class CreateForeignKeysTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('novel_id')->references('id')->on('novel')->onDelete('cascade');  
         });
+
+        Schema::table('topic', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');      
+        });
+
+        Schema::table('comment_topic', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('topic_id')->references('id')->on('topic')->onDelete('cascade');  
+        });
+
     }
 
     /**

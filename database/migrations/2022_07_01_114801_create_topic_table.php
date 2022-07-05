@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeTable extends Migration
+class CreateTopicTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('type', function (Blueprint $table) {
+        Schema::create('topic', function (Blueprint $table) {
             $table->id();
-            $table->string('typename');
-            $table->string('slug_typename');
-            $table->integer('status');
+            $table->bigInteger('user_id')->unsigned();
+            $table->string('title');
+            $table->string('slug_title');
+            $table->text('content');
+            $table->integer('type_topic');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type');
+        Schema::dropIfExists('topic');
     }
 }

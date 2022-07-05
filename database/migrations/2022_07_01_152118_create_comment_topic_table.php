@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentTable extends Migration
+class CreateCommentTopicTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateCommentTable extends Migration
      */
     public function up()
     {
-        Schema::create('comment', function (Blueprint $table) {
+        Schema::create('comment_topic', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('novel_id')->unsigned();
+            $table->bigInteger('topic_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('comment_parent_id')->unsigned()->nullable();
             $table->text('content');
@@ -31,6 +31,6 @@ class CreateCommentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment');
+        Schema::dropIfExists('comment_topic');
     }
 }
