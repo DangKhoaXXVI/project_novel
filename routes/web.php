@@ -8,6 +8,10 @@ use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TopicController;
+use App\Http\Controllers\CommentTopicController;
+
+
 
 
 /*
@@ -25,66 +29,131 @@ use App\Http\Controllers\UserController;
 
 
 
-Route::get('/log-out', [UserController::class, 'logOut'])->name('log-out');
+Route::get('/dang-xuat', [UserController::class, 'logOut'])->name('log-out');
 
 
-Route::post('/log-in', [UserController::class, 'logIn'])->name('loginnn');
-Route::get('/log-in', [UserController::class, 'viewLogin'])->name('log-in');
+Route::post('/dang-nhap', [UserController::class, 'logIn'])->name('loginnn');
+Route::get('/dang-nhap', [UserController::class, 'viewLogin'])->name('log-in');
 
 // Route::post('/sign-up', [UserController::class, 'signUp'])->name('sign-up');
-Route::get('/sign-up', [UserController::class, 'ViewsignUp'])->name('sign-up-view');
+Route::get('/dang-ky', [UserController::class, 'ViewsignUp'])->name('sign-up-view');
 
 Route::get('/', [IndexController::class, 'home'])->name('home');
 
-Route::get('/category/{slug}', [IndexController::class, 'category']);
+Route::get('/the-loai/{slug}', [IndexController::class, 'category'])->name('category');
 
-Route::get('/novel/{slug}', [IndexController::class, 'novel']);
+Route::get('/truyen/{slug}', [IndexController::class, 'novel'])->name('novel');
 
-Route::get('/chapter/{id}-{slug}', [IndexController::class, 'chapter'])->name('chapter');
+Route::get('/chuong/{id}-{slug}', [IndexController::class, 'chapter'])->name('chapter');
 
-Route::get('/All-New-Novel', [IndexController::class, 'listnewnovel'])->name('AllNewNovel');
+Route::get('/danh-sach-truyen-moi-nhat', [IndexController::class, 'listnewnovel'])->name('AllNewNovel');
 
-Route::get('/All-Completed-Novel', [IndexController::class, 'listcompletednovel'])->name('AllCompleted');
+Route::get('/danh-sach-truyen-da-hoan-thanh', [IndexController::class, 'listcompletednovel'])->name('AllCompleted');
 
-Route::get('/All-New-Chapter', [IndexController::class, 'listnewchapter'])->name('AllNewChapter');
+Route::get('/danh-sach-truyen-co-chuong-moi-nhat', [IndexController::class, 'listnewchapter'])->name('AllNewChapter');
 
-Route::get('/author/{author}', [IndexController::class, 'author'])->name('ListNovelAuthor');
+Route::get('/tac-gia/{author}', [IndexController::class, 'author'])->name('ListNovelAuthor');
 
-Route::get('/search', [IndexController::class, 'search'])->name('search');
+Route::get('/tim-kiem', [IndexController::class, 'search'])->name('search');
 
-Route::get('/member/{id}', [UserController::class, 'member_wall'])->name('member_wall');
+Route::get('/thanh-vien/{id}', [UserController::class, 'member_wall'])->name('member_wall');
+
+Route::get('/bai-viet', [TopicController::class, 'index'])->name('index_topic');
+
+Route::get('/bai-viet/chi-tiet/{id}-{slug}', [TopicController::class, 'detail'])->name('detail_topic');
 
 
 Auth::routes();
 
 
 Route::middleware('auth')->group(function () {
-    Route::put('/member/{id}', [UserController::class, 'update'])->name('update_member');
-    Route::post('/rating-novel', [UserController::class, 'rating'])->name('rating-novel');
-    Route::post('/favorite', [UserController::class, 'favorite'])->name('favorite');
-    Route::get('/favorite', [UserController::class, 'favorite_page'])->name('favorite_page');
-    Route::post('/comment/{novel_id}', [UserController::class, 'comment'])->name('comment');
-    Route::put('/comment/update/{cmt_id}', [UserController::class, 'updatecomment'])->name('updatecomment');
-    Route::put('/comment/delete/{cmt_id}', [UserController::class, 'deletecomment'])->name('deletecomment');
+    Route::put('/thanh-vien/{id}', [UserController::class, 'update'])->name('update_member');
+
+    Route::post('/danh-gia-truyen', [UserController::class, 'rating'])->name('rating-novel');
+    Route::post('/yeu-thich', [UserController::class, 'favorite'])->name('favorite');
+
+    Route::get('/danh-sach-yeu-thich', [UserController::class, 'favorite_page'])->name('favorite_page');
+
+    Route::post('truyen/binh-luan/{novel_id}', [UserController::class, 'comment'])->name('comment');
+    Route::put('truyen/binh-luan/cap-nhat/{cmt_id}', [UserController::class, 'updatecomment'])->name('updatecomment');
+    Route::put('truyen/binh-luan/xoa/{cmt_id}', [UserController::class, 'deletecomment'])->name('deletecomment');
+
+    Route::post('bai-viet/binh-luan/{topic_id}', [CommentTopicController::class, 'comment_topic'])->name('comment_topic');
+    Route::put('bai-viet/binh-luan/cap-nhat/{cmt_id}', [CommentTopicController::class, 'updatecomment_topic'])->name('updatecomment_topic');
+    Route::put('bai-viet/binh-luan/xoa/{cmt_id}', [CommentTopicController::class, 'deletecomment_topic'])->name('deletecomment_topic');
+
+    Route::get('bai-viet/tao-bai-viet', [TopicController::class, 'create'])->name('create_topic');
+    Route::post('bai-viet/luu-bai-viet', [TopicController::class, 'store'])->name('store_topic');
+    Route::get('bai-viet/{topic_id}/chinh-sua', [TopicController::class, 'edit'])->name('edit_topic');
+    Route::put('bai-viet/{topic_id}/cap-nhat', [TopicController::class, 'update'])->name('update_topic');
+    Route::put('bai-viet/{topic_id}/xoa', [TopicController::class, 'delete'])->name('delete_topic');
+
 });
 
 Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
 
-    Route::get('/home', [HomeController::class, 'index'])->name('homeAdmin');
+    Route::get('/trang-quan-ly', [HomeController::class, 'index'])->name('homeAdmin');
+
+    // Route::get('/management', [HomeController::class, 'management'])->name('management');
+
+
+
+    Route::get('/quan-ly/truyen', [NovelController::class, 'management_index'])->name('novel_index');
+
+    Route::get('/quan-ly/truyen/{id}/chinh-sua', [NovelController::class, 'management_edit'])->name('novel_edit');
+
+    Route::get('/quan-ly/truyen/them-truyen', [NovelController::class, 'management_create'])->name('novel_create');
+
+
+
+    Route::get('/quan-ly/truyen/{novel_id}/danh-sach-chuong', [ChapterController::class, 'management_chapter_index'])->name('chapter_index');
+
+    Route::get('/quan-ly/chuong/{id}/chinh-sua', [ChapterController::class, 'management_chapter_edit'])->name('chapter_edit');
+
+    Route::get('/quan-ly/truyen/{novel_id}/danh-sach-chuong/them-chuong', [ChapterController::class, 'management_chapter_create'])->name('chapter_create');
+
+
+
+    Route::get('/quan-ly/loai-truyen', [TypeNovelController::class, 'management_type_index'])->name('typenovel_index');
+
+    Route::get('/quan-ly/loai-truyen/{id}/chinh-sua', [TypeNovelController::class, 'management_type_edit'])->name('typenovel_edit');
+
+    Route::get('/quan-ly/loai-truyen/them-loai-truyen', [TypeNovelController::class, 'management_type_create'])->name('typenovel_create');
+
+
+
+    Route::get('/quan-ly/the-loai', [CategoryController::class, 'management_category_index'])->name('category_index');
+
+    Route::get('/quan-ly/the-loai/{id}/chinh-sua', [CategoryController::class, 'management_category_edit'])->name('category_edit');
+
+    Route::get('/quan-ly/the-loain/them-the-loai', [CategoryController::class, 'management_category_create'])->name('category_create');
+
     
-    Route::resource('/typenovel', TypeNovelController::class);
 
-    Route::resource('/novel', NovelController::class);
+    Route::get('/quan-ly/thanh-vien', [UserController::class, 'index'])->name('member_index');
 
-    Route::resource('/chapter', ChapterController::class);
+    Route::get('/quan-ly/thanh-vien/{id}/chinh-sua', [UserController::class, 'edit'])->name('member_edit');
 
-    Route::resource('/category', CategoryController::class);
+    Route::put('/quan-ly/thanh-vien/{id}/chinh-sua', [UserController::class, 'admin_update'])->name('member_update');
 
-    Route::get('/member', [UserController::class, 'index']);
 
-    Route::get('/member/edit/{id}', [UserController::class, 'edit']);
 
-    Route::put('/member/edit/{id}', [UserController::class, 'admin_update'])->name('admin_update_member');
+    Route::get('/quan-ly/bai-viet', [TopicController::class, 'management_topic_index'])->name('topic_index');
+
+
+
+
+    Route::resource('/loai-truyen', TypeNovelController::class);
+
+    Route::resource('/truyen', NovelController::class);
+
+    Route::resource('/chuong', ChapterController::class);
+
+    Route::resource('/the-loai', CategoryController::class);
+
+    Route::get('/truyen/{novel_id}/danh-sach-chuong', [NovelController::class, 'showListChapter'])->name('list_chapter');
+
+    Route::get('/truyen/{novel_id}/danh-sach-chuong/them-chuong', [NovelController::class, 'showAddChapter'])->name('index_add_chapter');
 
 
 });

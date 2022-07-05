@@ -109,6 +109,7 @@
         CKEDITOR.replace('chapter_content');
         CKEDITOR.replace('summary_content');
         CKEDITOR.replace('comment_content');
+        CKEDITOR.replace('topic_content');
     </script>
 
 
@@ -261,6 +262,41 @@
                 document.getElementById('convert_slug_author').value = slugAuthor;
             }
     </script>
+
+<script type="text/javascript">
+        function ChangeToSlugTopicTitle()
+            {
+                var slugTopicTitle;
+            
+                //Lấy text từ thẻ input title 
+                slugTopicTitle = document.getElementById("slug_title").value;
+                slugTopicTitle = slugTopicTitle.toLowerCase();
+                //Đổi ký tự có dấu thành không dấu
+                    slugTopicTitle = slugTopicTitle.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+                    slugTopicTitle = slugTopicTitle.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+                    slugTopicTitle = slugTopicTitle.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+                    slugTopicTitle = slugTopicTitle.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+                    slugTopicTitle = slugTopicTitle.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+                    slugTopicTitle = slugTopicTitle.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+                    slugTopicTitle = slugTopicTitle.replace(/đ/gi, 'd');
+                    //Xóa các ký tự đặt biệt
+                    slugTopicTitle = slugTopicTitle.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+                    //Đổi khoảng trắng thành ký tự gạch ngang
+                    slugTopicTitle = slugTopicTitle.replace(/ /gi, "-");
+                    //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+                    //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+                    slugTopicTitle = slugTopicTitle.replace(/\-\-\-\-\-/gi, '-');
+                    slugTopicTitle = slugTopicTitle.replace(/\-\-\-\-/gi, '-');
+                    slugTopicTitle = slugTopicTitle.replace(/\-\-\-/gi, '-');
+                    slugTopicTitle = slugTopicTitle.replace(/\-\-/gi, '-');
+                    //Xóa slugTopicTitlecác ký tự gạch ngang ở đầu và cuối
+                    slugTopicTitle = '@' + slugTopicTitle + '@';
+                    slugTopicTitle = slugTopicTitle.replace(/\@\-|\-\@|\@/gi, '');
+                    //In slug ra textbox có id “slug”
+                document.getElementById('convert_slug_title').value = slugTopicTitle;
+            }
+    </script>
+
 
 
 

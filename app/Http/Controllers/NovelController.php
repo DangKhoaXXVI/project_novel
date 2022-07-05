@@ -13,35 +13,20 @@ use Illuminate\Support\Facades\Auth;
 
 class NovelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $listnovel = Novel::with('typenovel', 'belongstomanycategory')->orderBy('id', 'DESC')->get();
-        return view('admin_cpanel.novel.index')->with(compact('listnovel'));
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $category = Category::orderBy('id', 'DESC')->get();
-        $type = TypeNovel::orderBy('id', 'DESC')->get();
-        return view('admin_cpanel.novel.create')->with(compact('type', 'category'));
-    }
+    // public function index()
+    // {
+    //     $listnovel = Novel::with('typenovel', 'belongstomanycategory')->orderBy('id', 'DESC')->get();
+    //     return view('admin_cpanel.novel.index')->with(compact('listnovel'));
+    // }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // public function create()
+    // {
+    //     $category = Category::orderBy('id', 'DESC')->get();
+    //     $type = TypeNovel::orderBy('id', 'DESC')->get();
+    //     return view('admin_cpanel.novel.create')->with(compact('type', 'category'));
+    // }
+
     public function store(Request $request)
     {
         $data = $request->validate(
@@ -82,10 +67,6 @@ class NovelController extends Controller
         $novel->created_at = Carbon::now('Asia/Ho_Chi_Minh');
         $novel->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
-        // foreach($data['category'] as $key => $categories) {
-        //     $novel->category_id = $categories[0];
-        // }
-
         // add a new image into folder
         $get_image = $request->image;
         $path = 'uploads/novel/';
@@ -99,45 +80,29 @@ class NovelController extends Controller
 
         $novel->belongstomanycategory()->attach($data['category']);
 
-        return redirect()->back()->with('status', 'Thêm truyện thành công!');
+        return redirect()->route('novel_index')->with('status', 'Thêm truyện thành công!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $novel = Novel::find($id);
+    // public function show($id)
+    // {
+        
+    // }
 
-        $incategory = $novel->belongstomanycategory;
 
-        $type = TypeNovel::orderBy('id', 'DESC')->get();
-        $category = Category::orderBy('id', 'DESC')->get();
+    // public function edit($id)
+    // {
+    //     $novel = Novel::find($id);
 
-        return view('admin_cpanel.novel.edit')->with(compact('novel', 'type', 'category', 'incategory'));
-    }
+    //     $incategory = $novel->belongstomanycategory;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //     $type = TypeNovel::orderBy('id', 'DESC')->get();
+    //     $category = Category::orderBy('id', 'DESC')->get();
+
+    //     return view('admin_cpanel.novel.edit')->with(compact('novel', 'type', 'category', 'incategory'));
+    // }
+
+
     public function update(Request $request, $id)
     {
         $data = $request->validate(
@@ -172,9 +137,6 @@ class NovelController extends Controller
 
         $novel->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
-        // foreach($data['category'] as $key => $categories) {
-        //     $novel->category_id = $categories[0];
-        // }
         $novel->belongstomanycategory()->sync($data['category']);
 
         // add a new image into folder
@@ -193,15 +155,9 @@ class NovelController extends Controller
         }
         
         $novel->save();
-        return redirect()->back()->with('status', 'Cập nhật truyện thành công!');
+        return redirect()->route('novel_index')->with('status', 'Cập nhật truyện thành công!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $novel = Novel::find($id);
@@ -221,4 +177,47 @@ class NovelController extends Controller
         $novel->delete();
         return redirect()->back()->with('status', 'Xóa truyện thành công!');
     }
+
+    // public function showListChapter($novel_id) {
+    //     $category = Category::orderBy('id', 'DESC')->get();
+    //     $novel = Novel::find($novel_id);
+    //     $chapter = Chapter::with('novel')->orderBy('created_at', 'ASC')->where('novel_id', $novel_id)->get();
+        
+    //     return view('admin_cpanel.novel.list_chapter')->with(compact('category', 'novel', 'chapter'));
+    // }
+
+    // public function showAddChapter($novel_id) {
+    //     $category = Category::orderBy('id', 'DESC')->get();
+    //     $novel = Novel::find($novel_id);
+    //     return view('admin_cpanel.novel.index_add_chapter')->with(compact('category', 'novel'));
+    // }
+
+
+    public function management_index()
+    {
+        $listnovel = Novel::with('typenovel', 'belongstomanycategory')->orderBy('id', 'DESC')->get();
+        return view('admin_cpanel.novel.novel_index')->with(compact('listnovel'));
+    }
+
+    
+
+    public function management_create()
+    {
+        $category = Category::orderBy('id', 'DESC')->get();
+        $type = TypeNovel::orderBy('id', 'DESC')->get();
+        return view('admin_cpanel.novel.novel_create')->with(compact('type', 'category'));
+    }
+
+    public function management_edit($id)
+    {
+        $novel = Novel::find($id);
+
+        $incategory = $novel->belongstomanycategory;
+
+        $type = TypeNovel::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->get();
+
+        return view('admin_cpanel.novel.novel_edit')->with(compact('novel', 'type', 'category', 'incategory'));
+    }
+
 }

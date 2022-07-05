@@ -22,7 +22,6 @@ class CreateNovelTable extends Migration
             $table->string('slug_author');
             $table->text('summary')->nullable();
             $table->bigInteger('novel_views')->unsigned()->default(0);
-            $table->bigInteger('type_id')->unsigned();
             $table->integer('state');
             $table->string('image')->nullable();
             $table->integer('status');

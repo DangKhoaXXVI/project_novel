@@ -28,7 +28,7 @@
                             <div class="col-12 col-md-9">
                                 <div class="series-name-group" >
                                     <span class="series-name" >
-                                        <a href="">
+                                        <a href="#">
                                             {{ $novel->novelname }}
                                         </a>
                                     </span>
@@ -36,14 +36,14 @@
                                 <div class="series-information" >
                                     <div class="series-categories">
                                         @foreach($novel->belongstomanycategory as $incategories)
-                                        <a class="series-gerne-item"  href="{{url('category/'.$incategories->slug_category)}}">{{ $incategories->categoryname }}</a>
+                                        <a class="series-gerne-item"  href="{{ route('category', ['slug' => $incategories->slug_category]) }}">{{ $incategories->categoryname }}</a>
                                         @endforeach
                                     </div>
                                     <div class="info-item" >
                                     <i class="fa fa-user"></i>
                                         <span class="info-name" >Tác giả:</span>
                                         <span class="info-value ">
-                                            <a href="{{ url('author/'.$novel->slug_author ) }}">
+                                            <a href="{{ route('ListNovelAuthor', ['author' => $novel->slug_author]) }}">
                                             {{ $novel->author }}
                                             </a>
                                         </span>
@@ -61,7 +61,7 @@
                                             @endif
                                         </span>
                                     </div>
-                                    @if(isset($nguoidung))
+                                    @if(Auth::check())
                                         @if(isset($ratingUser) || $ratingUser>0)
                                             <div class="info-item" >
                                                 <i class="fa fa-star"></i>
@@ -110,7 +110,7 @@
                                         <div class="col-4 col-md feature-item width-auto-x1">
                                             <div class="side-feature-button button-rate wishlist">
                                                 <span class="block feature-value">
-                                                    @if(isset($nguoidung))
+                                                    @if(Auth::check())
                                                         @if($favoritedUser)
                                                             <i class="fas fa-heart" style="font-weight: 900!important;" onclick="submitFavorite()">
                                                         @else
@@ -145,7 +145,7 @@
                                                 </label>
                                                 <input type="checkbox" id="open-rating">
                                                     <div class="series-evaluation clear">
-                                                        @if(isset($nguoidung))
+                                                        @if(Auth::check())
                                                             <div class="rating text-center">
                                                                 <div class='starrr' id='star1'></div>
                                                             </div>
@@ -200,7 +200,7 @@
                             <div class="series-owner group-mem">
                                 <img src="{{ asset('uploads/user/'.$user->avatar) }}" alt="Poster's avatar">
                                     <div class="series-owner-title">
-                                        <span class="series-owner_name"><a href="{{ url('member/'.$user->id) }}">{{ $user->name }}</a></span>
+                                        <span class="series-owner_name"><a href="{{ route('member_wall', ['id' => $user->id] ) }}">{{ $user->name }}</a></span>
                                     </div>
                             </div>
                         </main>
@@ -227,7 +227,7 @@
                                         </div>
                                     </div>
                                     <div class="others-info">
-                                        <h5 class="others-name"><a href="{{url('novel/'.$novel_up->slug_novelname)}}">{{ $novel_up->novelname }}</a></h5>
+                                        <h5 class="others-name"><a href="{{ route('novel', ['slug' => $novel_up->slug_novelname]) }}">{{ $novel_up->novelname }}</a></h5>
                                         <small class="series-summary-2">{!! $novel_up->summary !!}</small>
                                     </div>
                                 </li>
@@ -252,7 +252,7 @@
                                     </div>
                                 </div>
                                 <div class="others-info">                                        
-                                    <h5 class="others-name"><a href="{{url('novel/'.$top4->slug_novelname)}}">{{ $top4->novelname }}</a></h5>
+                                    <h5 class="others-name"><a href="{{ route('novel', ['slug' => $top4->slug_novelname]) }}">{{ $top4->novelname }}</a></h5>
                                     <i class="fa fa-eye"></i>
                                         <span>Lượt xem:</span>
                                         <span>
@@ -272,7 +272,9 @@
         @if($mucluc>0)
             <section class="volume-list at-series basic-section">
                 <header class="sect-header">
-                    <a style="margin-left: 10px; float: right; font-size: 20px;" class="edit-icon" href=""><i class="fas fa-edit"></i></a>
+                    @if(Auth::user()->id == $user->id)
+                    <a style="margin-left: 10px; float: right; font-size: 20px;" class="edit-icon" href="#"><i class="fas fa-edit"></i></a>
+                    @endif
                     <span class="sect-title"> Mục Lục </span>
                 </header>
                 <main class="d-lg-block">
@@ -285,7 +287,7 @@
                                 @foreach($chapter as $key => $chapters)
                                     <li>
                                         <div class="chapter-name">
-                                            <a href="{{url('chapter/'.$chapters->id.'-'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
+                                            <a href="{{ route('chapter', ['id' => $chapters->id, 'slug' => $chapters->slug_chapter]) }}">{{ $chapters->title }}</a>
                                         </div>
                                         <div class="chapter-time">{{ $chapters->created_at->toDateString() }}</div>
                                     </li>
@@ -311,7 +313,7 @@
                                 @foreach($chapter as $key => $chapters)
                                     <li>
                                         <div class="chapter-name">
-                                            <a href="{{url('chapter/'.$chapters->id.'-'.$chapters->slug_chapter)}}">{{ $chapters->title }}</a>
+                                            <a href="{{ route('chapter', ['id' => $chapters->id, 'slug' => $chapters->slug_chapter]) }}">{{ $chapters->title }}</a>
                                         </div>
                                         <div class="chapter-time">{{ $chapters->created_at->toDateString() }}</div>
                                     </li>
@@ -331,7 +333,7 @@
                     <div class="tab-content clear">
                         <section class="ln-comment">
                             <main class="ln-comment-body">
-                                @if(isset($nguoidung))
+                                @if(Auth::check())
                                 <div class="ln-commemt-form">
                                     <form class="comment_form" action="{{ route('comment', $novel->id) }}" method="POST">
                                         @csrf
@@ -355,7 +357,7 @@
                                             <div class="ln-comment-info">
                                                 <div class="ln-comment-wrapper">
                                                     <div class="ln-comment-user_name">
-                                                        <a href="{{ url('member/'.$com->user->id) }}" class="strong">{{$com->user->name}}</a>
+                                                        <a href="{{ route('member_wall', ['id' => $com->user->id] ) }}" class="strong">{{$com->user->name}}</a>
                                                         @if($com->user->id == $user->id)
                                                         <div class="ln-comment-user_badge comment-owner">
                                                             <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
@@ -368,7 +370,7 @@
                                                         <a class="visible-toolkit-item do-reply" data-id="{{$com->id}}">Trả lời</a>
                                                         <span class="ln-comment-time" style="float: right;">
                                                             <a href="#">
-                                                                <time  class="timeago" title="26-04-2022 10:14:53" datetime="">{{ $com->created_at->format('H:i:s - d/m/Y') }}</time>
+                                                                <time  class="timeago" title="" datetime="">{{ $com->created_at->format('H:i:s - d/m/Y') }}</time>
                                                             </a>
                                                         </span>
                                                         </div>
@@ -386,12 +388,12 @@
                                                         <a class="visible-toolkit-item do-reply" data-id="{{$com->id}}">Trả lời</a>
                                                         <span class="ln-comment-time" style="float: right;">
                                                             <a href="#">
-                                                                <time  class="timeago" title="26-04-2022 10:14:53" datetime="">{{ $com->updated_at->format('H:i:s - d/m/Y') }}</time>
+                                                                <time  class="timeago" title="" datetime="">{{ $com->updated_at->format('H:i:s - d/m/Y') }}</time>
                                                             </a>
                                                         </span>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div> 
                                             </div>
 
                                             <div class="ln-comment-menu" x-data="{ show: false }">
@@ -399,7 +401,7 @@
                                                     <i class="fas fa-angle-down"></i>
                                                 </div>
                                                 <div class="ln-comment-toolkit" x-show="show" @click.outside="show = false" style="display: none;">            
-                                                @if(isset($nguoidung))    
+                                                @if(Auth::check())    
                                                     @if(Auth::user()->id == $com->user_id)
                                                     <span onclick="formEditComment{{$com->id}}()" class="ln-comment-toolkit-item span-edit"><i class="fas fa-edit"></i> Chỉnh sửa</span>
                                                     <form action="{{route('deletecomment', [$com->id])}}" method="POST">
@@ -433,7 +435,7 @@
                                             <div class="ln-comment-info">
                                                 <div class="ln-comment-wrapper">
                                                     <div class="ln-comment-user_name">
-                                                        <a href="{{ url('member/'.$com->user->id) }}" class="strong">{{$com->user->name}}</a>
+                                                        <a href="{{ route('member_wall', ['id' => $com->user->id] ) }}" class="strong">{{$com->user->name}}</a>
                                                         @if($com->user->id == $user->id)
                                                         <div class="ln-comment-user_badge comment-owner">
                                                             <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
@@ -446,7 +448,7 @@
                                                         <a class="visible-toolkit-item do-reply" data-id="{{$com->id}}">Trả lời</a>
                                                         <span class="ln-comment-time" style="float: right;">
                                                             <a href="#">
-                                                                <time  class="timeago" title="26-04-2022 10:14:53" datetime="">{{ $com->created_at->format('H:i:s - d/m/Y') }}</time>
+                                                                <time  class="timeago" title="" datetime="">{{ $com->created_at->format('H:i:s - d/m/Y') }}</time>
                                                             </a>
                                                         </span>
                                                         </div>
@@ -464,7 +466,7 @@
                                                         <a class="visible-toolkit-item do-reply" data-id="{{$com->id}}">Trả lời</a>
                                                         <span class="ln-comment-time" style="float: right;">
                                                             <a href="#">
-                                                                <time  class="timeago" title="26-04-2022 10:14:53" datetime="">{{ $com->updated_at->format('H:i:s - d/m/Y') }}</time>
+                                                                <time  class="timeago" title="" datetime="">{{ $com->updated_at->format('H:i:s - d/m/Y') }}</time>
                                                             </a>
                                                         </span>
                                                         </div>
@@ -489,131 +491,150 @@
 
                                         <!-- Trả lời bình luận -->
                                         @foreach($com->replies as $key => $child)
-                                        <div class="ln-comment-reply">
-                                            @if($child->status == 0)
-                                            <div class="ln-comment-item">
-                                                <div class="ln-comment-user_ava">
-                                                    <img src="{{ asset('uploads/user/'.$child->user->avatar) }}">
-                                                </div>
-                                                <div class="ln-comment-info">
-                                                    <div class="ln-comment-wrapper">
-                                                        <div class="ln-comment-user_name">
-                                                            <a href="{{ url('member/'.$child->user->id) }}" class="strong">{{$child->user->name}}</a>
-                                                            @if($child->user->id == $user->id)
-                                                            <div class="ln-comment-user_badge comment-owner">
-                                                                <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
+                                            <div class="ln-comment-reply">
+                                                @if($child->status == 0)
+                                                <div class="ln-comment-item">
+                                                    <div class="ln-comment-user_ava">
+                                                        <img src="{{ asset('uploads/user/'.$child->user->avatar) }}">
+                                                    </div>
+                                                    <div class="ln-comment-info">
+                                                        <div class="ln-comment-wrapper">
+                                                            <div class="ln-comment-user_name">
+                                                                <a href="{{ route('member_wall', ['id' => $child->user->id] ) }}" class="strong">{{$child->user->name}}</a>
+                                                                @if($child->user->id == $user->id)
+                                                                <div class="ln-comment-user_badge comment-owner">
+                                                                    <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
+                                                                </div>
+                                                                @endif
                                                             </div>
-                                                            @endif
-                                                        </div>
-                                                        <div id="content-{{$child->id}}" class="ln-comment-content long-text">
-                                                            <p>{!! $child->content !!}<p>
-                                                            <div class="visible-toolkit">
-                                                                <span class="ln-comment-time" style="float: right;">
-                                                                    <a href="#">
-                                                                        <time  class="timeago" title="26-04-2022 10:14:53" datetime="">{{ $child->updated_at->format('H:i:s - d/m/Y') }}</time>
-                                                                    </a>
-                                                                </span>
+                                                            <div id="content-{{$child->id}}" class="ln-comment-content long-text">
+                                                                <p>{!! $child->content !!}<p>
+                                                                <div class="visible-toolkit">
+                                                                    <span class="ln-comment-time" style="float: right;">
+                                                                        <a href="#">
+                                                                            <time  class="timeago" title="" datetime="">{{ $child->updated_at->format('H:i:s - d/m/Y') }}</time>
+                                                                        </a>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div id="edit-{{$child->id}}" class="edit-ln-comment-content long-text" style="display: none;">
+                                                                <form class="comment_form" action="{{ route('updatecomment', [$child->id]) }}" method="POST">
+                                                                    @method('PUT')
+                                                                    @csrf
+                                                                    <textarea class="form-control" id="edit_comment_content_{{$child->id}}" name="content" rows="5" style="resize: none">{!! $child->content !!}</textarea>
+                                                                    <div class="comment_toolkit clear">
+                                                                        <input id="btn-comment" class="button comment-button" type="submit" value="Sửa">
+                                                                    </div>
+                                                                </form>
+                                                                <div class="visible-toolkit">
+                                                                    <span class="ln-comment-time" style="float: right;">
+                                                                        <a href="#">
+                                                                            <time  class="timeago" title="" datetime="">{{ $com->created_at->format('H:i:s - d/m/Y') }}</time>
+                                                                        </a>
+                                                                    </span>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div id="edit-{{$child->id}}" class="edit-ln-comment-content long-text" style="display: none;">
-                                                            <form class="comment_form" action="{{ route('updatecomment', [$child->id]) }}" method="POST">
+                                                    </div>
+                                                    <div class="ln-comment-menu" x-data="{ show: false }">
+                                                        <div onclick="$(this).next('div').slideToggle(200);return false;" id="toggleCmt" class="ln-comment-toolkit-icon" @click="show = !show">
+                                                            <i class="fas fa-angle-down"></i>
+                                                        </div>
+                                                        <div class="ln-comment-toolkit" x-show="show" @click.outside="show = false" style="display: none;">            
+                                                        @if(Auth::check())
+                                                            @if(Auth::user()->id == $child->user_id)
+                                                            <span onclick="formEditCommentChild{{$child->id}}()" class="ln-comment-toolkit-item span-edit"><i class="fas fa-edit"></i> Chỉnh sửa</span>
+                                                            <form action="{{route('deletecomment', [$child->id])}}" method="POST">
                                                                 @method('PUT')
                                                                 @csrf
-                                                                <textarea class="form-control" id="edit_comment_content_{{$child->id}}" name="content" rows="5" style="resize: none">{!! $child->content !!}</textarea>
-                                                                <div class="comment_toolkit clear">
-                                                                    <input id="btn-comment" class="button comment-button" type="submit" value="Sửa">
-                                                                </div>
-                                                            </form>
-                                                            <div class="visible-toolkit">
-                                                                <span class="ln-comment-time" style="float: right;">
-                                                                    <a href="#">
-                                                                        <time  class="timeago" title="26-04-2022 10:14:53" datetime="">{{ $com->created_at->format('H:i:s - d/m/Y') }}</time>
-                                                                    </a>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="ln-comment-menu" x-data="{ show: false }">
-                                                    <div onclick="$(this).next('div').slideToggle(200);return false;" id="toggleCmt" class="ln-comment-toolkit-icon" @click="show = !show">
-                                                        <i class="fas fa-angle-down"></i>
-                                                    </div>
-                                                    <div class="ln-comment-toolkit" x-show="show" @click.outside="show = false" style="display: none;">            
-                                                    @if(isset($nguoidung))
-                                                        @if(Auth::user()->id == $child->user_id)
-                                                        <span onclick="formEditCommentChild{{$child->id}}()" class="ln-comment-toolkit-item span-edit"><i class="fas fa-edit"></i> Chỉnh sửa</span>
-                                                        <form action="{{route('deletecomment', [$child->id])}}" method="POST">
-                                                            @method('PUT')
-                                                            @csrf
-                                                            <button onclick="return confirm('Bạn có chắc là muốn xóa bình luận này không?');" class="ln-comment-toolkit-item span-delete">
-                                                            <i class="fas fa-times"></i>
-                                                            Xóa
-                                                            </button>                                                        </form>
-                                                        @elseif(Auth::user()->id == $user->id)
-                                                        <form action="{{route('deletecomment', [$child->id])}}" method="POST">
-                                                            @method('PUT')
-                                                            @csrf
-                                                            <button onclick="return confirm('Bạn có chắc là muốn xóa bình luận này không?');" class="ln-comment-toolkit-item span-delete">
-                                                            <i class="fas fa-times"></i>
-                                                            Xóa
-                                                            </button>                                                        </form>
+                                                                <button onclick="return confirm('Bạn có chắc là muốn xóa bình luận này không?');" class="ln-comment-toolkit-item span-delete">
+                                                                <i class="fas fa-times"></i>
+                                                                Xóa
+                                                                </button>                                                        </form>
+                                                            @elseif(Auth::user()->id == $user->id)
+                                                            <form action="{{route('deletecomment', [$child->id])}}" method="POST">
+                                                                @method('PUT')
+                                                                @csrf
+                                                                <button onclick="return confirm('Bạn có chắc là muốn xóa bình luận này không?');" class="ln-comment-toolkit-item span-delete">
+                                                                <i class="fas fa-times"></i>
+                                                                Xóa
+                                                                </button>                                                        </form>
+                                                            @endif
                                                         @endif
-                                                    @endif
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            @else
-                                            <div class="ln-comment-item deleted">
-                                                <div class="ln-comment-user_ava">
-                                                    <img src="{{ asset('uploads/user/'.$child->user->avatar) }}">
-                                                </div>
-                                                <div class="ln-comment-info">
-                                                    <div class="ln-comment-wrapper">
-                                                        <div class="ln-comment-user_name">
-                                                            <a href="{{ url('member/'.$child->user->id) }}" class="strong">{{$child->user->name}}</a>
-                                                            @if($child->user->id == $user->id)
-                                                            <div class="ln-comment-user_badge comment-owner">
-                                                                <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
-                                                            </div>
-                                                            @endif
-                                                        </div>
-                                                        <div id="content-{{$child->id}}" class="ln-comment-content long-text">
-                                                            <p>{!! $child->content !!}<p>
-                                                            <div class="visible-toolkit">
-                                                                <span class="ln-comment-time" style="float: right;">
-                                                                    <a href="#">
-                                                                        <time  class="timeago" title="26-04-2022 10:14:53" datetime="">{{ $child->updated_at->format('H:i:s - d/m/Y') }}</time>
-                                                                    </a>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <div id="edit-{{$child->id}}" class="edit-ln-comment-content long-text" style="display: none;">
-                                                            <form class="comment_form" action="{{ route('updatecomment', [$child->id]) }}" method="POST">
-                                                                @method('PUT')
-                                                                @csrf
-                                                                <textarea class="form-control" id="edit_comment_content_{{$child->id}}" name="content" rows="5" style="resize: none">{!! $child->content !!}</textarea>
-                                                                <div class="comment_toolkit clear">
-                                                                    <input id="btn-comment" class="button comment-button" type="submit" value="Sửa">
+                                                @else
+                                                <div class="ln-comment-item deleted">
+                                                    <div class="ln-comment-user_ava">
+                                                        <img src="{{ asset('uploads/user/'.$child->user->avatar) }}">
+                                                    </div>
+                                                    <div class="ln-comment-info">
+                                                        <div class="ln-comment-wrapper">
+                                                            <div class="ln-comment-user_name">
+                                                                <a href="{{ route('member_wall', ['id' => $child->user->id] ) }}" class="strong">{{$child->user->name}}</a>
+                                                                @if($child->user->id == $user->id)
+                                                                <div class="ln-comment-user_badge comment-owner">
+                                                                    <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
                                                                 </div>
-                                                            </form>
-                                                            <div class="visible-toolkit">
-                                                                <span class="ln-comment-time" style="float: right;">
-                                                                    <a href="#">
-                                                                        <time  class="timeago" title="26-04-2022 10:14:53" datetime="">{{ $com->created_at->format('H:i:s - d/m/Y') }}</time>
-                                                                    </a>
-                                                                </span>
+                                                                @endif
+                                                            </div>
+                                                            <div id="content-{{$child->id}}" class="ln-comment-content long-text">
+                                                                <p>{!! $child->content !!}<p>
+                                                                <div class="visible-toolkit">
+                                                                    <span class="ln-comment-time" style="float: right;">
+                                                                        <a href="#">
+                                                                            <time  class="timeago" title="" datetime="">{{ $child->updated_at->format('H:i:s - d/m/Y') }}</time>
+                                                                        </a>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div id="edit-{{$child->id}}" class="edit-ln-comment-content long-text" style="display: none;">
+                                                                <form class="comment_form" action="{{ route('updatecomment', [$child->id]) }}" method="POST">
+                                                                    @method('PUT')
+                                                                    @csrf
+                                                                    <textarea class="form-control" id="edit_comment_content_{{$child->id}}" name="content" rows="5" style="resize: none">{!! $child->content !!}</textarea>
+                                                                    <div class="comment_toolkit clear">
+                                                                        <input id="btn-comment" class="button comment-button" type="submit" value="Sửa">
+                                                                    </div>
+                                                                </form>
+                                                                <div class="visible-toolkit">
+                                                                    <span class="ln-comment-time" style="float: right;">
+                                                                        <a href="#">
+                                                                            <time  class="timeago" title="" datetime="">{{ $com->created_at->format('H:i:s - d/m/Y') }}</time>
+                                                                        </a>
+                                                                    </span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endif
                                             </div>
-                                            @endif
-                                        </div>
+                                            <script type="text/javascript">
+                                                CKEDITOR.replace('edit_comment_content_{{$child->id}}');
+                                            </script>
+                                            
+                                            <script>
+                                                let isShow{{$child->id}} = true;
+                                                function formEditCommentChild{{$child->id}}() {
+                                                    if(isShow{{$child->id}}) {
+                                                        $('#content-{{ $child->id }}').hide();
+                                                        $('#edit-{{ $child->id }}').show();
+                                                        isShow{{$child->id}} = false;
+                                                    }
+                                                    else {
+                                                        $('#content-{{ $child->id }}').show();
+                                                        $('#edit-{{ $child->id }}').hide();
+                                                        isShow{{$child->id}} = true;
+                                                    }
+                                                }
+                                            </script>
+                                        @endforeach
                                         <script type="text/javascript">
-                                            CKEDITOR.replace('comment_reply_content_{{$com->id}}');
-                                            CKEDITOR.replace('edit_comment_content_{{$com->id}}');
-                                            CKEDITOR.replace('edit_comment_content_{{$child->id}}');
-                                        </script>
+                                                CKEDITOR.replace('comment_reply_content_{{$com->id}}');
+                                                CKEDITOR.replace('edit_comment_content_{{$com->id}}');
+                                            </script>
                                         <script>
                                             let isShow{{$com->id}} = true;
                                             function formEditComment{{$com->id}}() {
@@ -629,22 +650,6 @@
                                                 }
                                             }
                                         </script>
-                                        <script>
-                                            let isShow{{$child->id}} = true;
-                                            function formEditCommentChild{{$child->id}}() {
-                                                if(isShow{{$child->id}}) {
-                                                    $('#content-{{ $child->id }}').hide();
-                                                    $('#edit-{{ $child->id }}').show();
-                                                    isShow{{$child->id}} = false;
-                                                }
-                                                else {
-                                                    $('#content-{{ $child->id }}').show();
-                                                    $('#edit-{{ $child->id }}').hide();
-                                                    isShow{{$child->id}} = true;
-                                                }
-                                            }
-                                        </script>
-                                        @endforeach
                                     </div>
                                 @endforeach
                             </main>

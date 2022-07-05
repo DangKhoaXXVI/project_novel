@@ -11,25 +11,29 @@
             <!-------------Trang Cá Nhân------------------>
             @yield('member')
             <div class="container-fluid" id="main">
+                <div class="container">
+                    <div class="row">
+                        <!---------------------Slide------------------------->
+                        @yield('slide')
+                        <!---------------Bài viết--------------->
+                        @yield('topic')
+                        <!------------Chương Mới Nhất------------------->
+                        @yield('novel_new_chapter')
+                        <!---------Có thể bạn sẽ thích----------------->
+                        @yield('maybe')
+                        <!------------Truyện Mới Nhất------------------->
+                        @yield('content')
+                        <!---------Top truyện yêu thích----------------->
+                        @yield('favorite')
+                        <!---------Truyện Đã Hoàn Thành----------------->
+                        @yield('completed')
 
-                <!---------------------Slide------------------------->
-                @yield('slide')
-                <!---------------Bài viết--------------->
-                @yield('topic')
-                <!------------Chương Mới Nhất------------------->
-                <!-- ('novel_new_chapter) -->
-                <!------------Truyện Mới Nhất------------------->
-                @yield('content')
-                <!---------Truyện Đã Hoàn Thành----------------->
-                @yield('completed')
+                    </div>
+                </div>
             </div>
                 <!-------------Footer------------->
                 @include('layouts.footer')
         </section>
-
-
-
-
     </body>
 </html>
 

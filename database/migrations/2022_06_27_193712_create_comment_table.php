@@ -17,7 +17,7 @@ class CreateCommentTable extends Migration
             $table->id();
             $table->bigInteger('novel_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('comment_parent_id')->unsigned()->nullable()->default(0);
+            $table->bigInteger('comment_parent_id')->unsigned()->nullable();
             $table->text('content');
             $table->integer('status')->default(0);
             $table->timestamps();
