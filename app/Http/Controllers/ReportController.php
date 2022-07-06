@@ -59,4 +59,24 @@ class ReportController extends Controller
         $report->save();        
         return redirect()->back()->with('status', 'Quyết định ẩn truyện!');
     }
+
+    public function management_report_search() {
+
+        $keywords = $_GET['keywords'];
+        $keywords_convert = '';
+        if($keywords == "spam") {
+            $keywords_convert = 1;
+        } elseif ($keywords == "lỗi font") {
+            $keywords_convert = 2;
+        } elseif ($keywords == "sai nội dung") {
+            $keywords_convert = 3;
+        } elseif ($keywords == "nội dung không phù hợp") {
+            $keywords_convert = 4;
+        } else {
+            $keywords_convert = 5;
+        }
+        $reports = Report::where('reason', 'LIKE', '%'.$keywords_convert.'%')->get();
+        
+        return view('admin_cpanel.report.search_report')->with(compact('keywords', 'reports'));
+    }
 }

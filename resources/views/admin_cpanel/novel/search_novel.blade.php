@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($listnovel as $key => $novel)
+                    @forelse($novels as $key => $novel)
                         <tr class="intro-x">
                             <td class="w-40">
                                 <div class="flex">
@@ -92,7 +92,7 @@
                     @empty
                         <tr class="intro-x">
                             <td class="w-40"></td>
-                            <td>Chưa có truyện nào hết...</td>
+                            <td>Không tìm thấy truyện...</td>
                             <td class="text-center"></td>
                             <td class="text-center"></td>
                             <td class="text-center"></td>
@@ -106,9 +106,7 @@
         <!-- END: Data List -->       
     </div>
 <!-- BEGIN: Pagination -->
-    <div class="mt-4 text-center center-pagination">
-        {{ $listnovel->links() }}
-    </div>
+
  <!-- END: Pagination -->
 @endsection
             

@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($list_report as $key => $report)
+                    @forelse($reports as $key => $report)
                         <tr class="intro-x">
                             <td class="w-40">
                                 <div class="flex">
@@ -87,7 +87,7 @@
                     @empty
                         <tr class="intro-x">
                             <td class="w-40"></td>
-                            <td>Không có báo cáo nào hết...</td>
+                            <td>Không tìm thấy báo cáo...</td>
                             <td class="text-center"></td>
                             <td class="text-center"></td>
                             <td class="table-report__action w-56"></td>
@@ -99,9 +99,7 @@
         <!-- END: Data List -->       
     </div>
 <!-- BEGIN: Pagination -->
-    <div class="mt-4 text-center center-pagination">
-        {{ $list_report->links() }}
-    </div>
+
  <!-- END: Pagination -->
 @endsection
             

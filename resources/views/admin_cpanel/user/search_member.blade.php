@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($user as $key => $values)
+                    @forelse($member as $key => $values)
                         <tr class="intro-x">
                             <td class="w-40">
                                 <div class="flex">
@@ -88,7 +88,16 @@
                                 $('#changeRole{{ $values->id }}').submit();
                             }
                         </script>
-                    @endforeach
+                    @empty
+                        <tr class="intro-x">
+                            <td class="w-40"></td>
+                            <td>Không tìm thấy thành viên...</td>
+                            <td></td>
+                            <td></td>
+                            <td class="w-40"><td>
+                            <td class="table-report__action w-56"></td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -97,7 +106,7 @@
     </div>
 <!-- BEGIN: Pagination -->
     <div class="mt-4 text-center center-pagination">
-        {{ $user->links() }}
+        {{ $member->links() }}
     </div>
  <!-- END: Pagination -->
 @endsection

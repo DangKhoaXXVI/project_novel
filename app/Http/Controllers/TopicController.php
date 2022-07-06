@@ -141,4 +141,12 @@ class TopicController extends Controller
         
     }
 
+    public function management_topic_search() {
+
+        $keywords = $_GET['keywords'];
+        $topics = Topic::where('title', 'LIKE', '%'.$keywords.'%')->get();
+        
+        return view('admin_cpanel.topic.search_topic')->with(compact('keywords', 'topics'));
+    }
+
 }
