@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Rating;
 use App\Models\Favorite;
 use App\Models\Comment;
+use App\Models\Report;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -294,4 +295,7 @@ class UserController extends Controller
             return redirect('/admin/quan-ly/thanh-vien')->with('status', 'Đổi chức vụ thành công!');
         }
     }
+
+    
+
 }

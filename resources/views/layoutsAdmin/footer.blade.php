@@ -168,6 +168,12 @@
                 footer: '<a href="/log-in">Đăng nhập</a>'
             })
         }
+
+        function submitRemoveFavoriteList() {
+            $('#removeFormFavorite').submit();
+        }
+
+
     </script>
 
     <script>

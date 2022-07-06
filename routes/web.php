@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CommentTopicController;
 
 
@@ -70,6 +71,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/danh-gia-truyen', [UserController::class, 'rating'])->name('rating-novel');
     Route::post('/yeu-thich', [UserController::class, 'favorite'])->name('favorite');
+    Route::post('/bao-cao', [ReportController::class, 'report'])->name('report');
 
     Route::get('/danh-sach-yeu-thich', [UserController::class, 'favorite_page'])->name('favorite_page');
 
@@ -136,6 +138,12 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
     Route::get('/quan-ly/bai-viet', [TopicController::class, 'management_topic_index'])->name('topic_index');
 
     Route::get('/quan-ly/bai-viet/{topic_id}/doi-trang-thai', [TopicController::class, 'change_status'])->name('change_status');
+
+
+    Route::get('/quan-ly/bao-cao', [ReportController::class, 'management_report_index'])->name('report_index');
+    Route::post('/quan-ly/bao-cao/{report_id}/giu', [ReportController::class, 'management_report_keep'])->name('report_keep');
+    Route::post('/quan-ly/bao-cao/{report_id}/an-truyen', [ReportController::class, 'management_report_hide'])->name('report_hide');
+
 
 
 
