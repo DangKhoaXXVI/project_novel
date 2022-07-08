@@ -99,4 +99,12 @@ class CategoryController extends Controller
         return view('admin_cpanel.category.category_edit')->with(compact('category'));
     }
 
+    public function management_category_search() {
+
+        $keywords = $_GET['keywords'];
+        $categories = Category::where('categoryname', 'LIKE', '%'.$keywords.'%')->get();
+        
+        return view('admin_cpanel.category.search_category')->with(compact('keywords', 'categories'));
+    }
+
 }

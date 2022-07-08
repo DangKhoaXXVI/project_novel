@@ -112,4 +112,12 @@ class ChapterController extends Controller
         return view('admin_cpanel.chapter.chapter_edit')->with(compact('chapter'));
     }
 
+    public function management_chapter_search($novel_id) {
+        $novel = Novel::find($novel_id);
+        $keywords = $_GET['keywords'];
+        $chapters = Chapter::with('novel')->where('novel_id', $novel_id)->where('title', 'LIKE', '%'.$keywords.'%')->get();
+        
+        return view('admin_cpanel.chapter.search_chapter')->with(compact('keywords', 'chapters', 'novel'));
+    }
+
 }

@@ -107,6 +107,9 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
 
     Route::get('/quan-ly/truyen/them-truyen', [NovelController::class, 'management_create'])->name('novel_create');
 
+    Route::get('/quan-ly/truyen/tim-kiem', [NovelController::class, 'management_search'])->name('novel_search');
+
+
 
 
     Route::get('/quan-ly/truyen/{novel_id}/danh-sach-chuong', [ChapterController::class, 'management_chapter_index'])->name('chapter_index');
@@ -115,6 +118,9 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
 
     Route::get('/quan-ly/truyen/{novel_id}/danh-sach-chuong/them-chuong', [ChapterController::class, 'management_chapter_create'])->name('chapter_create');
 
+    Route::get('/quan-ly/truyen/{novel_id}/danh-sach-chuong/tim-kiem', [ChapterController::class, 'management_chapter_search'])->name('chapter_search');
+
+
 
 
     Route::get('/quan-ly/the-loai', [CategoryController::class, 'management_category_index'])->name('category_index');
@@ -122,6 +128,9 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
     Route::get('/quan-ly/the-loai/{id}/chinh-sua', [CategoryController::class, 'management_category_edit'])->name('category_edit');
 
     Route::get('/quan-ly/the-loain/them-the-loai', [CategoryController::class, 'management_category_create'])->name('category_create');
+
+    Route::get('/quan-ly/the-loai/tim-kiem', [CategoryController::class, 'management_category_search'])->name('category_search');
+
 
     
 
@@ -133,16 +142,25 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
 
     Route::get('/quan-ly/thanh-vien/{id}/doi-chuc-vu', [UserController::class, 'change_role'])->name('change_role');
 
+    Route::get('/quan-ly/thanh-vien/tim-kiem', [UserController::class, 'search'])->name('member_search');
+
+
 
 
     Route::get('/quan-ly/bai-viet', [TopicController::class, 'management_topic_index'])->name('topic_index');
 
     Route::get('/quan-ly/bai-viet/{topic_id}/doi-trang-thai', [TopicController::class, 'change_status'])->name('change_status');
 
+    Route::get('/quan-ly/bai-viet/tim-kiem', [TopicController::class, 'management_topic_search'])->name('topic_search');
+
+
+
 
     Route::get('/quan-ly/bao-cao', [ReportController::class, 'management_report_index'])->name('report_index');
     Route::post('/quan-ly/bao-cao/{report_id}/giu', [ReportController::class, 'management_report_keep'])->name('report_keep');
     Route::post('/quan-ly/bao-cao/{report_id}/an-truyen', [ReportController::class, 'management_report_hide'])->name('report_hide');
+    Route::get('/quan-ly/bao-cao/tim-kiem', [ReportController::class, 'management_report_search'])->name('report_search');
+
 
 
 
@@ -154,9 +172,9 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
 
     Route::resource('/the-loai', CategoryController::class);
 
-    Route::get('/truyen/{novel_id}/danh-sach-chuong', [NovelController::class, 'showListChapter'])->name('list_chapter');
+    // Route::get('/truyen/{novel_id}/danh-sach-chuong', [NovelController::class, 'showListChapter'])->name('list_chapter');
 
-    Route::get('/truyen/{novel_id}/danh-sach-chuong/them-chuong', [NovelController::class, 'showAddChapter'])->name('index_add_chapter');
+    // Route::get('/truyen/{novel_id}/danh-sach-chuong/them-chuong', [NovelController::class, 'showAddChapter'])->name('index_add_chapter');
 
 
 });

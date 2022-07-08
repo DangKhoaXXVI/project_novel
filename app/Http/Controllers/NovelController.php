@@ -213,4 +213,12 @@ class NovelController extends Controller
         return view('admin_cpanel.novel.novel_edit')->with(compact('novel', 'category', 'incategory'));
     }
 
+    public function management_search() {
+
+        $keywords = $_GET['keywords'];
+        $novels = Novel::where('novelname', 'LIKE', '%'.$keywords.'%')->orWhere('author', 'LIKE', '%'.$keywords.'%')->get();
+        
+        return view('admin_cpanel.novel.search_novel')->with(compact('keywords', 'novels'));
+    }
+
 }

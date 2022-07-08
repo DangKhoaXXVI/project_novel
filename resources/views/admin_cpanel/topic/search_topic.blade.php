@@ -37,7 +37,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($list_topic as $key => $topic)
+                    @forelse($topics as $key => $topic)
                         <tr class="intro-x">
                             <td class="w-40">
                                 <div class="flex">
@@ -118,7 +118,7 @@
                     @empty
                         <tr class="intro-x">
                             <td class="w-40"></td>
-                            <td></td>
+                            <td>Không tìm thấy bài viết</td>
                             <td class="text-center"></td>
                             <td class="text-center"></td>
                             <td class="text-center"></td>
@@ -132,9 +132,7 @@
         
     </div>
 <!-- BEGIN: Pagination -->
-    <div class="mt-4 text-center center-pagination">
-        {{ $list_topic->links() }}
-    </div>
+
  <!-- END: Pagination -->
 @endsection
             

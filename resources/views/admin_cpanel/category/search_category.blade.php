@@ -36,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($category as $key => $cate)
+                    @forelse($categories as $key => $cate)
                         <tr class="intro-x">
                             <td>{{ $cate->categoryname }}</td>
                             <td class="text-center">
@@ -62,7 +62,7 @@
                         </tr>
                     @empty
                         <tr class="intro-x">
-                            <td>Chưa có thể loại nào</td>
+                            <td>Không tìm thấy thể loại</td>
                             <td class="text-center"></td>
                             <td class="table-report__action w-56"></td>
                         </tr>
@@ -73,9 +73,6 @@
         <!-- END: Data List -->
     </div>
 <!-- BEGIN: Pagination -->
-    <div class="mt-4 text-center center-pagination">
-        {{ $category->links() }}
-    </div>
  <!-- END: Pagination -->
 @endsection
             

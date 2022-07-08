@@ -296,6 +296,14 @@ class UserController extends Controller
         }
     }
 
+    public function search() {
+
+        $keywords = $_GET['keywords'];
+        $member = User::where('name', 'LIKE', '%'.$keywords.'%')->get();
+        
+        return view('admin_cpanel.user.search_member')->with(compact('keywords', 'member'));
+    }
+
     
 
 }
