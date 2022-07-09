@@ -17,8 +17,6 @@ class CreateFavoriteTable extends Migration
             $table->id();
             $table->bigInteger('novel_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->timestamps();
-
         });
     }
 

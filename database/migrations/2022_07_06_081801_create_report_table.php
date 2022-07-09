@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRatingTable extends Migration
+class CreateReportTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateRatingTable extends Migration
      */
     public function up()
     {
-        Schema::create('rating', function (Blueprint $table) {
+        Schema::create('report', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('novel_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->integer('rating_star')->unsigned();
+            $table->bigInteger('novel_id')->unsigned();
+            $table->integer('reason');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('approved_at')->nullable();
         });
     }
 
@@ -28,6 +30,6 @@ class CreateRatingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rating');
+        Schema::dropIfExists('report');
     }
 }
