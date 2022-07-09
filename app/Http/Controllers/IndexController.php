@@ -102,7 +102,7 @@ class IndexController extends Controller
         
         // Người đăng - Truyện đã đăng
         $user = User::with('novel')->where('id', $novel->user_id)->first();
-        $novel_uploaded = Novel::where('user_id', $user->id)->whereNotIn('id', [$novel->id])->inRandomOrder()->take(4)->get();
+        $novel_uploaded = Novel::where('user_id', $user->id)->where('status', 0)->whereNotIn('id', [$novel->id])->inRandomOrder()->take(4)->get();
 
         // Top truyện nổi bật
         $top4_novel = Novel::orderBy('novel_views', 'DESC')->where('status', 0)->take(4)->get();
