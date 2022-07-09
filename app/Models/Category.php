@@ -15,8 +15,4 @@ class Category extends Model
     ];
     protected $primaryKey = 'id';
     protected $table = 'category';
-
-    public function novel() {
-        return $this->belongTo(Novel::class);
-    }
 }

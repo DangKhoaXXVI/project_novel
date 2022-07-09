@@ -47,13 +47,18 @@
 }
 
 .main_all {
-    background-color: var(--lightest);
+    background-color: var(--lightest)!important;
 }
 
 
 footer {
     background-color: #333; 
     padding: 30px 10px;
+}
+
+
+.right-footer a:hover {
+    text-decoration: none;
 }
 
 .right-footer {
@@ -69,23 +74,39 @@ footer {
     margin-right: 20px; 
 }
 
+.profile-feature {
+    border-color: var(--border-cover)!important;
+    background-color: var(--background-cover)!important;
+}
+
+.profile-nav {
+    background-color: var(--white)!important;
+}
+
+.profile-intro_name {
+    color: var(--darkest)!important;
+}
+
+.profile-info-item .info-name {
+    color: var(--icon-infor)!important;
+}
 
 .toggle {
     cursor: pointer;
     user-select: none;
-    color: var(--white);
+    color: var(--black);
 }
 
 .toggle::before {
     content: '\f186';
     font-family: fontAwesome;
     padding: 8px; 
-    background: var(--black);
+    /* background: var(--black); */
     margin-right: 10px;
-    color: var(--white);
+    /* color: var(--white); */
     font-size: 1.2em;
-    border: 1px solid var(--white);
-    box-shadow: 0 5px 10px var(--shadow);
+    /* border: 1px solid var(--white);
+    box-shadow: 0 5px 10px var(--shadow); */
 }
 
 .toggle.active::before {
@@ -93,6 +114,10 @@ footer {
 }
 
 .dark {
+    --icon-infor: rgba(255, 255, 255, 0.452);
+    --darkest: #ffffff;
+    --background-cover: rgba(7, 7, 7, 0.9);
+    --border-cover: #202020 #2c2c2c rgba(66, 66, 66, 0.8);
     --white: #333;
     --lightest: #111;
     --lightgreen: #fff;
@@ -103,4 +128,10 @@ footer {
     --borderbottom: #2a2a2a;
     --seriesgerne: #333;
     --shadow: rgba(255, 255, 255, 0.2);
+    --background-maincontent: #cecece12;
+    --chapter-theme: #222;
+    --comment-background: #2a2a2a;
+    --rank-number: rgba(102, 102, 102, 0.7);
+    --top3-series-title: rgba(255, 255, 255, 0.952);
+    --series-title: rgba(231, 231, 231, 0.856);
 }

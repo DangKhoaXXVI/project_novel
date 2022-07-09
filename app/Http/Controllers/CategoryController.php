@@ -6,37 +6,23 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Chapter;
 use App\Models\Novel;
-use App\Models\TypeNovel;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $category = Category::orderBy('id', 'DESC')->get();
-        return view('admin_cpanel.category.index')->with(compact('category'));
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin_cpanel.category.create');
-    }
+    // public function index()
+    // {
+    //     $category = Category::orderBy('id', 'DESC')->get();
+    //     return view('admin_cpanel.category.index')->with(compact('category'));
+    // }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+    // public function create()
+    // {
+    //     return view('admin_cpanel.category.create');
+    // }
+
+
     public function store(Request $request)
     {
         $data = $request->validate(
@@ -57,39 +43,17 @@ class CategoryController extends Controller
         $category->slug_category = $data['slug_category'];
         $category->status = $data['status'];
         $category->save();
-        return redirect()->back()->with('status', 'Thêm thể loại thành công!');
+        return redirect()->route('category_index')->with('status', 'Thêm thể loại thành công!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $category = Category::find($id);
-        return view('admin_cpanel.category.edit')->with(compact('category'));
-    }
+    // public function edit($id)
+    // {
+    //     $category = Category::find($id);
+    //     return view('admin_cpanel.category.edit')->with(compact('category'));
+    // }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $data = $request->validate(
@@ -108,18 +72,39 @@ class CategoryController extends Controller
         $category->slug_category = $data['slug_category'];
         $category->status = $data['status'];
         $category->save();
-        return redirect()->back()->with('status', 'Cập nhật thể loại thành công!');
+        return redirect()->route('category_index')->with('status', 'Cập nhật thể loại thành công!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         Category::find($id)->delete();
         return redirect()->back()->with('status', 'Xóa thể loại thành công!');
     }
+
+    public function management_category_index()
+    {
+        $category = Category::orderBy('id', 'DESC')->paginate(10);
+        return view('admin_cpanel.category.category_index')->with(compact('category'));
+    }
+
+    public function management_category_create()
+    {
+        return view('admin_cpanel.category.category_create');
+    }
+
+    public function management_category_edit($id)
+    {
+        $category = Category::find($id);
+        return view('admin_cpanel.category.category_edit')->with(compact('category'));
+    }
+
+    public function management_category_search() {
+
+        $keywords = $_GET['keywords'];
+        $categories = Category::where('categoryname', 'LIKE', '%'.$keywords.'%')->get();
+        
+        return view('admin_cpanel.category.search_category')->with(compact('keywords', 'categories'));
+    }
+
 }

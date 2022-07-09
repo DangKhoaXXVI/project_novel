@@ -1,44 +1,23 @@
 @extends('../welcome')
+
+@section('title')
+    {{ "Danh sách truyện" }}
+@endsection
+
 @section('content')
 
-<style type="text/css"> 
-
-a.page-link{ 
-    transition: .4s; 
-} 
-
-.page-link {
-    color: #333;
-}
-
-a.page-link:hover { 
-    color: white !important; background: #799a19 !important; 
-}  
-
-.pagination>.active>span {
-    background-color: #749a19!important;
-    border-color: #749a19!important;
-    color: #fff!important;
-}
-
-nav {
-    display: inline-block;
-}
-
-</style>
-
-<div class="container-fluid" id="mainpart">
+<div class="container-fluid p-40" id="mainpart">
     <div class="container">
         <div class="b_title"><strong>Danh Sách Tất Cả Truyện</strong></div>
             <div class="gridlist">
                 @foreach($new_novel as $key => $value)
                 <div class="glitem">
-                    <a href="{{url('novel/'.$value->slug_novelname)}}">
+                    <a href="{{route('novel', ['slug' => $value->slug_novelname] )}}">
                         <div class="image">
                             <img class="lazy loaded" src="{{ asset('uploads/novel/'.$value->image) }}" alt="{{$value->novelname}}" width="100%" height="100%" data-was-processed="true">
                         </div>
                     </a>
-                    <a class="series-name" href="{{url('novel/'.$value->slug_novelname)}}">{{$value->novelname}}</a>
+                    <a class="series-name" href="{{route('novel', ['slug' => $value->slug_novelname] )}}">{{$value->novelname}}</a>
                 </div>
                 @endforeach
             </div>
@@ -48,7 +27,7 @@ nav {
 
 
 
-<div class="text-center">
+<div class="text-center center-pagination">
     {{ $new_novel->links() }}
 </div>
 
