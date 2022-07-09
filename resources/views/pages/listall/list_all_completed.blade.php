@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="container-fluid p-40" id="mainpart">
+<div class="container-fluid p-40" id="mainpart" style="margin-bottom: 460px;">
     <div class="container">
         <div class="b_title"><strong>Danh Sách Tất Cả Truyện Đã Hoàn Thành</strong></div>
             <div class="gridlist">

@@ -291,7 +291,7 @@
                                                         <a href="{{ route('member_wall', ['id' => $child->user->id] ) }}" class="strong">{{$child->user->name}}</a>
                                                         @if($child->user->id == $user->id)
                                                         <div class="ln-comment-user_badge comment-owner">
-                                                            <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
+                                                            <i class="fas fa-flag" style="color: white;"></i> Chủ post
                                                         </div>
                                                         @endif
                                                     </div>
@@ -327,9 +327,9 @@
                                         </div>
                                     @endif
                                 </div>
-                                <script type="text/javascript">
+                                <!-- <script type="text/javascript">
                                     CKEDITOR.replace('edit_comment_content_{{$child->id}}');
-                                </script>
+                                </script> -->
                                 <script>
                                     let isShow{{$child->id}} = true;
                                     function formEditCommentChild{{$child->id}}() {
@@ -346,10 +346,10 @@
                                     }
                                 </script>
                                 @endforeach
-                                <script type="text/javascript">
+                                <!-- <script type="text/javascript">
                                     CKEDITOR.replace('comment_reply_content_{{$com->id}}');
                                     CKEDITOR.replace('edit_comment_content_{{$com->id}}');
-                                </script>
+                                </script> -->
                                 <script>
                                     let isShow{{$com->id}} = true;
                                     function formEditComment{{$com->id}}() {

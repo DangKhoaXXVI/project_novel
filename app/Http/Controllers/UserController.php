@@ -304,6 +304,22 @@ class UserController extends Controller
         return view('admin_cpanel.user.search_member')->with(compact('keywords', 'member'));
     }
 
+    public function change_member_status($id) {
+
+        $user = User::find($id);
+        if($user->status == 0) {
+            $user->status = 1;
+            $user->save();
+            return redirect('/admin/quan-ly/thanh-vien')->with('status', 'Đổi trạng thái thành công!');
+        }
+        if($user->status == 1) {
+            $user->status = 0;
+            $user->save();
+            return redirect('/admin/quan-ly/thanh-vien')->with('status', 'Đổi trạng thái thành công!');
+        }
+        
+    }
+
     
 
 }

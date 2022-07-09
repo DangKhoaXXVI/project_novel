@@ -32,7 +32,7 @@
                     <tr>
                         <th class="whitespace-nowrap">TÊN THỂ LOẠI</th>
                         <th class="text-center whitespace-nowrap">TRẠNG THÁI</th>
-                        <th class="text-center whitespace-nowrap">CHỨC NĂNG</th>
+                        <th class="text-center whitespace-nowrap">HÀNH ĐỘNG</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -142,6 +142,8 @@ Route::prefix('admin')->middleware('checkadmin','auth')->group(function () {
 
     Route::get('/quan-ly/thanh-vien/{id}/doi-chuc-vu', [UserController::class, 'change_role'])->name('change_role');
 
+    Route::get('/quan-ly/thanh-vien/{id}/doi-trang-thai', [UserController::class, 'change_member_status'])->name('change_member_status');
+
     Route::get('/quan-ly/thanh-vien/tim-kiem', [UserController::class, 'search'])->name('member_search');
 
 

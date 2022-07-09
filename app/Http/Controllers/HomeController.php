@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\InCategory;
 use App\Models\Novel;
+use App\Models\Report;
 use App\Models\Chapter;
 use App\Models\User;
 use Carbon\Carbon;
@@ -31,6 +32,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.management');
+        $novel = Novel::get()->count();
+        $novel_views = Novel::sum('novel_views');
+        $chapter = Chapter::get()->count();
+        $report = Report::get()->count();
+        return view('admin.management')->with(compact('novel', 'report', 'novel_views', 'chapter'));
     }
 }

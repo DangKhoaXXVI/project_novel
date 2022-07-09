@@ -33,7 +33,7 @@
                         <th class="text-center whitespace-nowrap">THỜI GIAN ĐĂNG</th>
                         <th class="text-center whitespace-nowrap">LẦN CUỐI CẬP NHẬT</th>
                         <th class="text-center whitespace-nowrap">TRẠNG THÁI</th>
-                        <th class="text-center whitespace-nowrap">CHỨC NĂNG</th>
+                        <th class="text-center whitespace-nowrap">HÀNH ĐỘNG</th>
                     </tr>
                 </thead>
                 <tbody>

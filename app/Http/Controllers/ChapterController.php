@@ -83,7 +83,7 @@ class ChapterController extends Controller
         $chapter->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
         $chapter->save();
-        return redirect()->route('chapter_index', ['novel_id' => $request->novel_id])->with('status', 'Cập nhật chương thành công!');
+        return redirect()->route('chapter_index', ['novel_id' => $chapter->novel_id])->with('status', 'Cập nhật chương thành công!');
     }
 
 

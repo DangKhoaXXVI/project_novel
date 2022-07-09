@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid" id="mainpart">
+<div class="container-fluid" id="mainpart" style="margin-bottom: 200px;">
     <div class="container">
         <div class="b_title"><strong><i class="far fa-newspaper"></i> Danh sách bài viết</strong></div>
         <div>

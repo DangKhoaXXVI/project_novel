@@ -24,7 +24,6 @@
         <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_green.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
         
-        <script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
         <style>
             a {
                 background-color: transparent;

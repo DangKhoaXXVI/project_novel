@@ -3,8 +3,7 @@
                     <!-- BEGIN: Breadcrumb -->
                     <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Trang quản lý</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Thống kê</li>
+                            <li class="breadcrumb-item"><a>Trang quản lý</a></li>
                         </ol>
                     </nav>
                     <!-- END: Breadcrumb -->
