@@ -36,6 +36,6 @@ class HomeController extends Controller
         $novel_views = Novel::sum('novel_views');
         $chapter = Chapter::get()->count();
         $report = Report::get()->count();
-        return view('admin.management')->with(compact('novel', 'report', 'novel_views', 'chapter'));
+        return view('admin_cpanel.dashboard.dashboard_index')->with(compact('novel', 'report', 'novel_views', 'chapter'));
     }
 }
