@@ -54,7 +54,7 @@
                                         </a>
                                         <a class="dropdown-item" href="{{ route('member_wall', ['id' => Auth::user()->id ] ) }}">
                                             <i class="fa fa-btn fa-user mr-2 w-4 h-4 text-center"></i>
-                                            Tài khoản
+                                            Trang cá nhân
                                         </a>
                                         <a class="dropdown-item" href="{{ route('favorite_page') }}">
                                             <i class="fas fa-heart mr-2 w-4 h-4 text-center" style="font-weight: 900!important;"></i>
@@ -71,7 +71,7 @@
                                         </a>
                                         <a class="dropdown-item" href="{{ route('member_wall', ['id' => Auth::user()->id ] ) }}">
                                             <i class="fa fa-btn fa-user mr-2 w-4 h-4 text-center"></i>
-                                            Tài khoản
+                                            Trang cá nhân
                                         </a>
                                         <a class="dropdown-item" href="{{ route('favorite_page') }}">
                                             <i class="fas fa-heart mr-2 w-4 h-4 text-center" style="font-weight: 900!important;"></i>

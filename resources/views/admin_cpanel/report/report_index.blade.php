@@ -31,7 +31,7 @@
                         <th class="whitespace-nowrap">TÊN TRUYỆN</th>
                         <th class="text-center whitespace-nowrap">LÝ DO BÁO CÁO</th>
                         <th class="text-center whitespace-nowrap">NGƯỜI BÁO CÁO</th>
-                        <th class="text-center whitespace-nowrap">CHỨC NĂNG</th>
+                        <th class="text-center whitespace-nowrap">HÀNH ĐỘNG</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,10 +56,8 @@
                                     <a class="topic_type">Lỗi font</a>
                                 @elseif($report->reason == 3)
                                     <a class="topic_type">Sai nội dung</a>
-                                @elseif($report->reason == 4)
-                                    <a class="topic_type">Nội dung không phù hợp</a>
                                 @else
-                                    <a class="topic_type">Khác</a>
+                                    <a class="topic_type">Nội dung không phù hợp</a>
                                 @endif
                             </td>
                             <td class="text-center">
@@ -71,7 +69,7 @@
                                         @csrf
                                         <input type="hidden" name="novel_id" value="{{ $report->novel->id }}"></input>
                                         <button>
-                                            <a class="flex items-center mr-3 text-primary" href=""> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Giữ </a>
+                                            <a class="flex items-center mr-3 text-primary" href=""> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Giữ truyện </a>
                                         </button>
                                     </form>
                                     <form action="{{ route('report_hide', ['report_id' => $report->id]) }}" method="POST">

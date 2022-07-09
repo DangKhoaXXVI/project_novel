@@ -36,7 +36,7 @@
                     </div>
                     <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Tóm tắt</label>
-                        <textarea class="form-control" id="summary_content" name="summary" rows="5" style="resize: none"></textarea>
+                        <textarea class="form-control" id="summary_content" name="summary" rows="10" style="resize: none"></textarea>
                     </div>
                     <div class="mt-3">
                         <label for="crud-form-1" class="form-label">Thể loại</label></br>

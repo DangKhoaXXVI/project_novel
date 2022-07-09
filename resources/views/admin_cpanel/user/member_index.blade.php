@@ -33,7 +33,8 @@
                         <th class="whitespace-nowrap">SỞ THÍCH</th>
                         <th class="text-center whitespace-nowrap">NGÀY SINH</th>
                         <th class="text-center whitespace-nowrap">CHỨC VỤ</th>
-                        <th class="text-center whitespace-nowrap">CHỨC NĂNG</th>
+                        <th class="text-center whitespace-nowrap">TRẠNG THÁI</th>
+                        <th class="text-center whitespace-nowrap">HÀNH ĐỘNG</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,19 +66,42 @@
                                     <div class="flex items-center justify-center text-primary"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Thành viên </div>
                                 @endif
                             </td>
+                            <td class="w-40 text-center">
+                                @if($values->status==0)
+                                    <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Kích hoạt </div>
+                                @else
+                                    <div class="flex items-center justify-center text-danger"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Không kích hoạt </div>
+                                @endif
+                            </td>
                             <td class="table-report__action w-56">
                                 @if($values->role == 0)
                                 <form id="changeRole{{ $values->id }}" method="GET" action="{{ route('change_role',['id' => $values->id]) }}">
-                                    <div class="form-check form-switch switch-hide">
+                                    <div class="form-check form-switch" style="margin-left: 10px;">
                                         <input id="checkbox-switch-7" class="form-check-input" type="checkbox" onclick="submitChangeRole{{ $values->id }}()">
                                         <label class="form-check-label" for="checkbox-switch-7">Quản trị viên</label>
                                     </div>
                                 </form>
                                 @else
                                 <form id="changeRole{{ $values->id }}" method="GET" action="{{ route('change_role',['id' => $values->id]) }}">
-                                    <div class="form-check form-switch switch-hide">
+                                    <div class="form-check form-switch" style="margin-left: 10px;">
                                         <input id="checkbox-switch-7" class="form-check-input" type="checkbox" checked onclick="submitChangeRole{{ $values->id }}()">
                                         <label class="form-check-label" for="checkbox-switch-7">Quản trị viên</label>
+                                    </div>
+                                </form>
+                                @endif
+
+                                @if($values->status == 0)
+                                <form id="changeStatus{{ $values->id }}" method="GET" action="{{ route('change_member_status',['id' => $values->id]) }}">
+                                    <div class="form-check form-switch mt-2" style="margin-left: 10px;">
+                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" checked onclick="submitChangeStatus{{ $values->id }}()">
+                                        <label class="form-check-label" for="checkbox-switch-7">Kích hoạt tài khoản</label>
+                                    </div>
+                                </form>
+                                @else
+                                <form id="changeStatus{{ $values->id }}" method="GET" action="{{ route('change_member_status',['id' => $values->id]) }}">
+                                    <div class="form-check form-switch mt-2" style="margin-left: 10px;">
+                                        <input id="checkbox-switch-7" class="form-check-input" type="checkbox" onclick="submitChangeStatus{{ $values->id }}()">
+                                        <label class="form-check-label" for="checkbox-switch-7">Kích hoạt tài khoản</label>
                                     </div>
                                 </form>
                                 @endif
@@ -86,6 +110,10 @@
                         <script>
                             function submitChangeRole{{ $values->id }}() {
                                 $('#changeRole{{ $values->id }}').submit();
+                            }
+
+                            function submitChangeStatus{{ $values->id }}() {
+                                $('#changeStatus{{ $values->id }}').submit();
                             }
                         </script>
                     @endforeach

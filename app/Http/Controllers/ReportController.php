@@ -64,16 +64,14 @@ class ReportController extends Controller
 
         $keywords = $_GET['keywords'];
         $keywords_convert = '';
-        if($keywords == "spam") {
+        if($keywords == "spam" || $keywords == "Spam") {
             $keywords_convert = 1;
-        } elseif ($keywords == "lỗi font") {
+        } elseif ($keywords == "lỗi font" || $keywords == "Lỗi font") {
             $keywords_convert = 2;
-        } elseif ($keywords == "sai nội dung") {
+        } elseif ($keywords == "sai nội dung" || $keywords == "Sai nội dung") {
             $keywords_convert = 3;
-        } elseif ($keywords == "nội dung không phù hợp") {
+        } elseif ($keywords == "nội dung không phù hợp" || $keywords == "Nội dung không phù hợp") {
             $keywords_convert = 4;
-        } else {
-            $keywords_convert = 5;
         }
         $reports = Report::where('reason', 'LIKE', '%'.$keywords_convert.'%')->get();
         
