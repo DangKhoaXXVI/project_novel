@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container p-40">
+    <div class="container p-40" style="margin-bottom: 460px;">
         <div class="b_title"><strong>Kết quả tìm kiếm: {{ $keywords }}</strong></div>
         <div class="gridlist">
             @php

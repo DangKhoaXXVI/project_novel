@@ -34,17 +34,17 @@
                                     Sửa thông tin
                                 </button>
                             @else
-                                <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#">
+                                <!-- <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#">
                                     <i class="fas fa-edit" style="font-size: 20px;"></i>
                                     Liên lạc
-                                </button>
+                                </button> -->
                             @endif
                         
                         @else
-                                <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#">
+                                <!-- <button type="button" class="button to-contact button-green" data-toggle="modal" data-target="#">
                                     <i class="fas fa-edit" style="font-size: 20px;"></i>
                                     Liên lạc
-                                </button>
+                                </button> -->
                         @endif
                         <!------------------------------- Dialog ------------------------------>
 
@@ -96,10 +96,10 @@
                                                     
 
                                                     <div class="field has-icon-left">
-                                                        <label class="label" for="2565c-name">Tên</label>
+                                                        <label class="label" >Tên</label>
                                                         <div class="control">
                                                             <input name="name" placeholder="Tên" autocomplete="name nickname username" type="text" class="input" value="{{ $member->name }}">
-                                                            <label class="icon icon-left" for="2565c-name">
+                                                            <label class="icon icon-left" >
                                                                 <div class="Basic___TooltipArea-sc-hic7b9-7 jQhXRe">
                                                                     <i class="fa-solid fa-user"></i>
                                                                 </div>
@@ -108,10 +108,10 @@
                                                     </div>
 
                                                     <div class="field has-icon-left">
-                                                        <label class="label" for="2565c-name">Ngày sinh</label>
+                                                        <label class="label" >Ngày sinh</label>
                                                         <div class="control">
                                                             <input name="birthday" placeholder="Ngày sinh" id="birthday-pk" type="text" class="input" value="{{ $member->birthday }}">
-                                                            <label class="icon icon-left" for="2565c-name">
+                                                            <label class="icon icon-left" >
                                                                 <div class="Basic___TooltipArea-sc-hic7b9-7 jQhXRe">
                                                                     <i class="fa-solid fa-cake-candles"></i>
                                                                 </div>
@@ -120,10 +120,10 @@
                                                     </div>
 
                                                     <div class="field has-icon-left">
-                                                        <label class="lable" for="2565c-name">Sở thích</label>
+                                                        <label class="lable" >Sở thích</label>
                                                         <div class="control">
                                                             <input name="favorite" placeholder="Sở thích" autocomplete="name nickname username"  type="text" class="input" value="{{ $member->favorite }}">
-                                                            <label class="icon icon-left" for="2565c-name">
+                                                            <label class="icon icon-left" >
                                                                 <div class="Basic___TooltipArea-sc-hic7b9-7 jQhXRe">
                                                                     <i class="fa-solid fa-heart"></i>
                                                                 </div>
@@ -132,10 +132,10 @@
                                                     </div>
 
                                                     <div class="field has-icon-left">
-                                                        <label class="label" for="2565c-name">Giới thiệu về bản thân</label>
+                                                        <label class="label" >Giới thiệu về bản thân</label>
                                                         <div class="control">
                                                             <input name="about" placeholder="Giới thiệu về bản thân" autocomplete="name nickname username" type="text" class="input" value="{{ $member->about }}">
-                                                            <label class="icon icon-left" for="2565c-name">
+                                                            <label class="icon icon-left" >
                                                                 <div class="Basic___TooltipArea-sc-hic7b9-7 jQhXRe">
                                                                     <i class="fa-solid fa-address-card"></i>
                                                                 </div>
@@ -160,15 +160,17 @@
                                 </div>
                             </div>
                         </div>
+                         <!------------------------------- End Dialog ------------------------------>
+
                     </div>
                     <div class="profile-intro">
                         <h3 class="profile-intro_name">
                             {{ $member->name }}
                         </h3>
                         @if($member->role == 1)
-                            <span class="profile-intro_role role-mem">Admin</span>
+                            <span class="profile-intro_role role-mem">Quản trị viên</span>
                         @else
-                            <span class="profile-intro_role role-mem">Member</span>
+                            <span class="profile-intro_role role-mem">Thành viên</span>
                         @endif
                     </div>
                 </div>
@@ -220,19 +222,24 @@
                     $count = count($novel_uploaded);
                 @endphp
                 @if($count > 0)
-                <div class="b_title"><strong>Truyện đã đăng</strong></div>
-                <div class="gridlist">
-                    @foreach($novel_uploaded as $key => $value)
-                    <div class="glitem">
-                        <a href="{{ route('novel', ['slug' => $value->slug_novelname] ) }}">
-                            <div class="image">
-                                <img class="lazy loaded" src="{{ asset('uploads/novel/'.$value->image) }}" alt="{{$value->novelname}}" width="100%" height="100%" data-was-processed="true">
-                            </div>
-                        </a>
-                        <a class="series-name" href="{{ route('novel', ['slug' => $value->slug_novelname] ) }}">{{$value->novelname}}</a>
+                    <div class="b_title"><strong>Truyện đã đăng</strong></div>
+                    <div class="gridlist">
+                        @foreach($novel_uploaded as $key => $value)
+                        <div class="glitem">
+                            <a href="{{ route('novel', ['slug' => $value->slug_novelname] ) }}">
+                                <div class="image">
+                                    <img class="lazy loaded" src="{{ asset('uploads/novel/'.$value->image) }}" alt="{{$value->novelname}}" width="100%" height="100%" data-was-processed="true">
+                                </div>
+                            </a>
+                            <a class="series-name" href="{{ route('novel', ['slug' => $value->slug_novelname] ) }}">{{$value->novelname}}</a>
+                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
-                </div>
+                @else
+                    <div class="b_title"><strong>Truyện đã đăng</strong></div>
+                    <div class="gridlist">
+                       <p style="color: var(--black);">Tài khoản chưa đăng truyện nào...</p>
+                    </div>
                 @endif
             </div>
         </div>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\TypeNovel;
 use App\Models\Novel;
 use App\Models\Category;
 use App\Models\InCategory;
@@ -16,15 +15,14 @@ class NovelController extends Controller
 
     // public function index()
     // {
-    //     $listnovel = Novel::with('typenovel', 'belongstomanycategory')->orderBy('id', 'DESC')->get();
+    //     $listnovel = Novel::with('belongstomanycategory')->orderBy('id', 'DESC')->get();
     //     return view('admin_cpanel.novel.index')->with(compact('listnovel'));
     // }
 
     // public function create()
     // {
     //     $category = Category::orderBy('id', 'DESC')->get();
-    //     $type = TypeNovel::orderBy('id', 'DESC')->get();
-    //     return view('admin_cpanel.novel.create')->with(compact('type', 'category'));
+    //     return view('admin_cpanel.novel.create')->with(compact('category'));
     // }
 
     public function store(Request $request)
@@ -36,7 +34,6 @@ class NovelController extends Controller
                 'author' => 'required|max:255',
                 'slug_author' => 'required|max:255',
                 'summary' =>  'required',
-                'type' => 'required',
                 'category' => 'required',
                 'state' => 'required',
                 'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100, min_height=100, max_width=3000, max_height=3000',
@@ -50,6 +47,7 @@ class NovelController extends Controller
                 'author.required' => 'Phải có tên tác giả truyện!',
                 'slug_author.required' => 'Phải có slug tác giả!',
                 'summary.required' => 'Phải có tóm tắt truyện!',
+                'category.required' => 'Truyện phải có ít nhất 1 thể loại!',
                 'image.required' => 'Phải có ảnh bìa truyện!',
             ]
         );
@@ -60,7 +58,6 @@ class NovelController extends Controller
         $novel->author = $data['author'];
         $novel->slug_author = $data['slug_author'];
         $novel->summary = $data['summary'];
-        $novel->type_id = $data['type'];
         $novel->state = $data['state'];
         $novel->status = $data['status'];
 
@@ -96,10 +93,9 @@ class NovelController extends Controller
 
     //     $incategory = $novel->belongstomanycategory;
 
-    //     $type = TypeNovel::orderBy('id', 'DESC')->get();
     //     $category = Category::orderBy('id', 'DESC')->get();
 
-    //     return view('admin_cpanel.novel.edit')->with(compact('novel', 'type', 'category', 'incategory'));
+    //     return view('admin_cpanel.novel.edit')->with(compact('novel', 'category', 'incategory'));
     // }
 
 
@@ -112,7 +108,6 @@ class NovelController extends Controller
                 'author' => 'required|max:255',
                 'slug_author' => 'required|max:255',
                 'summary' =>  'required',
-                'type' => 'required',
                 'category' => 'required',
                 'state' => 'required',
                 'status' => 'required',
@@ -123,6 +118,7 @@ class NovelController extends Controller
                 'author.required' => 'Phải có tên tác giả truyện!',
                 'slug_author.required' => 'Phải có slug tác giả!',
                 'summary.required' => 'Phải có tóm tắt truyện!',
+                'category.required' => 'Truyện phải có ít nhất 1 thể loại!',
             ]
         );
         $novel = Novel::find($id);
@@ -131,7 +127,6 @@ class NovelController extends Controller
         $novel->author = $data['author'];
         $novel->slug_author = $data['slug_author'];
         $novel->summary = $data['summary'];
-        $novel->type_id = $data['type'];
         $novel->state = $data['state'];
         $novel->status = $data['status'];
 
@@ -195,7 +190,7 @@ class NovelController extends Controller
 
     public function management_index()
     {
-        $listnovel = Novel::with('typenovel', 'belongstomanycategory')->orderBy('id', 'DESC')->get();
+        $listnovel = Novel::with('belongstomanycategory')->orderBy('id', 'DESC')->paginate(10);
         return view('admin_cpanel.novel.novel_index')->with(compact('listnovel'));
     }
 
@@ -204,8 +199,7 @@ class NovelController extends Controller
     public function management_create()
     {
         $category = Category::orderBy('id', 'DESC')->get();
-        $type = TypeNovel::orderBy('id', 'DESC')->get();
-        return view('admin_cpanel.novel.novel_create')->with(compact('type', 'category'));
+        return view('admin_cpanel.novel.novel_create')->with(compact('category'));
     }
 
     public function management_edit($id)
@@ -214,10 +208,17 @@ class NovelController extends Controller
 
         $incategory = $novel->belongstomanycategory;
 
-        $type = TypeNovel::orderBy('id', 'DESC')->get();
         $category = Category::orderBy('id', 'DESC')->get();
 
-        return view('admin_cpanel.novel.novel_edit')->with(compact('novel', 'type', 'category', 'incategory'));
+        return view('admin_cpanel.novel.novel_edit')->with(compact('novel', 'category', 'incategory'));
+    }
+
+    public function management_search() {
+
+        $keywords = $_GET['keywords'];
+        $novels = Novel::where('novelname', 'LIKE', '%'.$keywords.'%')->orWhere('author', 'LIKE', '%'.$keywords.'%')->get();
+        
+        return view('admin_cpanel.novel.search_novel')->with(compact('keywords', 'novels'));
     }
 
 }

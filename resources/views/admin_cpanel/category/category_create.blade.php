@@ -46,6 +46,9 @@
             </div>
             <!-- END: Form Layout -->
         </div>
+        <div class="intro-y col-span-12 lg:col-span-6">
+            <img src="{{ asset('images/ShinoNovelLogo.png') }}">
+        </div>
     </div>
 
 @endsection

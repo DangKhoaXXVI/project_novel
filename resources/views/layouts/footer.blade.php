@@ -38,6 +38,7 @@
         <script src="{{ asset('rating/starrr.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>        
+        
         <script type="text/javascript">
             $('.owl-carousel').owlCarousel({
                 loop:true,
@@ -77,7 +78,7 @@
 
         </script>
 
-<script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -108,7 +109,7 @@
     <script type="text/javascript">
         CKEDITOR.replace('chapter_content');
         CKEDITOR.replace('summary_content');
-        CKEDITOR.replace('comment_content');
+        // CKEDITOR.replace('comment_content');
         CKEDITOR.replace('topic_content');
     </script>
 
@@ -145,7 +146,7 @@
                     title: 'Không thể đánh giá...',
                     text: 'Bạn cần đăng nhập để đánh giá!',
                     showConfirmButton: false,
-                    footer: '<a href="/log-in">Đăng nhập</a>'
+                    footer: '<a href="{{ route('log-in') }}">Đăng nhập</a>'
                 })
             } else {
                 $('.your-choice-was').hide();
@@ -166,12 +167,22 @@
                 title: 'Không thể thêm vào yêu thích...',
                 text: 'Bạn cần đăng nhập để thêm truyện vào danh sách yêu thích!',
                 showConfirmButton: false,
-                footer: '<a href="/log-in">Đăng nhập</a>'
+                footer: '<a href="{{ route('log-in') }}">Đăng nhập</a>'
             })
         }
 
         function submitRemoveFavoriteList() {
             $('#removeFormFavorite').submit();
+        }
+
+        function submitReportFail() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Không thể báo cáo truyện...',
+                text: 'Bạn cần đăng nhập để báo cáo truyện!',
+                showConfirmButton: false,
+                footer: '<a href="{{ route('log-in') }}">Đăng nhập</a>'
+            })
         }
 
     </script>

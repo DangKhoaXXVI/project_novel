@@ -83,7 +83,7 @@ class ChapterController extends Controller
         $chapter->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
 
         $chapter->save();
-        return redirect()->route('chapter_index', ['novel_id' => $request->novel_id])->with('status', 'Cập nhật chương thành công!');
+        return redirect()->route('chapter_index', ['novel_id' => $chapter->novel_id])->with('status', 'Cập nhật chương thành công!');
     }
 
 
@@ -96,7 +96,7 @@ class ChapterController extends Controller
     public function management_chapter_index($novel_id)
     {
         $novel = Novel::find($novel_id);
-        $chapter = Chapter::with('novel')->orderBy('created_at', 'ASC')->where('novel_id', $novel_id)->get();
+        $chapter = Chapter::with('novel')->orderBy('created_at', 'ASC')->where('novel_id', $novel_id)->paginate(10);
         return view('admin_cpanel.chapter.chapter_index')->with(compact('novel', 'chapter'));
     }
     
@@ -110,6 +110,14 @@ class ChapterController extends Controller
     {
         $chapter = Chapter::with('novel')->find($id);
         return view('admin_cpanel.chapter.chapter_edit')->with(compact('chapter'));
+    }
+
+    public function management_chapter_search($novel_id) {
+        $novel = Novel::find($novel_id);
+        $keywords = $_GET['keywords'];
+        $chapters = Chapter::with('novel')->where('novel_id', $novel_id)->where('title', 'LIKE', '%'.$keywords.'%')->get();
+        
+        return view('admin_cpanel.chapter.search_chapter')->with(compact('keywords', 'chapters', 'novel'));
     }
 
 }

@@ -76,7 +76,7 @@
 
         </script>
 
-<script src="//cdn.ckeditor.com/4.19.0/full/ckeditor.js"></script>
+<script src="//cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -172,6 +172,7 @@
         function submitRemoveFavoriteList() {
             $('#removeFormFavorite').submit();
         }
+
 
     </script>
 

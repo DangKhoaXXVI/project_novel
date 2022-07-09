@@ -17,18 +17,15 @@
                             <img class="lazy loaded" src="{{ asset('uploads/novel/'.$value->novel->image) }}" alt="{{$value->novel->novelname}}" width="100%" height="100%" data-was-processed="true">
                         </div>
                     </a>
-                    <a class="series-name" href="{{route('novel', ['slug' => $value->novel->slug_novelname] )}}">{{$value->novel->novelname}}</a>
+                    <div class="series-info">
+                        <a class="chap" title="{{$value->title}}" href="{{ route('chapter', ['id' => $value->id, 'slug' => $value->slug_chapter]) }}">{{ $value->title }}</a>
+                    </div>
+                    <a class="series-name" href="{{ route('novel', ['slug' => $value->novel->slug_novelname]) }}">{{$value->novel->novelname}}</a>
                 </div>
                 @endforeach
             </div>
         </div>
     </div>
-</div>
-
-
-
-<div class="text-center center-pagination">
-    {{ $new_chapter->links() }}
 </div>
 
 @endsection

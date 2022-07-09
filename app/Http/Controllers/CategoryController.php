@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Chapter;
 use App\Models\Novel;
-use App\Models\TypeNovel;
 
 class CategoryController extends Controller
 {
@@ -85,7 +84,7 @@ class CategoryController extends Controller
 
     public function management_category_index()
     {
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->paginate(10);
         return view('admin_cpanel.category.category_index')->with(compact('category'));
     }
 
@@ -98,6 +97,14 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         return view('admin_cpanel.category.category_edit')->with(compact('category'));
+    }
+
+    public function management_category_search() {
+
+        $keywords = $_GET['keywords'];
+        $categories = Category::where('categoryname', 'LIKE', '%'.$keywords.'%')->get();
+        
+        return view('admin_cpanel.category.search_category')->with(compact('keywords', 'categories'));
     }
 
 }

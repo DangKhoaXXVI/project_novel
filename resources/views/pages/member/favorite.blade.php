@@ -45,27 +45,48 @@
                                     <a href="{{ route('ListNovelAuthor', ['author' => $favorite->novel->slug_author] ) }}">{{ $favorite->novel->author }}</a>
                                 </td>
                                 <td class="text-right update-action">
-                                    <span class="remove-favorite">
-                                        <i style="color: #e22590; cursor: pointer;" class="fa-solid fa-heart-circle-minus" onclick="submitRemoveFavoriteList()"></i>
-                                        <form action="{{ route('favorite') }}" method="POST" class="form-inline" id="removeFormFavorite">
-                                            @csrf
-                                            <div class="form-group">
-                                                <input type="hidden" class="form-control" name="novel_id" value="{{ $favorite->novel->id }}">
-                                                <input type="hidden" class="form-control" name="user_id" value="{{ Auth::user()->id }}">
-                                            </div>
-                                        </form>
-                                    </span>
+                                    <form action="{{ route('removeFavoriteList', ['favorite_id' => $favorite->id]) }}" method="POST" class="form-inline" id="removeFormFavorite{{ $favorite->id }}">
+                                        @csrf    
+                                        <span class="remove-favorite">
+                                            <i style="color: #e22590; cursor: pointer;" class="fa-solid fa-heart-circle-minus" onclick="submitRemoveFavoriteList{{ $favorite->id }}()"></i>   
+                                        </span>
+                                    </form>
                                 </td>
                             </tr>
                             @endif
+                            <script>
+                                function submitRemoveFavoriteList{{ $favorite->id }}() {
+                                    $('#removeFormFavorite{{ $favorite->id }}').submit();
+                                }
+                            </script>
                             @endforeach
+                            
                         </tbody>
                     </table>
                     <div class="text-center center-pagination">
                     {{ $listFavorite->links() }}
                     </div>
                     @else
-                        <h4>Bạn chưa thêm truyện nào vào danh sách yêu thích cả...</h4>
+                    <table class="table table-borderless listext-table has-covers">
+                        <tbody>
+                            <tr>
+                                <th class="col-8 col-md-6">Tên truyện</th>
+                                <th class="none table-cell-m col-md-4">Tên tác giả</th>
+                                <th class="col-4 col-md-2 text-right">Loại bỏ</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="series-name">
+                                        <a>Bạn chưa yêu thích truyện nào cả...</a>
+                                    </div>
+                                </td>
+                                <td class="none table-cell-m">
+                                </td>
+                                <td class="text-right update-action">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     @endif
                 </section>
             </div>

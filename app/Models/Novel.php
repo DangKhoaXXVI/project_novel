@@ -25,10 +25,6 @@ class Novel extends Model
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
-    public function typenovel(){
-        return $this->belongsTo('App\Models\TypeNovel', 'type_id', 'id');
-    }
-
     public function chapter(){
         return $this->hasMany('App\Models\Chapter', 'novel_id', 'id');
     }
@@ -39,6 +35,10 @@ class Novel extends Model
 
     public function favorite(){
         return $this->belongsToMany(Favorite::class, 'favorite','novel_id', 'user_id');
+    }
+
+    public function report(){
+        return $this->belongsToMany(Report::class, 'report','novel_id', 'user_id');
     }
 
     public function comment() {

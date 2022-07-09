@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Rating;
 use App\Models\Favorite;
 use App\Models\Comment;
+use App\Models\Report;
 use Carbon\Carbon;
 
 class UserController extends Controller
@@ -156,7 +157,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $user = User::orderBy('id', 'DESC')->get();
+        $user = User::orderBy('id', 'DESC')->paginate(10);
         return view('admin_cpanel.user.member_index')->with(compact('user'));
     }
 
@@ -210,6 +211,15 @@ class UserController extends Controller
         }
         return redirect()->back()->with('status', 'Đã thêm vào danh sách yêu thích!');
     }
+
+
+    public function remove_favorite_list($favoriteID)
+    {
+        Favorite::find($favoriteID)->delete();
+        return redirect()->back()->with('status', 'Đã xóa truyện ra khỏi danh sách yêu thích!');
+    }
+
+
 
     public function favorite_page() {
         $category = Category::orderBy('id', 'DESC')->get();
@@ -270,5 +280,46 @@ class UserController extends Controller
         $comment->save();
         return redirect()->back();
     }
+
+    public function change_role($id) {
+
+        $user = User::find($id);
+        if($user->role == 0) {
+            $user->role = 1;
+            $user->save();
+            return redirect('/admin/quan-ly/thanh-vien')->with('status', 'Đổi chức vụ thành công!');
+        }
+        if($user->role == 1) {
+            $user->role = 0;
+            $user->save();
+            return redirect('/admin/quan-ly/thanh-vien')->with('status', 'Đổi chức vụ thành công!');
+        }
+    }
+
+    public function search() {
+
+        $keywords = $_GET['keywords'];
+        $member = User::where('name', 'LIKE', '%'.$keywords.'%')->get();
+        
+        return view('admin_cpanel.user.search_member')->with(compact('keywords', 'member'));
+    }
+
+    public function change_member_status($id) {
+
+        $user = User::find($id);
+        if($user->status == 0) {
+            $user->status = 1;
+            $user->save();
+            return redirect('/admin/quan-ly/thanh-vien')->with('status', 'Đổi trạng thái thành công!');
+        }
+        if($user->status == 1) {
+            $user->status = 0;
+            $user->save();
+            return redirect('/admin/quan-ly/thanh-vien')->with('status', 'Đổi trạng thái thành công!');
+        }
+        
+    }
+
+    
 
 }

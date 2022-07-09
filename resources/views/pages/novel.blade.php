@@ -173,6 +173,70 @@
                                                 <span class="block feature-name">{{ $novel->novel_views }} lượt xem</span>
                                             </div>
                                         </div>
+                                        <div class="col-4 col-md feature-item width-auto-x1">
+                                            <div class="side-feature-button button-rate viewed">
+                                                <span class="block feature-value">
+                                                    @if(Auth::check())
+                                                        <button class="btn-report" type="button" data-toggle="modal" data-target="#report_novel">
+                                                            <i class="fa-solid fa-flag"></i>
+                                                        </button>
+                                                        <div class="modal fade" id="report_novel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
+                                                                        <div class="dialog-container">
+                                                                            <div class="dialog-content">
+                                                                                <form class="eIoQdo" method="POST" action="{{ route('report') }}" enctype='multipart/form-data'>
+                                                                                    @csrf
+                                                                                    <div class="Heading___Heading-sc-1wdsv8o-0 cfRHkz modal-header">
+                                                                                        <a class="navbar-brand"><div class="logo"></div></a>
+                                                                                    </div>
+                                                                                    <div class="modal-headline">
+                                                                                        <h2><b>Báo cáo</b> truyện này</b>.</h2>
+                                                                                    </div>
+                                                                                    <div class="modal-fields">
+
+                                                                                    <div class="avatar-dialog">
+                                                                                        <div class="report-img">
+                                                                                            <img src="{{ url('/uploads/novel/'.$novel->image) }}">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="field has-icon-left">
+                                                                                        <label class="label" >Lý do</label>
+                                                                                        <div class="control">
+                                                                                            <input type="hidden" class="form-control" name="novel_id" value="{{ $novel->id }}">
+                                                                                            <p class="font-weight-bold mt-4">Vui lòng chọn lý do báo cáo</p>
+                                                                                            <select name="reason" class="selectpicker mt-2">
+                                                                                                <option value="1">Spam</option>
+                                                                                                <option value="2">Lỗi font</option>
+                                                                                                <option value="3">Sai nội dung</option>
+                                                                                                <option value="4">Nội dung không phù hợp</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="Modal___ModalFooter-sc-1657dip-5 kGCHZn dialog-footer">
+                                                                                        <div class="options">
+                                                                                        <button type="submit" class="button to-contact button-save-dialog" data-toggle="modal">
+                                                                                            <i class="fa-solid fa-paper-plane" style="font-size: 20px;"></i>
+                                                                                            Gửi báo cáo
+                                                                                        </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <i class="fa-solid fa-flag" onclick="submitReportFail()"></i>
+                                                    @endif
+                                                </span>
+                                                <span class="block feature-name">Báo cáo</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -272,9 +336,6 @@
         @if($mucluc>0)
             <section class="volume-list at-series basic-section">
                 <header class="sect-header">
-                    @if(Auth::user()->id == $user->id)
-                    <a style="margin-left: 10px; float: right; font-size: 20px;" class="edit-icon" href="#"><i class="fas fa-edit"></i></a>
-                    @endif
                     <span class="sect-title"> Mục Lục </span>
                 </header>
                 <main class="d-lg-block">
@@ -360,7 +421,7 @@
                                                         <a href="{{ route('member_wall', ['id' => $com->user->id] ) }}" class="strong">{{$com->user->name}}</a>
                                                         @if($com->user->id == $user->id)
                                                         <div class="ln-comment-user_badge comment-owner">
-                                                            <i class="fas fa-flag" style="font-weight: 900!important;"></i> Chủ post
+                                                            <i class="fas fa-flag" style="color: white;"></i> Chủ post
                                                         </div>
                                                         @endif
                                                     </div>
@@ -611,9 +672,9 @@
                                                 </div>
                                                 @endif
                                             </div>
-                                            <script type="text/javascript">
+                                            <!-- <script type="text/javascript">
                                                 CKEDITOR.replace('edit_comment_content_{{$child->id}}');
-                                            </script>
+                                            </script> -->
                                             
                                             <script>
                                                 let isShow{{$child->id}} = true;
@@ -631,10 +692,10 @@
                                                 }
                                             </script>
                                         @endforeach
-                                        <script type="text/javascript">
+                                        <!-- <script type="text/javascript">
                                                 CKEDITOR.replace('comment_reply_content_{{$com->id}}');
                                                 CKEDITOR.replace('edit_comment_content_{{$com->id}}');
-                                            </script>
+                                            </script> -->
                                         <script>
                                             let isShow{{$com->id}} = true;
                                             function formEditComment{{$com->id}}() {

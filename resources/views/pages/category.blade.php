@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid p-40" id="mainpart">
+<div class="container-fluid p-40" id="mainpart" style="margin-bottom: 460px;">
     <div class="container">
         <div class="b_title"><strong>Truyện {{ $category_id->categoryname }}</strong></div>
         <div class="gridlist">
