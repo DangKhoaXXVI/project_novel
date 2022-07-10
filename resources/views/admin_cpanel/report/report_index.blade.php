@@ -69,7 +69,7 @@
                                         @csrf
                                         <input type="hidden" name="novel_id" value="{{ $report->novel->id }}"></input>
                                         <button>
-                                            <a class="flex items-center mr-3 text-primary" href=""> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Giữ truyện </a>
+                                            <a class="flex items-center mr-3 text-primary"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Giữ truyện </a>
                                         </button>
                                     </form>
                                     <form action="{{ route('report_hide', ['report_id' => $report->id]) }}" method="POST">
