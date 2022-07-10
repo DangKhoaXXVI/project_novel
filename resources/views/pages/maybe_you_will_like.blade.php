@@ -3,7 +3,7 @@
         <div class="container">   
             <section class="index-section">
                 <header>
-                    <div class="b_title"><strong><i class="fa-solid fa-thumbs-up"></i>    Có thể bạn sẽ thích</strong></div>
+                    <div class="b_title"><strong><i class="fa-solid fa-dice"></i>    Gợi ý ngẫu nhiên</strong></div>
                 </header>
                 <main class="d-lg-block">
                     <ul class="others-list">

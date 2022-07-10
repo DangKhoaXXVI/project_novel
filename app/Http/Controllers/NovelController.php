@@ -198,8 +198,7 @@ class NovelController extends Controller
 
     public function management_create()
     {
-        $category = Category::orderBy('id', 'DESC')->get();
-        return view('admin_cpanel.novel.novel_create')->with(compact('category'));
+        return view('admin_cpanel.novel.novel_create');
     }
 
     public function management_edit($id)
@@ -208,9 +207,7 @@ class NovelController extends Controller
 
         $incategory = $novel->belongstomanycategory;
 
-        $category = Category::orderBy('id', 'DESC')->get();
-
-        return view('admin_cpanel.novel.novel_edit')->with(compact('novel', 'category', 'incategory'));
+        return view('admin_cpanel.novel.novel_edit')->with(compact('novel', 'incategory'));
     }
 
     public function management_search() {

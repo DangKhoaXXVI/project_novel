@@ -69,7 +69,7 @@
                                                                     <div class="cover-change" style="position: initial;">
                                                                         <input name="cover" type="file">
                                                                         <i class="fas fa-camera"></i>
-                                                                        <span class="p-c_text">Yêu cầu 1100 x 300 px</span>
+                                                                        <span class="p-c_text">Yêu cầu 1110 x 300 px</span>
                                                                     </div>
                                                                 </div>
                                                         </div>

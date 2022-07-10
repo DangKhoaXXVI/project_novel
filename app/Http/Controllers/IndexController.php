@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 class IndexController extends Controller
 {
     public function home() {
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->where('status', 0)->get();
         $novel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->take(14)->get();
         $allNovel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->get();
         $top8_novel = Novel::orderBy('novel_views', 'DESC')->where('status', 0)->take(8)->get();
@@ -46,7 +46,7 @@ class IndexController extends Controller
     }
 
     public function listnewchapter() {
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->where('status', 0)->get();
         // $a = Chapter::with('novel')->where('status', 0)->orderBy('created_at', 'DESC')->get();
         // $new_chapter = Chapter::with('novel')->where('status', 0)->groupBy('novel_id')->orderBy(Chapter::raw('MAX(created_at)'), 'DESC')->paginate(35);
         $a = Chapter::with('novel')->where('status', 0)->orderBy('created_at', 'DESC')->get();
@@ -55,7 +55,7 @@ class IndexController extends Controller
     }
 
     public function listcompletednovel() {
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->where('status', 0)->get();
         $list_completed_novel = Novel::orderBy('created_at', 'DESC')->where('status', 0)->where('state', 1)->paginate(35);
         
         
@@ -65,7 +65,7 @@ class IndexController extends Controller
 
 
     public function category($slug) {
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->where('status', 0)->get();
         $category_id = Category::where('slug_category', $slug)->first();
 
         // Nhiều Thể Loại
@@ -84,7 +84,7 @@ class IndexController extends Controller
     }
 
     public function novel($slug) {
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->where('status', 0)->get();
         $novel = Novel::where('slug_novelname', $slug)->where('status', 0)->first();
         $novel->novel_views = $novel->novel_views + 1;
         if(Auth::check()) {
@@ -98,7 +98,7 @@ class IndexController extends Controller
         $ratingAvg = Rating::where('novel_id', $novel->id)->avg('rating_star');
         $favorite = Favorite::where('novel_id', $novel->id)->get();
         $novel->save();
-        $chapter = Chapter::with('novel')->orderBy('id', 'ASC')->where('novel_id', $novel->id)->get();
+        $chapter = Chapter::with('novel')->orderBy('id', 'ASC')->where('novel_id', $novel->id)->where('status', 0)->get();
         
         // Người đăng - Truyện đã đăng
         $user = User::with('novel')->where('id', $novel->user_id)->first();
@@ -116,7 +116,7 @@ class IndexController extends Controller
     }
 
     public function chapter($id, $slug) {
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->where('status', 0)->get();
         $novel = Chapter::where('slug_chapter', $slug)->where('id', $id)->first();
         $chapter = Chapter::with('novel')->where('slug_chapter', $slug)->where('novel_id', $novel->novel_id)->first();
 
@@ -141,7 +141,7 @@ class IndexController extends Controller
     }
 
     public function author($author) {
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->where('status', 0)->get();
 
         $novel_author = Novel::orderBy('created_at', 'DESC')->where('status', 0)->where('slug_author', $author)->paginate(35);
         $novel_author_name = Novel::orderBy('created_at', 'DESC')->where('status', 0)->where('slug_author', $author)->first();
@@ -151,7 +151,7 @@ class IndexController extends Controller
     }
 
     public function search() {
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->where('status', 0)->get();
         $keywords = $_GET['keywords'];
         $novel = Novel::where('status', 0)->where('novelname', 'LIKE', '%'.$keywords.'%')->orWhere('author', 'LIKE', '%'.$keywords.'%')->get();
         
