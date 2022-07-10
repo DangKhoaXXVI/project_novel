@@ -198,16 +198,18 @@ class NovelController extends Controller
 
     public function management_create()
     {
-        return view('admin_cpanel.novel.novel_create');
+        $category = Category::where('status', 0)->orderBy('id', 'DESC')->get();
+        return view('admin_cpanel.novel.novel_create')->with(compact('category'));
     }
 
     public function management_edit($id)
     {
         $novel = Novel::find($id);
+        $category = Category::where('status', 0)->orderBy('id', 'DESC')->get();
 
         $incategory = $novel->belongstomanycategory;
 
-        return view('admin_cpanel.novel.novel_edit')->with(compact('novel', 'incategory'));
+        return view('admin_cpanel.novel.novel_edit')->with(compact('novel', 'incategory', 'category'));
     }
 
     public function management_search() {
