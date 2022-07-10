@@ -19,7 +19,7 @@ class TopicController extends Controller
 {
 
     public function index() {
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->where('status', 0)->get();
         $list_topic = Topic::with('user')->where('status', 0)->orderBy('created_at', 'DESC')->paginate(40);
         return view('pages.topic.index')->with(compact('category', 'list_topic'));
     }
@@ -27,7 +27,7 @@ class TopicController extends Controller
 
 
     public function create() {
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->where('status', 0)->get();
         return view('pages.topic.create')->with(compact('category'));
     }
 
@@ -64,7 +64,7 @@ class TopicController extends Controller
 
 
     public function detail($id, $slug) {
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->where('status', 0)->get();
         $topic = Topic::where('id', $id)->where('slug_title', $slug)->where('status', 0)->first();
         $user = User::with('topic')->where('id', $topic->user_id)->first();
         $comment = CommentTopic::where(['topic_id' => $topic->id, 'comment_parent_id' => 0])->orderBy('created_at', 'DESC')->get();
@@ -74,7 +74,7 @@ class TopicController extends Controller
     public function edit($id)
     {
         $topic = Topic::find($id);
-        $category = Category::orderBy('id', 'DESC')->get();
+        $category = Category::orderBy('id', 'DESC')->where('status', 0)->get();
 
         return view('pages.topic.edit')->with(compact('topic', 'category'));
     }
