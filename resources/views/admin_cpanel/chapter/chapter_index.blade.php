@@ -81,9 +81,9 @@
             </table>
         </div>
         <!-- END: Data List -->
-        <!-- BEGIN: Pagination -->
-
-        <!-- END: Pagination -->
+    </div>
+    <div class="mt-4 text-center center-pagination">
+        {{ $chapter->links() }}
     </div>
 @endsection
             
