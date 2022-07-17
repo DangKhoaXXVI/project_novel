@@ -6,7 +6,7 @@
 
 @section('member')
 
-<main id="mainpart" class="user-page">
+<main id="mainpart" class="user-page" style="padding-bottom: 100px;">
     <div class="container">
         <div class="row d-block clearfix">
             <div class="col-12 col-lg-9 float-left">
@@ -45,7 +45,7 @@
                                     <a href="{{ route('ListNovelAuthor', ['author' => $favorite->novel->slug_author] ) }}">{{ $favorite->novel->author }}</a>
                                 </td>
                                 <td class="text-right update-action">
-                                    <form action="{{ route('removeFavoriteList', ['favorite_id' => $favorite->id]) }}" method="POST" class="form-inline" id="removeFormFavorite{{ $favorite->id }}">
+                                    <form action="{{ route('removeFavoriteList', ['favorite_id' => $favorite->id]) }}" method="POST" class="form-inline" style="float: right;" id="removeFormFavorite{{ $favorite->id }}">
                                         @csrf    
                                         <span class="remove-favorite">
                                             <i style="color: #e22590; cursor: pointer;" class="fa-solid fa-heart-circle-minus" onclick="submitRemoveFavoriteList{{ $favorite->id }}()"></i>   
