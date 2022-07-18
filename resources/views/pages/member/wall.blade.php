@@ -6,7 +6,7 @@
 
 @section('member')
 
-<main id="mainpart" class="profile-page">
+<main id="mainpart" class="profile-page" style="padding-bottom: 104px;">
     <div class="profile-feature-wrapper">
         <div class="container">
             <div class="profile-feature">

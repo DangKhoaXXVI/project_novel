@@ -589,6 +589,10 @@ a.series-name:hover {
     line-height: 1.5em;
 }
 
+.reading-content {
+    user-select: none;
+}
+
 h2, h3, h4 {
     color: #333;
     font-weight: 700;
@@ -2059,3 +2063,4 @@ table.board-table tr td .topic-username a:hover {
     border-color: #5cb85c;
     border-width: 1px;
 }
+
