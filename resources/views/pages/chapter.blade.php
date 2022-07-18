@@ -6,7 +6,7 @@
 
 @section('content')
 
-<main class="reading-page">
+<main class="reading-page" style="user-select: none;">
 <section id="rd_side_icon">
     @if($chapter->id == $min_id->id)
         <a href="" class="rd_sd-button_item col text-center {{ $chapter->id == $min_id->id ? 'isDisable' : '' }}"><i class="fas fa-backward"></i></a>
