@@ -106,7 +106,7 @@ class TopicController extends Controller
 
         $topic->save();
 
-        return redirect('/topic/'.$id.'-'.$request->slug_title)->with('status', 'Cập nhật bài viết thành công!');
+        return redirect('/bai-viet/chi-tiet/'.$id.'-'.$request->slug_title)->with('status', 'Cập nhật bài viết thành công!');
     }
 
 
@@ -117,7 +117,7 @@ class TopicController extends Controller
 
         $topic->save();
 
-        return redirect('/topic')->with('status', 'Xóa bài viết thành công!');
+        return redirect('/bai-viet')->with('status', 'Xóa bài viết thành công!');
     }
 
     public function management_topic_index() {
